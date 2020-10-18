@@ -3,28 +3,64 @@ require "src/Models/Repository/TodoRepository.php";
 
 class TodoController
 {
-    public function __construct($params, $method)
+    private $Todo;
+    private $id;
+
+    public function __construct($params, $method, $data)
     {
+        $this->Todo = new TodoRepository();
+        $this->id = isset($params[0]) ? $params[0] : NULL;
+
         if ($method === "GET") {
-            try {
-                $id = isset($params[0]) ? $params[0] : NULL;
-
-                $TODO = new TodoRepository();
-
-                if ($id) {
-                    $TODO->GetTodo($id);
-                } else {
-                    $TODO->GetTodos();
-                }
-            } catch (Exception $e) {
-                print_r($e);
-            }
+            $this->Get($this->id);
         } elseif ($method === "POST") {
-            echo $method;
+            $this->post($data);
         } elseif ($method === "PATCH") {
-            echo $method;
+            $this->Patch($this->id);
+        } elseif ($method === "PUT") {
+            $this->Put($this->id, $data);
         } else {
             echo http_response_code(404);
+        }
+    }
+
+    public function Get($id)
+    {
+        try {
+            if ($id) {
+                $this->Todo->GetTodo($id);
+            } else {
+                $this->Todo->GetTodos();
+            }
+        } catch (Exception $e) {
+            print_r($e);
+        }
+    }
+
+    public function Post($data)
+    {
+        try {
+            $this->Todo->AddTodo($data);
+        } catch (Exception $e) {
+            print_r($e);
+        }
+    }
+
+    public function Put($id, $data)
+    {
+        try {
+            $this->Todo->EditTodo($id, $data);
+        } catch (Exception $e) {
+            print_r($e);
+        }
+    }
+
+    public function Patch($id)
+    {
+        try {
+            $this->Todo->CloseTodo($id);
+        } catch (Exception $e) {
+            print_r($e);
         }
     }
 }

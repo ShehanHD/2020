@@ -57,4 +57,14 @@ class TodoRepository implements ITodoRepository
             http_response_code(500);
         }
     }
+
+    public function AddTodo($data)
+    {
+        return 0;
+    }
+
+    public function EditTodo($id, $data)
+    {
+        return 0;
+    }
 }

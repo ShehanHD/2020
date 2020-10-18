@@ -17,12 +17,11 @@ class PDOConnection
     {
         try {
             $pdo = new PDO($this->dsn, $this->user, $this->password);
-            // //! set attribute
-            // $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            // $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            //! set attribute
+            $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+            $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-            var_dump($pdo);
             return $pdo;
         } catch (PDOException $e) {
             throw $e;

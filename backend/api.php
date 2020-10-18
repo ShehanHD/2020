@@ -11,7 +11,7 @@ if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
     switch ($controller) {
         case 'todo':
             include('./src/Controller/TodoController.php');
-            new TodoController(array_slice($URL, 4), $REQUEST_METHOD);
+            new TodoController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
             break;
 
         default:
