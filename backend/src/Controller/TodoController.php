@@ -4,26 +4,26 @@ require "src/Models/Repository/TodoRepository.php";
 class TodoController
 {
     private $Todo;
-    private $id;
+    private $firstParams;
 
     public function __construct($params, $method, $data)
     {
         $this->Todo = new TodoRepository();
-        $this->id = isset($params[0]) ? $params[0] : NULL;
+        $this->firstParams = isset($params[0]) ? $params[0] : NULL;
 
 
         switch ($method) {
             case 'GET':
-                $this->Get($this->id);
+                $this->Get($this->firstParams);
                 break;
             case 'POST':
-                $this->post($data);
+                $this->post($this->firstParams, $data);
                 break;
             case 'PATCH':
-                $this->Patch($this->id);
+                $this->Patch($this->firstParams);
                 break;
             case 'PUT':
-                $this->Put($this->id, $data);
+                $this->Put($this->firstParams, $data);
                 break;
             default:
                 echo http_response_code(404);
@@ -31,11 +31,11 @@ class TodoController
         }
     }
 
-    public function Get($id)
+    public function Get($firstParams)
     {
         try {
-            if ($id) {
-                $this->Todo->GetTodo($id);
+            if ($firstParams) {
+                $this->Todo->GetTodo($firstParams);
             } else {
                 $this->Todo->GetTodos();
             }
@@ -44,10 +44,23 @@ class TodoController
         }
     }
 
-    public function Post($data)
+    public function Post($firstParams, $data)
     {
         try {
-            $this->Todo->AddTodo($data);
+            switch ($firstParams) {
+                case '':
+                    $this->Todo->AddTodo($data);
+                    break;
+                case 'category':
+                    $this->Todo->AddCategory($data);
+                    break;
+                case 'subcategory':
+                    $this->Todo->AddSubCategory($data);
+                    break;
+                default:
+                    echo http_response_code(404);
+                    break;
+            }
         } catch (Exception $e) {
             print_r($e);
         }

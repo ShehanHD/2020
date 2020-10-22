@@ -1,0 +1,15 @@
+(Locale)
+GET:
+http://localhost:8080/2020/backend/api/todo
+http://localhost:8080/2020/backend/api/todo/1
+
+POST:
+http://localhost:8080/2020/backend/api/todo
+http://localhost:8080/2020/backend/api/category
+http://localhost:8080/2020/backend/api/subcategory
+
+PUT:
+http://localhost:8080/2020/backend/api/todo/1
+
+Patch:
+http://localhost:8080/2020/backend/api/todo/1

@@ -5,6 +5,10 @@ namespace TD {
     {
         function AddTodo($data);
 
+        function AddCategory($data);
+
+        function AddSubCategory($data);
+
         function GetTodos();
 
         function GetTodo($id);

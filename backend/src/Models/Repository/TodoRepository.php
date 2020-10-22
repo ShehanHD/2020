@@ -36,7 +36,7 @@ class TodoRepository implements ITodoRepository
     {
         try {
             $query = $this->dbConnection->prepare('SELECT * from todos WHERE todo_id = :id');
-            $query->execute([':id' => $id]);
+            $query->execute(['id' => $id]);
             $x = $query->fetch();
             print_r($x);
         } catch (Exception $e) {
@@ -49,7 +49,7 @@ class TodoRepository implements ITodoRepository
     {
         try {
             $query = $this->dbConnection->prepare('UPDATE todos SET isComplete = True WHERE todo_id = :id');
-            $query->execute([':id' => $id]);
+            $query->execute(['id' => $id]);
             $x = $query->fetch();
             print_r($x);
         } catch (Exception $e) {
@@ -60,17 +60,44 @@ class TodoRepository implements ITodoRepository
 
     public function AddTodo($data)
     {
-        $this->dbConnection->beginTransaction();
+        try {
+            $this->dbConnection->beginTransaction();
 
-        $query = $this->dbConnection->prepare('INSERT INTO todos () VALUES ();');
-        $query->execute([]);
+            $query = $this->dbConnection->prepare('INSERT INTO todos () VALUES ();');
+            $query->execute([]);
 
-        $this->dbConnection->commit();
+            $this->dbConnection->commit();
+        } catch (Exception $e) {
+            $this->dbConnection->rollBack();
+            print_r($e->getMessage());
+            http_response_code(500);
+        }
+    }
+
+    function AddCategory($data)
+    {
+        try {
+            $query = $this->dbConnection->prepare('INSERT INTO categories () VALUES ();');
+            $query->execute([]);
+        } catch (Exception $e) {
+            print_r($e->getMessage());
+            http_response_code(500);
+        }
+    }
+
+    function AddSubCategory($data)
+    {
+        try {
+            $query = $this->dbConnection->prepare('INSERT INTO sub_categories () VALUES ();');
+            $query->execute([]);
+        } catch (Exception $e) {
+            print_r($e->getMessage());
+            http_response_code(500);
+        }
     }
 
     public function EditTodo($id, $data)
     {
-        $this->dbConnection->rollBack();
         return 0;
     }
 }

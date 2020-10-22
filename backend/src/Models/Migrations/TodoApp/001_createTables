@@ -1,0 +1,24 @@
+    CREATE TABLE IF NOT EXISTS categories(
+                category_id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50) NOT NULL,
+                user_id VARCHAR(10) DEFAULT NULL
+                );
+
+    CREATE TABLE IF NOT EXISTS sub_categories(
+                sub_category_id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50) NOT NULL,
+                category_id INT NOT NULL,
+                FOREIGN KEY (category_id) REFERENCES categories(category_id)
+                );
+
+    CREATE TABLE IF NOT EXISTS todos(
+                todos_id INT PRIMARY KEY AUTO_INCREMENT,
+                name VARCHAR(50) NOT NULL,
+                category_id INT NOT NULL,
+                sub_category_id INT NOT NULL,
+                is_done BOOLEAN DEFAULT false,
+                user_id VARCHAR(10) DEFAULT NULL,
+                FOREIGN KEY (category_id) REFERENCES categories(category_id),
+                FOREIGN KEY (sub_category_id) REFERENCES sub_categories(sub_category_id)
+                );
+
