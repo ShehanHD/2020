@@ -60,11 +60,17 @@ class TodoRepository implements ITodoRepository
 
     public function AddTodo($data)
     {
-        return 0;
+        $this->dbConnection->beginTransaction();
+
+        $query = $this->dbConnection->prepare('INSERT INTO todos () VALUES ();');
+        $query->execute([]);
+
+        $this->dbConnection->commit();
     }
 
     public function EditTodo($id, $data)
     {
+        $this->dbConnection->rollBack();
         return 0;
     }
 }
