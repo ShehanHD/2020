@@ -11,16 +11,23 @@ class TodoController
         $this->Todo = new TodoRepository();
         $this->id = isset($params[0]) ? $params[0] : NULL;
 
-        if ($method === "GET") {
-            $this->Get($this->id);
-        } elseif ($method === "POST") {
-            $this->post($data);
-        } elseif ($method === "PATCH") {
-            $this->Patch($this->id);
-        } elseif ($method === "PUT") {
-            $this->Put($this->id, $data);
-        } else {
-            echo http_response_code(404);
+
+        switch ($method) {
+            case 'GET':
+                $this->Get($this->id);
+                break;
+            case 'POST':
+                $this->post($data);
+                break;
+            case 'PATCH':
+                $this->Patch($this->id);
+                break;
+            case 'PUT':
+                $this->Put($this->id, $data);
+                break;
+            default:
+                echo http_response_code(404);
+                break;
         }
     }
 
