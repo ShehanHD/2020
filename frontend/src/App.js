@@ -6,7 +6,6 @@ import Todos from './Components/TodoApp/Todos';
 import Home from './Components/Home';
 import { createMuiTheme, MuiThemeProvider, useTheme } from '@material-ui/core';
 import useStyles from './Hooks/useStyles';
-import { blue, grey } from '@material-ui/core/colors';
 
 function App() {
   const theme = useTheme();
@@ -23,11 +22,11 @@ function App() {
 
   const lightTheme = createMuiTheme({
     palette: {
-      primary: blue,
-      secondary: grey,
+      primary: { main: '#1c1f4c' },
+      secondary: { main: '#00848c' },
       background: {
-        default: "#cacaca",
-        paper: "#e4e4e4d9",
+        default: "#ebebd9",
+        paper: "#d6d8ce",
       },
     },
   });

@@ -4,7 +4,7 @@ class PDOConnection
 {
     private $host = 'localhost';
     private $user = "root";
-    private $password = "";
+    private $password = "wecode2020";
     private $dbname = "2020";
     private $dsn;
 

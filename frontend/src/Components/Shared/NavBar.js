@@ -1,4 +1,4 @@
-import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, MenuList, Toolbar, Typography, useTheme } from '@material-ui/core';
+import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, MenuList, Paper, Toolbar, Typography, useTheme } from '@material-ui/core';
 import React from 'react'
 import useStyles from '../../Hooks/useStyles';
 import clsx from "clsx";
@@ -27,7 +27,7 @@ function NavBar(props) {
                 })}
                 color={"default"}
             >
-                <Toolbar>
+                <Toolbar component={Paper}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"

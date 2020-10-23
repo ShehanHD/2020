@@ -6,10 +6,10 @@ http://localhost:8080/2020/backend/api/todo/1
 POST:
 http://localhost:8080/2020/backend/api/todo
 http://localhost:8080/2020/backend/api/category
-http://localhost:8080/2020/backend/api/subcategory
+http://localhost:8080/2020/backend/api/subcategory/category_id
 
 PUT:
-http://localhost:8080/2020/backend/api/todo/1
+http://localhost:8080/2020/backend/api/todo/id
 
 Patch:
 http://localhost:8080/2020/backend/api/todo/1

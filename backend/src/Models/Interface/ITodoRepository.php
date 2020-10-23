@@ -13,6 +13,10 @@ namespace TD {
 
         function GetTodo($id);
 
+        function GetCategory();
+
+        function GetSubCategory($id);
+
         function CloseTodo($id);
 
         function EditTodo($id, $data);

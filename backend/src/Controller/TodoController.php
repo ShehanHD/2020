@@ -10,11 +10,12 @@ class TodoController
     {
         $this->Todo = new TodoRepository();
         $this->firstParams = isset($params[0]) ? $params[0] : NULL;
+        $this->secParams = isset($params[1]) ? $params[1] : NULL;
 
 
         switch ($method) {
             case 'GET':
-                $this->Get($this->firstParams);
+                $this->Get($this->firstParams, $this->secParams);
                 break;
             case 'POST':
                 $this->post($this->firstParams, $data);
@@ -31,22 +32,33 @@ class TodoController
         }
     }
 
-    public function Get($firstParams)
+    private function Get($firstParams, $id)
     {
         try {
-            if ($firstParams) {
-                $this->Todo->GetTodo($firstParams);
-            } else {
-                $this->Todo->GetTodos();
+            switch ($firstParams) {
+                case '':
+                    $this->Todo->GetTodos();
+                    break;
+                case 'category':
+                    $this->Todo->GetCategory();
+                    break;
+                case 'subcategory':
+                    $this->Todo->GetSubCategory($id);
+                    break;
+                default:
+                    $this->Todo->GetTodo($firstParams);
+                    break;
             }
         } catch (Exception $e) {
             print_r($e);
         }
     }
 
-    public function Post($firstParams, $data)
+    private function Post($firstParams, $data)
     {
         try {
+            $data = json_decode($data);
+
             switch ($firstParams) {
                 case '':
                     $this->Todo->AddTodo($data);
@@ -66,7 +78,7 @@ class TodoController
         }
     }
 
-    public function Put($id, $data)
+    private function Put($id, $data)
     {
         try {
             $this->Todo->EditTodo($id, $data);
@@ -75,7 +87,7 @@ class TodoController
         }
     }
 
-    public function Patch($id)
+    private function Patch($id)
     {
         try {
             $this->Todo->CloseTodo($id);

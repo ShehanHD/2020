@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import NewTodos from './NewTodos';
 import Admin from './Admin';
+import View from './View';
 import './todoApp.scss'
 
 function Todos() {
-    const [selectedTab, setSelectedTab] = React.useState(0);
+    const [selectedTab, setSelectedTab] = useState(0);
 
     const handleChange = (event, newValue) => {
         setSelectedTab(newValue);
@@ -14,20 +15,23 @@ function Todos() {
     return (
         <>
             <h1>TODO APP</h1>
-            <Paper square style={{ marginBottom: '2vh' }}>
+            <Paper square style={{ marginBottom: '5vh' }}>
                 <Tabs
                     value={selectedTab}
                     indicatorColor="primary"
                     textColor="primary"
                     onChange={handleChange}
                 >
+                    <Tab label="New Todo" />
                     <Tab label="Todos" />
                     <Tab label="Admin" />
                 </Tabs>
             </Paper>
-            {
-                selectedTab === 0 ? <NewTodos /> : <Admin />
-            }
+
+            {selectedTab === 0 && <NewTodos />}
+            {selectedTab === 1 && <View />}
+            {selectedTab === 2 && <Admin />}
+
         </>
     )
 }
