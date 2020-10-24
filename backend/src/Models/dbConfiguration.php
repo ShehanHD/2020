@@ -3,7 +3,7 @@
 class PDOConnection
 {
     private $host = 'localhost';
-    private $user = "root";
+    private $user = "wecode";
     private $password = "wecode2020";
     private $dbname = "2020";
     private $dsn;

@@ -66,12 +66,22 @@ function NavBar(props) {
                 <Divider />
                 <List>
                     <MenuList>
-                        <Link to={'/todo'} style={{ textDecoration: "none", color: "inherit" }}>
+                        <Link to={'/'} style={{ textDecoration: "none", color: "inherit" }}>
                             <ListItem button>
                                 <ListItemIcon>
-                                    <i className={"fas fa-list-ul"}></i>
+                                    <i className={"fas fa-tachometer-alt"}></i>
                                 </ListItemIcon>
-                                <ListItemText primary={'Todos'} />
+                                <ListItemText primary={'Dashboard'} />
+                            </ListItem>
+                        </Link>
+                    </MenuList>
+                    <MenuList>
+                        <Link to={'/exercises'} style={{ textDecoration: "none", color: "inherit" }}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <i className={"fas fa-stream"}></i>
+                                </ListItemIcon>
+                                <ListItemText primary={'Exercises'} />
                             </ListItem>
                         </Link>
                     </MenuList>

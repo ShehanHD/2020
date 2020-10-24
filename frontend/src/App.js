@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 import NavBar from './Components/Shared/NavBar';
-import Todos from './Components/TodoApp/Todos';
-import Home from './Components/Home';
+import Todos from './Components/Exercises/TodoApp/Todos';
 import { createMuiTheme, MuiThemeProvider, useTheme } from '@material-ui/core';
 import useStyles from './Hooks/useStyles';
+import Dashboard from './Components/Dashboard/Dashboard';
+import Exercises from './Components/Exercises/Exercises';
 
 function App() {
   const theme = useTheme();
@@ -43,13 +44,17 @@ function App() {
         <div className={classes.content}>
           <Switch>
             <Route exact path={'/'}>
-              <Home />
+              <Dashboard />
             </Route>
-            {/* TODO APP */}
-            <Route exact path={'/todo'}>
+
+            <Route exact path={'/exercises'}>
+              <Exercises />
+            </Route>
+
+            <Route exact path={'/:path/todo'}>
               <Todos />
             </Route>
-            {/* END TODO APP */}
+
           </Switch>
         </div>
       </MuiThemeProvider>

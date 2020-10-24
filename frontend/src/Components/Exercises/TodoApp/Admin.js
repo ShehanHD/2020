@@ -31,7 +31,8 @@ function Admin() {
     const handleSubmitCategory = () => {
         try {
             let category = {
-                name: categoryName
+                name: categoryName,
+                user_id: null
             }
 
             fetch(`http://localhost:8080/2020/backend/api/todo/category`, {
