@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { Typography } from '@material-ui/core'
 
 function Dashboard() {
+
     return (
-        <div>
-            s
-        </div>
+        <>
+            <Typography variant={'h3'}>Dashboard</Typography>
+
+        </>
     )
 }
 

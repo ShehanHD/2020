@@ -1,3 +1,5 @@
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
 import React, { useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
@@ -7,6 +9,7 @@ import { createMuiTheme, MuiThemeProvider, useTheme } from '@material-ui/core';
 import useStyles from './Hooks/useStyles';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Exercises from './Components/Exercises/Exercises';
+import Covid from './Components/Covid/Covid';
 
 function App() {
   const theme = useTheme();
@@ -17,7 +20,7 @@ function App() {
     palette: {
       type: "dark",
       primary: { main: '#00e7ff' },
-      secondary: { main: '#eee' },
+      secondary: { main: '#ff2200' },
     },
   });
 
@@ -25,10 +28,10 @@ function App() {
     palette: {
       primary: { main: '#1c1f4c' },
       secondary: { main: '#00848c' },
-      background: {
-        default: "#ebebd9",
-        paper: "#d6d8ce",
-      },
+      // background: {
+      //   default: "#e6e6e6",
+      //   paper: "#4dc5d8",
+      // },
     },
   });
 
@@ -43,18 +46,11 @@ function App() {
 
         <div className={classes.content}>
           <Switch>
-            <Route exact path={'/'}>
-              <Dashboard />
-            </Route>
+            <Route exact path={'/'}> <Dashboard /> </Route>
+            <Route exact path={'/covid'}> <Covid /> </Route>
 
-            <Route exact path={'/exercises'}>
-              <Exercises />
-            </Route>
-
-            <Route exact path={'/:path/todo'}>
-              <Todos />
-            </Route>
-
+            <Route exact path={'/exercises'}> <Exercises /> </Route>
+            <Route exact path={'/exercises/todo'}> <Todos /> </Route>
           </Switch>
         </div>
       </MuiThemeProvider>

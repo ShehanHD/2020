@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react'
 function Admin() {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedDeleteCategory, setSelectedDeleteCategory] = useState(null);
     const [categoryName, setCategoryName] = useState("");
     const [subCategoryName, setSubCategoryName] = useState("");
     const [newEvent, setNewEvent] = useState(false);
@@ -25,8 +26,6 @@ function Admin() {
     }
 
     const handleCategoryName = (e) => setCategoryName(e.target.value);
-
-    const handleSubCategoryName = (e) => setSubCategoryName(e.target.value);
 
     const handleSubmitCategory = () => {
         try {
@@ -59,6 +58,21 @@ function Admin() {
 
     }
 
+    const handleSelectedDeleteCategory = (e, value) => {
+        if (value) {
+            setSelectedDeleteCategory(value);
+        }
+        else {
+            setSelectedDeleteCategory(null);
+        }
+    }
+
+    const handleDeleteCategory = () => {
+        setSelectedDeleteCategory(null);
+    }
+
+    const handleSubCategoryName = (e) => setSubCategoryName(e.target.value);
+
     const handleSubmitSubCategory = () => {
         try {
             let category = {
@@ -89,9 +103,10 @@ function Admin() {
         }
 
     }
+
     return (
         <>
-            <Typography style={{ marginBottom: '2vh' }}>Create Category</Typography>
+            <Typography variant={'h6'}>Create Category</Typography>
             <Grid container component={Paper} style={{ padding: '3vw' }}>
                 <Grid item sm={2} xl={3} />
                 <Grid item sm={8} xl={6}>
@@ -112,8 +127,42 @@ function Admin() {
                 <Grid item sm={2} xl={3} />
             </Grid>
 
+            <Typography variant={'h6'}>Delete Category</Typography>
+            <Grid container component={Paper} style={{ padding: '3vw' }}>
+                <Grid item sm={2} xl={3} />
+                <Grid item sm={8} xl={6}>
+                    <Grid container spacing={3}>
+                        <Grid xs={12} lg={6} item>
+                            <Autocomplete
+                                autoComplete
+                                includeInputInList
+                                filterSelectedOptions
+                                id="category_id"
+                                value={selectedDeleteCategory}
+                                onChange={handleSelectedDeleteCategory}
+                                options={categories || []}
+                                getOptionLabel={(categories) => categories.name}
+                                renderInput={(params) => (
+                                    <TextField
+                                        {...params}
+                                        // error={referenceError}
+                                        label="Category"
+                                        variant="standard"
+                                    // onSelect={() => setReferenceError(false)}
+                                    />
+                                )}
+                            />
+                        </Grid>
+                        <Grid xs={12} lg={6} item>
+                            <Button fullWidth variant={'outlined'} color={'secondary'} style={{ marginTop: '1vh' }} disabled={!selectedDeleteCategory} onClick={handleDeleteCategory}>Delete Category</Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item sm={2} xl={3} />
+            </Grid>
 
-            <Typography style={{ marginBottom: '2vh', marginTop: '4vh' }}>Create Sub Category</Typography>
+
+            <Typography variant={'h6'}>Create Sub Category</Typography>
             <Grid container component={Paper} style={{ padding: '3vw' }}>
                 <Grid item sm={2} xl={3} />
                 <Grid item sm={8} xl={6}>

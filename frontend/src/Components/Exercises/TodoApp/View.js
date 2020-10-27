@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Checkbox, FormControlLabel, Icon, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@material-ui/core';
+import { Checkbox, FormControlLabel, Icon, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 
 function View() {
     const [rows, setRows] = useState([]);
-    const [newDelete, setNewDelete] = useState(false);
+    const [newAction, setNewAction] = useState(false);
     const [showAll, setShowAll] = useState(true);
     const [closedTodos, setClosedTodos] = useState(false);
     const [openTodos, setOpenTodos] = useState(false);
@@ -12,7 +12,7 @@ function View() {
         fetch(`http://localhost:8080/2020/backend/api/todo`)
             .then((response) => response.json())
             .then((data) => setRows(data));
-    }, [newDelete])
+    }, [newAction])
 
     const handleDelete = (e, id) => {
         e.preventDefault();
@@ -21,7 +21,7 @@ function View() {
             method: "PATCH",
         })
             .then(response => {
-                setNewDelete(!newDelete);
+                setNewAction(!newAction);
                 response.json()
             })
             .then(data => console.log(data))

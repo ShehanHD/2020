@@ -1,4 +1,4 @@
-import { AppBar, CssBaseline, Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, MenuList, Paper, Toolbar, Typography, useTheme } from '@material-ui/core';
+import { AppBar, Avatar, Card, CardHeader, CardMedia, CssBaseline, Divider, Drawer, IconButton, ListItem, ListItemIcon, ListItemText, MenuList, Paper, SwipeableDrawer, Toolbar, Typography, useTheme } from '@material-ui/core';
 import React from 'react'
 import useStyles from '../../Hooks/useStyles';
 import clsx from "clsx";
@@ -9,12 +9,11 @@ function NavBar(props) {
     const classes = useStyles(theme);
     const [open, setOpen] = React.useState(false);
 
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-
-    const handleDrawerClose = () => {
-        setOpen(false);
+    const toggleDrawer = (event) => {
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift') && open) {
+            return;
+        }
+        setOpen(!open);
     };
 
     return (
@@ -31,7 +30,7 @@ function NavBar(props) {
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={handleDrawerOpen}
+                        onClick={toggleDrawer}
                         edge="start"
                         className={clsx(classes.menuButton, {
                             [classes.hide]: open,
@@ -45,7 +44,7 @@ function NavBar(props) {
                 </Toolbar>
             </AppBar>
 
-            <Drawer
+            <SwipeableDrawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
                     [classes.drawerOpen]: open,
@@ -57,50 +56,67 @@ function NavBar(props) {
                         [classes.drawerClose]: !open,
                     }),
                 }}
+                onClick={toggleDrawer}
+                onKeyDown={toggleDrawer}
             >
                 <div className={classes.toolbar}>
-                    <IconButton className={classes.arrow} onClick={handleDrawerClose}>
+                    <IconButton className={classes.arrow} onClick={toggleDrawer}>
                         <i className="fas fa-arrow-left"></i>
                     </IconButton>
                 </div>
-                <Divider />
-                <List>
-                    <MenuList>
-                        <Link to={'/'} style={{ textDecoration: "none", color: "inherit" }}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <i className={"fas fa-tachometer-alt"}></i>
-                                </ListItemIcon>
-                                <ListItemText primary={'Dashboard'} />
-                            </ListItem>
-                        </Link>
-                    </MenuList>
-                    <MenuList>
-                        <Link to={'/exercises'} style={{ textDecoration: "none", color: "inherit" }}>
-                            <ListItem button>
-                                <ListItemIcon>
-                                    <i className={"fas fa-stream"}></i>
-                                </ListItemIcon>
-                                <ListItemText primary={'Exercises'} />
-                            </ListItem>
-                        </Link>
-                    </MenuList>
-                </List>
 
                 <Divider />
-                <List>
-                    <MenuList>
-                        <ListItem button onClick={props.toggleDarkTheme}>
-                            <ListItemIcon>
-                                <i className={"fas fa-adjust"}></i>
-                            </ListItemIcon>
-                            <ListItemText primary={"Switch Theme"} />
-                        </ListItem>
-                    </MenuList>
-                </List>
-            </Drawer>
+                <Card>
+                    <CardHeader
+                        avatar={
+                            <Avatar aria-label="aa" style={{ marginLeft: '-8px' }}>
+                                G
+                            </Avatar>
+                        }
+                        action={
+                            <IconButton aria-label="">
+                                <i className="fas fa-ellipsis-v" style={{ fontSize: '14px' }}></i>
+                            </IconButton>
+                        }
+                        title="Guest User"
+                        subheader="Description"
+                    />
+                </Card>
+                <Divider />
+
+                <MenuList>
+                    <NavItem path={'/'} icon={"far fa-compass"} text={'Dashboard'} />
+                    <NavItem path={'/covid'} icon={"fas fa-hands-wash"} text={'Covid'} />
+                    <NavItem path={'/exercises'} icon={"far fa-hdd"} text={'Exercises'} />
+                </MenuList>
+
+                <Divider />
+
+                <MenuList>
+                    <ListItem button onClick={props.toggleDarkTheme}>
+                        <ListItemIcon>
+                            <i className={"fas fa-magic menu-icon"}></i>
+                        </ListItemIcon>
+                        <ListItemText primary={"Switch Theme"} />
+                    </ListItem>
+                </MenuList>
+            </SwipeableDrawer>
         </div>
     )
 }
 
 export default NavBar
+
+
+const NavItem = ({ path, icon, text }) => {
+    return (
+        <Link to={path} style={{ textDecoration: "none", color: "inherit" }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <i className={icon + " menu-icon"}></i>
+                </ListItemIcon>
+                <ListItemText primary={text} />
+            </ListItem>
+        </Link>
+    )
+}

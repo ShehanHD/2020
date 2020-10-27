@@ -1,16 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ListItem, ListItemIcon, ListItemText, MenuList } from '@material-ui/core'
+import { ListItem, ListItemIcon, ListItemText, MenuList, Typography } from '@material-ui/core'
 function Exercises() {
     return (
         <div>
+            <Typography variant={'h3'}>Exercises</Typography>
             <MenuList>
-                <Link to={'exercise/todo'} style={{ textDecoration: "none", color: "inherit" }}>
+                <Link to={'exercises/todo'} style={{ textDecoration: "none", color: "inherit" }}>
                     <ListItem button>
                         <ListItemIcon>
                             <i className={"fas fa-list-ul"}></i>
                         </ListItemIcon>
-                        <ListItemText primary={'Todos'} />
+                        <ListItemText primary={'Todo App'} />
                     </ListItem>
                 </Link>
             </MenuList>

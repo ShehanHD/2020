@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     menuButton: {
-        marginRight: 36,
+        marginLeft: -20,
+        marginRight: 40,
         fontSize: 18,
     },
     arrow: {
