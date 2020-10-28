@@ -10,8 +10,19 @@ function View() {
 
     useEffect(() => {
         fetch(`http://localhost:8080/2020/backend/api/todo`)
-            .then((response) => response.json())
-            .then((data) => setRows(data));
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                }
+                else {
+                    throw response;
+                }
+            })
+            .then((data) => {
+                if (data.errorInfo !== null) {
+                    setRows(data)
+                }
+            });
     }, [newAction])
 
     const handleDelete = (e, id) => {
@@ -82,9 +93,9 @@ function View() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(showAll) && rows.map((row) => (<TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
-                    {(openTodos && !showAll && !closedTodos) && rows.map((row) => (row.is_done === 0 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
-                    {(closedTodos && !showAll && !openTodos) && rows.map((row) => (row.is_done === 1 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
+                    {(showAll && rows) && rows.map((row) => (<TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
+                    {(openTodos && !showAll && !closedTodos && rows) && rows.map((row) => (row.is_done === 0 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
+                    {(closedTodos && !showAll && !openTodos && rows) && rows.map((row) => (row.is_done === 1 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
                 </TableBody>
             </Table>
         </TableContainer>);

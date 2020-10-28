@@ -14,9 +14,18 @@ function NewTodos() {
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
 
     useEffect(() => {
+
         fetch(`http://localhost:8080/2020/backend/api/todo/category`)
-            .then((response) => response.json())
-            .then((data) => setCategories(data));
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json();
+                }
+            })
+            .then((data) => {
+                if (data.errorInfo !== null) {
+                    setCategories(data)
+                }
+            })
     }, [])
 
     const handleName = (e) => setName(e.target.value);

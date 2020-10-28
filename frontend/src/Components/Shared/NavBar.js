@@ -1,5 +1,5 @@
 import { AppBar, Avatar, Card, CardHeader, CardMedia, CssBaseline, Divider, Drawer, IconButton, ListItem, ListItemIcon, ListItemText, MenuList, Paper, SwipeableDrawer, Toolbar, Typography, useTheme } from '@material-ui/core';
-import React from 'react'
+import React, { useState } from 'react'
 import useStyles from '../../Hooks/useStyles';
 import clsx from "clsx";
 import { Link } from 'react-router-dom';
@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 function NavBar(props) {
     const theme = useTheme();
     const classes = useStyles(theme);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
 
     const toggleDrawer = (event) => {
-        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift') && open) {
+        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
         setOpen(!open);
@@ -40,11 +40,11 @@ function NavBar(props) {
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         weCode 2020
-          </Typography>
+                </Typography>
                 </Toolbar>
             </AppBar>
 
-            <SwipeableDrawer
+            <Drawer
                 variant="permanent"
                 className={clsx(classes.drawer, {
                     [classes.drawerOpen]: open,
@@ -56,7 +56,8 @@ function NavBar(props) {
                         [classes.drawerClose]: !open,
                     }),
                 }}
-                onClick={toggleDrawer}
+                open={open}
+                onClick={open ? toggleDrawer : null}
                 onKeyDown={toggleDrawer}
             >
                 <div className={classes.toolbar}>
@@ -100,7 +101,7 @@ function NavBar(props) {
                         <ListItemText primary={"Switch Theme"} />
                     </ListItem>
                 </MenuList>
-            </SwipeableDrawer>
+            </Drawer>
         </div>
     )
 }

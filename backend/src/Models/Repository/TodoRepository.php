@@ -1,6 +1,6 @@
 <?php
-require './src/Models/dbConfiguration.php';
-require './src/Models/interface/ITodoRepository.php';
+require('./src/Models/dbConfiguration.php');
+require('./src/Models/Interface/ITodoRepository.php');
 
 use TD\ITodoRepository;
 

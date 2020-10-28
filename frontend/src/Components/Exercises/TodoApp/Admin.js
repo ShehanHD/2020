@@ -12,8 +12,19 @@ function Admin() {
 
     useEffect(() => {
         fetch(`http://localhost:8080/2020/backend/api/todo/category`)
-            .then((response) => response.json())
-            .then((data) => setCategories(data));
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                }
+                else {
+                    throw response;
+                }
+            })
+            .then((data) => {
+                if (data.errorInfo !== null) {
+                    setCategories(data)
+                }
+            });
     }, [newEvent])
 
     const handleSelectedCategory = (e, value) => {
