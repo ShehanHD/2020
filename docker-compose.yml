@@ -1,0 +1,62 @@
+version: "3"
+services:
+    backend:
+        depends_on:
+            - mariadb
+        build: ./backend
+        container_name: proxy
+        restart: always
+        ports:
+            - "8080:80"
+            - "4430:443"
+        # volumes:
+        #     - react_data:/app
+        networks: 
+            app_network:
+                aliases: 
+                    - proxy
+    
+    # frontend:
+    #     depends_on:
+    #         - backend
+    #     build: ./frontend
+    #     container_name: react
+    #     restart: always
+    #     expose: 
+    #         - "3000"
+    #     volumes:
+    #         - react_data:/app
+    #     networks: 
+    #         app_network:
+    #             aliases: 
+    #                 - react
+
+    mariadb:
+        image: jsurf/rpi-mariadb:latest
+        container_name: mariadb
+        restart: always
+        expose: 
+            - "3306"
+        volumes: 
+            - mariadb_data:/var/lib/mysql
+        environment: 
+            MYSQL_ROOT_PASSWORD: test
+            MYSQL_DATABASE: wecode2020
+            MYSQL_USER: wecode
+            MYSQL_PASSWORD: wecode2020
+        networks: 
+            app_network:
+                aliases: 
+                    - mariadb
+
+networks: 
+    app_network:
+        name: app_network
+
+volumes:
+    react_data:
+        driver: local
+        name: react_data
+    mariadb_data:
+        driver: local
+        name: mariadb_data
