@@ -2,7 +2,7 @@
 
 class PDOConnection
 {
-    private $host = 'mariadb';
+    private $host = 'rasphd.ddns.net'; //mariadb
     private $user = "wecode";
     private $password = "wecode2020";
     private $dbname = "wecode2020";

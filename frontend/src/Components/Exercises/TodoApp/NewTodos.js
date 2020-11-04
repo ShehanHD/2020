@@ -2,7 +2,7 @@ import { Button, Grid, Paper, TextField, useTheme } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import useStyles from '../../../Hooks/useStyles';
 import Autocomplete from "@material-ui/lab/Autocomplete";
-
+import { URL } from '../../Shared/api_url';
 
 function NewTodos() {
     const theme = useTheme();
@@ -15,7 +15,7 @@ function NewTodos() {
 
     useEffect(() => {
 
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`)
+        fetch(`${URL}/api/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();
@@ -38,7 +38,7 @@ function NewTodos() {
                 sub_name: selectedSubCategory.name
             }
 
-            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo`, {
+            fetch(`${URL}/api/todo`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -75,7 +75,7 @@ function NewTodos() {
     }
 
     const fetchSubCategory = (id) => {
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/subcategory/${id}`)
+        fetch(`${URL}/api/todo/subcategory/${id}`)
             .then((response) => response.json())
             .then((data) => setSubCategories(data));
     }

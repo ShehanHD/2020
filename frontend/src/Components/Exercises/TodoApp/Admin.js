@@ -1,6 +1,7 @@
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import React, { useEffect, useState } from 'react'
+import { URL } from '../../Shared/api_url';
 
 function Admin() {
     const [categories, setCategories] = useState([]);
@@ -11,7 +12,7 @@ function Admin() {
     const [newEvent, setNewEvent] = useState(false);
 
     useEffect(() => {
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`)
+        fetch(`${URL}/api/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -45,7 +46,7 @@ function Admin() {
                 user_id: null
             }
 
-            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`, {
+            fetch(`${URL}/api/todo/category`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -79,7 +80,7 @@ function Admin() {
     }
 
     const handleDeleteCategory = () => {
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category/${selectedDeleteCategory.category_id}`, {
+        fetch(`${URL}/api/todo/category/${selectedDeleteCategory.category_id}`, {
             method: "DELETE",
         })
             .then(response => {
@@ -102,7 +103,7 @@ function Admin() {
                 category_id: selectedCategory.category_id
             }
 
-            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/subcategory`, {
+            fetch(`${URL}/api/todo/subcategory`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

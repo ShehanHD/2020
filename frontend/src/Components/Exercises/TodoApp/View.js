@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Checkbox, FormControlLabel, Icon, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
+import { URL } from '../../Shared/api_url';
 
 function View() {
     const [rows, setRows] = useState([]);
@@ -9,7 +10,7 @@ function View() {
     const [openTodos, setOpenTodos] = useState(false);
 
     useEffect(() => {
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo`)
+        fetch(`${URL}/api/todo`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -28,7 +29,7 @@ function View() {
     const handleDelete = (e, id) => {
         e.preventDefault();
 
-        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/${id}`, {
+        fetch(`${URL}/api/todo/${id}`, {
             method: "PATCH",
         })
             .then(response => {
