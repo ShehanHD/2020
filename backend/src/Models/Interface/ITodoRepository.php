@@ -7,6 +7,8 @@ namespace TD {
 
         function AddCategory($data);
 
+        function DeleteCategory($id);
+
         function AddSubCategory($data);
 
         function GetTodos();

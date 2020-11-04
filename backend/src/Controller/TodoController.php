@@ -26,6 +26,9 @@ class TodoController
             case 'PUT':
                 $this->Put($this->firstParams, $data);
                 break;
+            case 'DELETE':
+                $this->Delete($this->firstParams, $this->secParams);
+                break;
             default:
                 echo http_response_code(404);
                 break;
@@ -91,6 +94,15 @@ class TodoController
     {
         try {
             $this->Todo->CloseTodo($id);
+        } catch (Exception $e) {
+            print_r($e);
+        }
+    }
+
+    public function Delete($firstParams, $id)
+    {
+        try {
+            $this->Todo->DeleteCategory($id);
         } catch (Exception $e) {
             print_r($e);
         }

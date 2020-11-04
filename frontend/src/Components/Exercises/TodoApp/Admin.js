@@ -11,7 +11,7 @@ function Admin() {
     const [newEvent, setNewEvent] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/2020/backend/api/todo/category`)
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -45,7 +45,7 @@ function Admin() {
                 user_id: null
             }
 
-            fetch(`http://localhost:8080/2020/backend/api/todo/category`, {
+            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -53,7 +53,7 @@ function Admin() {
                 body: JSON.stringify(category),
             })
                 .then(response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                         setCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
@@ -69,7 +69,7 @@ function Admin() {
 
     }
 
-    const handleSelectedDeleteCategory = (e, value) => {
+    const selectDeleteCategory = (e, value) => {
         if (value) {
             setSelectedDeleteCategory(value);
         }
@@ -79,7 +79,18 @@ function Admin() {
     }
 
     const handleDeleteCategory = () => {
-        setSelectedDeleteCategory(null);
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category/${selectedDeleteCategory.category_id}`, {
+            method: "DELETE",
+        })
+            .then(response => {
+                setNewEvent(!newEvent);
+                response.json()
+            })
+            .then(data => {
+                console.log(data)
+                setSelectedDeleteCategory(null);
+            })
+
     }
 
     const handleSubCategoryName = (e) => setSubCategoryName(e.target.value);
@@ -91,7 +102,7 @@ function Admin() {
                 category_id: selectedCategory.category_id
             }
 
-            fetch(`http://localhost:8080/2020/backend/api/todo/subcategory`, {
+            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/subcategory`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -99,7 +110,7 @@ function Admin() {
                 body: JSON.stringify(category),
             })
                 .then(response => {
-                    if (response.status === 201) {
+                    if (response.status === 200) {
                         setSubCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
@@ -150,7 +161,7 @@ function Admin() {
                                 filterSelectedOptions
                                 id="category_id"
                                 value={selectedDeleteCategory}
-                                onChange={handleSelectedDeleteCategory}
+                                onChange={selectDeleteCategory}
                                 options={categories || []}
                                 getOptionLabel={(categories) => categories.name}
                                 renderInput={(params) => (

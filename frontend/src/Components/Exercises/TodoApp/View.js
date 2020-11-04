@@ -9,7 +9,7 @@ function View() {
     const [openTodos, setOpenTodos] = useState(false);
 
     useEffect(() => {
-        fetch(`http://localhost:8080/2020/backend/api/todo`)
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -28,7 +28,7 @@ function View() {
     const handleDelete = (e, id) => {
         e.preventDefault();
 
-        fetch(`http://localhost:8080/2020/backend/api/todo/${id}`, {
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/${id}`, {
             method: "PATCH",
         })
             .then(response => {

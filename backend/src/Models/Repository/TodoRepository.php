@@ -106,9 +106,21 @@ class TodoRepository implements ITodoRepository
     public function GetCategory()
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT * from categories WHERE 1');
+            $query = $this->dbConnection->prepare('SELECT * FROM categories WHERE 1');
             $query->execute();
             $x = $query->fetchAll();
+            echo json_encode($x);
+        } catch (Exception $e) {
+            echo json_encode($e);
+            http_response_code(500);
+        }
+    }
+
+    public function DeleteCategory($id){
+        try {
+            $query = $this->dbConnection->prepare('DELETE FROM  categories WHERE category_id=:id');
+            $query->execute(['id' => $id]);
+            
             echo json_encode($x);
         } catch (Exception $e) {
             echo json_encode($e);
@@ -119,8 +131,9 @@ class TodoRepository implements ITodoRepository
     public function GetSubCategory($id)
     {
         try {
-            $query = $this->dbConnection->prepare("SELECT * from sub_categories WHERE category_id = '$id'");
-            $query->execute();
+            $query = $this->dbConnection->prepare("SELECT * FROM sub_categories WHERE category_id = :id");
+            $query->execute(['id' => $id]);
+            
             $x = $query->fetchAll();
             echo json_encode($x);
         } catch (Exception $e) {

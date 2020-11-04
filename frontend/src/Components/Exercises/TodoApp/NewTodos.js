@@ -15,7 +15,7 @@ function NewTodos() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:8080/2020/backend/api/todo/category`)
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();
@@ -38,7 +38,7 @@ function NewTodos() {
                 sub_name: selectedSubCategory.name
             }
 
-            fetch(`http://localhost:8080/2020/backend/api/todo`, {
+            fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -75,7 +75,7 @@ function NewTodos() {
     }
 
     const fetchSubCategory = (id) => {
-        fetch(`http://localhost:8080/2020/backend/api/todo/subcategory/${id}`)
+        fetch(`http://rasphd.ddns.net:8080/2020/backend/api/todo/subcategory/${id}`)
             .then((response) => response.json())
             .then((data) => setSubCategories(data));
     }
