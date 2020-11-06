@@ -218,14 +218,14 @@ function Admin() {
                         <Grid xs={12} lg={6} item>
                             <TextField
                                 fullWidth
-                                label="Todo Name"
+                                label="Sub category Name"
                                 disabled={!selectedCategory}
                                 value={subCategoryName}
                                 onChange={handleSubCategoryName}
                             />
                         </Grid>
                         <Grid xs={12} item>
-                            <Button fullWidth variant={'outlined'} color={'primary'} style={{ marginTop: '1vh' }} onClick={handleSubmitSubCategory}>Add new Category</Button>
+                            <Button fullWidth variant={'outlined'} color={'primary'} style={{ marginTop: '1vh' }} onClick={handleSubmitSubCategory}>Add new Sub Category</Button>
                         </Grid>
                     </Grid>
                 </Grid>

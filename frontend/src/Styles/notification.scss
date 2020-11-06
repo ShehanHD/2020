@@ -1,0 +1,14 @@
+.MuiSnackbar-root {
+    width: 100%;
+    z-index: 10000 !important;
+
+    .MuiAlert-root {
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+        border-radius: 25px;
+        padding: 0px 16px !important;
+
+        .MuiAlert-message {
+            margin: auto;
+        }
+    }
+}

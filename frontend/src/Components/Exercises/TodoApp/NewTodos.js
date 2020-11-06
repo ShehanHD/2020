@@ -1,8 +1,9 @@
-import { Button, Grid, Paper, TextField, useTheme } from '@material-ui/core'
+import { Button, Grid, IconButton, InputAdornment, Paper, TextField, useTheme } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import useStyles from '../../../Hooks/useStyles';
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { URL } from '../../Shared/api_url';
+import { DatePicker, DateTimePicker, KeyboardDateTimePicker, TimePicker } from '@material-ui/pickers';
 
 function NewTodos() {
     const theme = useTheme();
@@ -151,6 +152,20 @@ function NewTodos() {
                             />
                         </Grid>
 
+                        <Grid xs={12} item>
+                            <DateTimePicker
+                                fullWidth
+                                autoOk
+                                hideTabs
+                                ampm={false}
+                                // value={selectedDate}
+                                // onChange={handleDateChange}
+                                label="Due Date"
+                                onError={console.log}
+                                minDate={new Date()}
+                                format="yyyy/MM/dd hh:mm"
+                            />
+                        </Grid>
                         <Grid item xs={12} className={classes.root}>
                             <Button fullWidth variant={'contained'} color={'primary'} onClick={handleSubmit}>Add new todo</Button>
                         </Grid>
