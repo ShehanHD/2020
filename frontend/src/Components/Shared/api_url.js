@@ -1,3 +1,4 @@
 // export const URL = 'http://rasphd.ddns.net:8080/2020/backend';
 
-export const URL = 'http://localhost:8080/2020/backend';
+// export const URL = 'http://localhost:8080/2020/backend';
+export const URL = 'http://backend:80/2020/backend';
