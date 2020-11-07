@@ -54,7 +54,7 @@ function Admin() {
                 body: JSON.stringify(category),
             })
                 .then(response => {
-                    if (response.status === 200) {
+                    if (response.status === 201) {
                         setCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
@@ -111,7 +111,7 @@ function Admin() {
                 body: JSON.stringify(category),
             })
                 .then(response => {
-                    if (response.status === 200) {
+                    if (response.status === 201) {
                         setSubCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
