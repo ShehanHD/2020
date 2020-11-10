@@ -44,22 +44,22 @@ function Covid() {
 
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
-                    <Paper className={'info'}>
+                    <div className={'info'}>
                         <Typography variant={'h6'}>Total Cases: {parseInt(global.TotalConfirmed).toLocaleString()}</Typography>
                         <Typography variant={'h6'}>New Cases: {parseInt(global.NewConfirmed).toLocaleString()}</Typography>
-                    </Paper>
+                    </div>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Paper className={'info'} style={{ border: 'solid red 1px' }}>
+                    <div className={'info'} style={{ color: '#cc2222' }}>
                         <Typography variant={'h6'}>Total Deaths: {parseInt(global.TotalDeaths).toLocaleString()}</Typography>
                         <Typography variant={'h6'}>New Deaths: {parseInt(global.NewDeaths).toLocaleString()}</Typography>
-                    </Paper>
+                    </div>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Paper className={'info'} style={{ border: 'solid green 1px' }}>
+                    <div className={'info'} style={{ color: '#22cc22' }}>
                         <Typography variant={'h6'}>Total Recovered: {parseInt(global.TotalRecovered).toLocaleString()}</Typography>
                         <Typography variant={'h6'}>New Recovered: {parseInt(global.NewRecovered).toLocaleString()}</Typography>
-                    </Paper>
+                    </div>
                 </Grid>
             </Grid>
 

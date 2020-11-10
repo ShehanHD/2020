@@ -6,8 +6,8 @@ function View() {
     const [rows, setRows] = useState([]);
     const [newAction, setNewAction] = useState(false);
     const [showAll, setShowAll] = useState(true);
-    const [closedTodos, setClosedTodos] = useState(false);
-    const [openTodos, setOpenTodos] = useState(false);
+    const [closedTodos, setClosedTodos] = useState(true);
+    const [openTodos, setOpenTodos] = useState(true);
 
     useEffect(() => {
         fetch(`${URL}/api/todo`)
@@ -39,36 +39,28 @@ function View() {
             .then(data => console.log(data))
     }
 
-    const handleShowAll = () => {
-        if (!showAll) {
-            setClosedTodos(true);
-            setOpenTodos(true);
-        }
-        else {
-            setClosedTodos(false);
-            setOpenTodos(true);
-        }
-        setShowAll(!showAll);
-    };
-
     const handleClosedTodos = () => {
         setClosedTodos(!closedTodos);
         setShowAll(!showAll);
+
+        if (!showAll) {
+            setOpenTodos(true);
+            setClosedTodos(true);
+        }
     }
 
     const handleOpenTodos = () => {
         setOpenTodos(!openTodos);
         setShowAll(!showAll);
+
+        if (!showAll) {
+            setOpenTodos(true);
+            setClosedTodos(true);
+        }
     }
 
     return (
         <TableContainer component={Paper} style={{ padding: '1vw' }}>
-            <FormControlLabel
-                control={<Checkbox color="primary" checked={showAll} />}
-                onChange={handleShowAll}
-                label="Show All"
-                labelPlacement="start"
-            />
             <FormControlLabel
                 control={<Checkbox color="primary" checked={openTodos} />}
                 onChange={handleOpenTodos}

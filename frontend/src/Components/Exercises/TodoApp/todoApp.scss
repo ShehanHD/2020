@@ -1,4 +1,11 @@
 .completed {
     transition: background-color 1s ease-in-out;
-    background-color: #30632bad;
+    background-color: #36852fad;
+}
+
+.todo-container {
+    margin-top: 1vh;
+    margin-bottom: 2vh;
+    border-radius: 10px !important;
+    padding: 3vw;
 }

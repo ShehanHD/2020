@@ -83,7 +83,7 @@ function NewTodos() {
 
     return (
         <>
-            <Grid container component={Paper} style={{ padding: '3vw' }}>
+            <Grid container component={Paper} className={'todo-container'}>
                 <Grid item sm={2} xl={3} />
                 <Grid item sm={8} xl={6}>
                     <Grid

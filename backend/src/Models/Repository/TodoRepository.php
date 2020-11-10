@@ -131,6 +131,7 @@ class TodoRepository implements ITodoRepository
             $query->execute(['id' => $id]);
 
             http_response_code(200);
+            echo json_encode($id);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);

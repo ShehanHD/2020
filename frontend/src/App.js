@@ -22,7 +22,7 @@ function App() {
   const darkTheme = createMuiTheme({
     palette: {
       type: "dark",
-      primary: { main: '#565656' },
+      primary: { main: '#d6d6d6' },
       secondary: { main: '#ff2200' },
       background: {
         default: "#282C2F",
@@ -33,8 +33,8 @@ function App() {
 
   const lightTheme = createMuiTheme({
     palette: {
-      primary: { main: '#1c1f4c' },
-      secondary: { main: '#00848c' },
+      primary: { main: '#282C2F' },
+      secondary: { main: '#ff2200' },
       background: {
         default: "#FAFAFA",
         paper: "#f0f0f0",
@@ -49,7 +49,7 @@ function App() {
   return (
     <BrowserRouter>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <MuiThemeProvider theme={!darkMode ? darkTheme : lightTheme}>
+        <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <NavBar toggleDarkTheme={toggleDarkTheme} />
 
           <div className={classes.content}>
