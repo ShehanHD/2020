@@ -84,11 +84,15 @@ class TodoRepository implements ITodoRepository
     public function AddCategory($data)
     {
         try {
-            $query = $this->dbConnection->prepare("INSERT INTO categories (name, user_id) VALUES (:name, :user_id);");
-            $query->execute(['name' => $data->name, 'user_id' => $data->user_id]);
+            if ($data->name) {
+                $query = $this->dbConnection->prepare("INSERT INTO categories (name, user_id) VALUES (:name, :user_id);");
+                $query->execute(['name' => $data->name, 'user_id' => $data->user_id]);
 
-            http_response_code(201);
-            echo json_encode($data);
+                http_response_code(201);
+                echo json_encode($data);
+            } else {
+                throw new Exception("Empty Field");
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);
@@ -98,11 +102,15 @@ class TodoRepository implements ITodoRepository
     public function AddSubCategory($data)
     {
         try {
-            $query = $this->dbConnection->prepare("INSERT INTO sub_categories (name, category_id) VALUES (:name, :category_id);");
-            $query->execute(['name' => $data->name, 'category_id' => $data->category_id]);
+            if ($data->name) {
+                $query = $this->dbConnection->prepare("INSERT INTO sub_categories (name, category_id) VALUES (:name, :category_id);");
+                $query->execute(['name' => $data->name, 'category_id' => $data->category_id]);
 
-            http_response_code(201);
-            echo json_encode($data);
+                http_response_code(201);
+                echo json_encode($data);
+            } else {
+                throw new Exception("Empty Field");
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);

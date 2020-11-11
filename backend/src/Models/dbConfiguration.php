@@ -6,11 +6,12 @@ class PDOConnection
     private $user = "wecode";
     private $password = "wecode2020";
     private $dbname = "wecode2020";
+    private $port = 3306;
     private $dsn;
 
     public function __construct()
     {
-        $this->dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+        $this->dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';port=' . $this->port;
     }
 
     public function connection()

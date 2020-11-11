@@ -102,7 +102,14 @@ class TodoController
     public function Delete($firstParams, $id)
     {
         try {
-            $this->Todo->DeleteCategory($id);
+            switch ($firstParams) {
+                case 'category':
+                    $this->Todo->DeleteCategory($id);
+                    break;
+                default:
+                    echo http_response_code(404);
+                    break;
+            }
         } catch (Exception $e) {
             print_r($e);
         }

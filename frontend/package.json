@@ -15,6 +15,7 @@
     "date-fns": "^2.16.1",
     "devextreme": "20.1.7",
     "devextreme-react": "20.1.7",
+    "material-ui-confirm": "^2.1.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

@@ -1,15 +1,20 @@
 import { Button, Grid, Paper, TextField, Typography } from '@material-ui/core'
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import { useConfirm } from 'material-ui-confirm';
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { callNotification } from '../../../Redux/reducers/notification';
 import { URL } from '../../Shared/api_url';
 
 function Admin() {
+    const dispatch = useDispatch();
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedDeleteCategory, setSelectedDeleteCategory] = useState(null);
     const [categoryName, setCategoryName] = useState("");
     const [subCategoryName, setSubCategoryName] = useState("");
     const [newEvent, setNewEvent] = useState(false);
+    const confirm = useConfirm();
 
     useEffect(() => {
         fetch(`${URL}/api/todo/category`)
@@ -58,12 +63,17 @@ function Admin() {
                         setCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
+                        dispatch(callNotification("A new category successfully Added", "success"))
+                        return response.json();
                     }
-                    return response.json();
+                    else {
+                        throw response;
+                    }
                 })
                 .then(data => {
                     console.log(data)
                 })
+                .catch(e => dispatch(callNotification(e.status + " " + e.statusText)))
         } catch (error) {
             console.log(error);
         }
@@ -80,18 +90,28 @@ function Admin() {
     }
 
     const handleDeleteCategory = () => {
-        fetch(`${URL}/api/todo/category/${selectedDeleteCategory.category_id}`, {
-            method: "DELETE",
-        })
-            .then(response => {
-                setNewEvent(!newEvent);
-                response.json()
+        confirm({ description: `This will permanently delete category '${selectedDeleteCategory.name}'` })
+            .then(() => {
+                fetch(`${URL}/api/todo/category/${selectedDeleteCategory.category_id}`, {
+                    method: "DELETE",
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            setCategories(categories.filter(item => item.category_id !== selectedDeleteCategory.category_id));
+                            return response.json()
+                        }
+                        else { throw response; }
+                    })
+                    .then(data => {
+                        setSelectedDeleteCategory(null);
+                        dispatch(callNotification("Category successfully deleted", "success"))
+                    })
+                    .catch(e => dispatch(callNotification(e.statusText)))
             })
-            .then(data => {
-                console.log(data)
-                setSelectedDeleteCategory(null);
-            })
-
+            .catch(() => {
+                console.log("Deletion cancelled.");
+                // dispatch(callNotification("Deletion cancelled.", "info"))
+            });
     }
 
     const handleSubCategoryName = (e) => setSubCategoryName(e.target.value);
@@ -115,11 +135,17 @@ function Admin() {
                         setSubCategoryName("");
                         setSelectedCategory(null);
                         setNewEvent(!newEvent);
+                        return response.json();
                     }
-                    return response.json();
+                    else {
+                        throw response;
+                    }
                 })
                 .then(data => {
-                    console.log(data)
+                    dispatch(callNotification("Subcategory '" + data.name + "' successfully Added", "success"))
+                })
+                .catch(e => {
+                    dispatch(callNotification(e.status + " " + e.statusText))
                 })
         } catch (error) {
             console.log(error);
@@ -150,7 +176,7 @@ function Admin() {
                 <Grid item sm={2} xl={3} />
             </Grid>
 
-            <Typography variant={'h5'}>Create Sub Category</Typography>
+            <Typography variant={'h5'}>Create Subcategory</Typography>
             <Grid container component={Paper} className={'todo-container'}>
                 <Grid item sm={2} xl={3} />
                 <Grid item sm={8} xl={6}>
@@ -183,7 +209,7 @@ function Admin() {
                         <Grid xs={12} lg={6} item>
                             <TextField
                                 fullWidth
-                                label="Sub category Name"
+                                label="Subcategory Name"
                                 disabled={!selectedCategory}
                                 value={subCategoryName}
                                 onChange={handleSubCategoryName}

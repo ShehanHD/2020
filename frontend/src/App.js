@@ -13,6 +13,7 @@ import Exercises from './Components/Exercises/Exercises';
 import Covid from './Components/Covid/Covid';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
+import { ConfirmProvider } from "material-ui-confirm";
 
 function App() {
   const theme = useTheme();
@@ -50,18 +51,20 @@ function App() {
     <BrowserRouter>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-          <NavBar toggleDarkTheme={toggleDarkTheme} />
+          <ConfirmProvider>
+            <NavBar toggleDarkTheme={toggleDarkTheme} />
 
-          <div className={classes.content}>
-            <Switch>
-              <Route exact path={'/'}> <Dashboard /> </Route>
-              <Route exact path={'/covid'}> <Covid /> </Route>
+            <div className={classes.content}>
+              <Switch>
+                <Route exact path={'/'}> <Dashboard /> </Route>
+                <Route exact path={'/covid'}> <Covid /> </Route>
 
-              <Route exact path={'/exercises'}> <Exercises /> </Route>
-              <Route exact path={'/exercises/todo'}> <Todos /> </Route>
-            </Switch>
-          </div>
-          <Notification />
+                <Route exact path={'/exercises'}> <Exercises /> </Route>
+                <Route exact path={'/exercises/todo'}> <Todos /> </Route>
+              </Switch>
+            </div>
+            <Notification />
+          </ConfirmProvider>
         </MuiThemeProvider>
       </MuiPickersUtilsProvider>
     </BrowserRouter>

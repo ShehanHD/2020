@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Checkbox, FormControlLabel, Icon, IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { URL } from '../../Shared/api_url';
+import { useDispatch } from 'react-redux';
+import { callNotification } from '../../../Redux/reducers/notification';
+import { useConfirm } from 'material-ui-confirm';
 
 function View() {
+    const dispatch = useDispatch();
+    const confirm = useConfirm();
     const [rows, setRows] = useState([]);
     const [newAction, setNewAction] = useState(false);
     const [showAll, setShowAll] = useState(true);
@@ -26,17 +31,28 @@ function View() {
             });
     }, [newAction])
 
-    const handleDelete = (e, id) => {
+    const closeTodo = (e, id) => {
         e.preventDefault();
+        confirm({ description: `Is this todo ready to be closed?` })
+            .then(() => {
 
-        fetch(`${URL}/api/todo/${id}`, {
-            method: "PATCH",
-        })
-            .then(response => {
-                setNewAction(!newAction);
-                response.json()
+                fetch(`${URL}/api/todo/${id}`, {
+                    method: "PATCH",
+                })
+                    .then(response => {
+                        if (response.status === 200) {
+                            setNewAction(!newAction);
+                            dispatch(callNotification("Another todo has been completed", "success"));
+                            return response.json()
+                        }
+                        else {
+                            throw response
+                        }
+                    })
+                    .then(data => console.log(data))
+                    .catch(e => dispatch(callNotification(e.statusText)))
             })
-            .then(data => console.log(data))
+            .catch(() => console.log("Deletion cancelled."))
     }
 
     const handleClosedTodos = () => {
@@ -86,9 +102,9 @@ function View() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {(showAll && rows) && rows.map((row) => (<TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
-                    {(openTodos && !showAll && !closedTodos && rows) && rows.map((row) => (row.is_done === 0 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
-                    {(closedTodos && !showAll && !openTodos && rows) && rows.map((row) => (row.is_done === 1 && <TRow key={row.todos_id} row={row} handleDelete={handleDelete} />))}
+                    {(showAll && rows) && rows.map((row) => (<TRow key={row.todos_id} row={row} closeTodo={closeTodo} />))}
+                    {(openTodos && !showAll && !closedTodos && rows) && rows.map((row) => (row.is_done === 0 && <TRow key={row.todos_id} row={row} closeTodo={closeTodo} />))}
+                    {(closedTodos && !showAll && !openTodos && rows) && rows.map((row) => (row.is_done === 1 && <TRow key={row.todos_id} row={row} closeTodo={closeTodo} />))}
                 </TableBody>
             </Table>
         </TableContainer>);
@@ -97,7 +113,7 @@ function View() {
 export default View
 
 
-export const TRow = ({ row, handleDelete }) => {
+export const TRow = ({ row, closeTodo }) => {
     return (
         <TableRow className={row.is_done === 1 ? "completed" : ""}>
             <TableCell align="center">{row.name}</TableCell>
@@ -107,8 +123,8 @@ export const TRow = ({ row, handleDelete }) => {
             <TableCell align="center">{row.is_done === 1 ? "Closed" : "Open"}</TableCell>
             <TableCell align="center" value={row.todos_id}>
                 {row.is_done === 0 ?
-                    <IconButton className="far fa-times-circle" style={{ color: 'red' }} onClick={(e) => handleDelete(e, row.todos_id)} />
-                    // <Button fullWidth variant={'outlined'} color={'secondary'} onClick={(e) => handleDelete(e, row.todos_id)} >Close Todo</Button>
+                    <IconButton className="far fa-times-circle" style={{ color: 'red' }} onClick={(e) => closeTodo(e, row.todos_id)} />
+                    // <Button fullWidth variant={'outlined'} color={'secondary'} onClick={(e) => closeTodo(e, row.todos_id)} >Close Todo</Button>
                     :
                     <Icon className="far fa-check-circle" style={{ color: 'green' }} />}
             </TableCell>
