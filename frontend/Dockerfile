@@ -13,7 +13,8 @@
 
 # CMD ["npm", "start"]
 
-FROM alpine:latest
+# FROM alpine:latest
+FROM node:15.2.0-alpine
 
 WORKDIR /app
 
@@ -22,6 +23,7 @@ RUN apk update && \
     apk add g++ && \
     apk add python2 && \
     apk add --update nodejs npm
+
 
 COPY . .
 
