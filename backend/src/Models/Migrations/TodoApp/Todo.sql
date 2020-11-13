@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS todos(
   is_done BIT DEFAULT 0,
   user_id VARCHAR(10) DEFAULT NULL,
   created_on DATETIME DEFAULT NULL,
+  expire_on DATETIME DEFAULT NULL,
   finished_on DATETIME DEFAULT NULL,
   FOREIGN KEY (sub_name, category_id) REFERENCES sub_categories(name, category_id) ON DELETE CASCADE
 );

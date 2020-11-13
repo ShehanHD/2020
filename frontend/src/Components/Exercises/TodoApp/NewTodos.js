@@ -13,6 +13,8 @@ function NewTodos() {
     const [subCategories, setSubCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [selectedSubCategory, setSelectedSubCategory] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [date, setDate] = useState("");
 
     useEffect(() => {
 
@@ -36,7 +38,8 @@ function NewTodos() {
             let todo = {
                 name,
                 category_id: selectedCategory.category_id,
-                sub_name: selectedSubCategory.name
+                sub_name: selectedSubCategory.name,
+                expire_on: date
             }
 
             fetch(`${URL}/api/todo`, {
@@ -79,6 +82,11 @@ function NewTodos() {
         fetch(`${URL}/api/todo/subcategory/${id}`)
             .then((response) => response.json())
             .then((data) => setSubCategories(data));
+    }
+
+    const handleDateChange = (e) => {
+        setSelectedDate(e);
+        setDate(e.getFullYear() + "-" + e.getMonth() + "-" + e.getDate() + " " + e.getHours() + ":" + e.getMinutes() + ":00");
     }
 
     return (
@@ -158,8 +166,8 @@ function NewTodos() {
                                 autoOk
                                 hideTabs
                                 ampm={false}
-                                // value={selectedDate}
-                                // onChange={handleDateChange}
+                                value={selectedDate}
+                                onChange={handleDateChange}
                                 label="Due Date"
                                 onError={console.log}
                                 minDate={new Date()}

@@ -68,8 +68,8 @@ class TodoRepository implements ITodoRepository
     {
         try {
             // $this->dbConnection->beginTransaction();
-            $query = $this->dbConnection->prepare('INSERT INTO todos (name, category_id, sub_name, created_on) VALUES (:name, :category_id, :sub_name, CURRENT_TIMESTAMP);');
-            $query->execute(['name' => $data->name, 'category_id' => $data->category_id, 'sub_name' => $data->sub_name]);
+            $query = $this->dbConnection->prepare('INSERT INTO todos (name, category_id, sub_name, created_on, expire_on) VALUES (:name, :category_id, :sub_name, CURRENT_TIMESTAMP, :expire_on);');
+            $query->execute(['name' => $data->name, 'category_id' => $data->category_id, 'sub_name' => $data->sub_name, 'expire' => $data->expire_on]);
             http_response_code(201);
             echo json_encode($data);
             // $this->dbConnection->commit();
