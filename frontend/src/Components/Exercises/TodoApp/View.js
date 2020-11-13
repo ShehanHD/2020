@@ -120,6 +120,7 @@ export const TRow = ({ row, closeTodo }) => {
             <TableCell align="center">{row.category_name}</TableCell>
             <TableCell align="center">{row.sub_name}</TableCell>
             <TableCell align="center">{row.created_on}</TableCell>
+            <TableCell align="center">{row.expire_on}</TableCell>
             <TableCell align="center">{row.is_done === 1 ? "Closed" : "Open"}</TableCell>
             <TableCell align="center" value={row.todos_id}>
                 {row.is_done === 0 ?
