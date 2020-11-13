@@ -97,6 +97,7 @@ function View() {
                         <TableCell align="center">Category</TableCell>
                         <TableCell align="center">Sub Category</TableCell>
                         <TableCell align="center">Created Date</TableCell>
+                        <TableCell align="center">Expire On</TableCell>
                         <TableCell align="center">State</TableCell>
                         <TableCell align="center">Action</TableCell>
                     </TableRow>

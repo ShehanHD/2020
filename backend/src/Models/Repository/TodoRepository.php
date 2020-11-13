@@ -22,7 +22,7 @@ class TodoRepository implements ITodoRepository
     public function GetTodos()
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT todos.todos_id, todos.name, todos.sub_name, todos.is_done, todos.created_on, todos.finished_on, categories.name as category_name from todos INNER JOIN categories ON todos.category_id = categories.category_id ORDER BY todos.created_on DESC;');
+            $query = $this->dbConnection->prepare('SELECT todos.todos_id, todos.name, todos.sub_name, todos.is_done, todos.created_on, todos.finished_on, categories.name as category_name, todos.expire_on from todos INNER JOIN categories ON todos.category_id = categories.category_id ORDER BY todos.created_on DESC;');
             $query->execute();
             $x = $query->fetchAll();
 
@@ -69,7 +69,7 @@ class TodoRepository implements ITodoRepository
         try {
             // $this->dbConnection->beginTransaction();
             $query = $this->dbConnection->prepare('INSERT INTO todos (name, category_id, sub_name, created_on, expire_on) VALUES (:name, :category_id, :sub_name, CURRENT_TIMESTAMP, :expire_on);');
-            $query->execute(['name' => $data->name, 'category_id' => $data->category_id, 'sub_name' => $data->sub_name, 'expire' => $data->expire_on]);
+            $query->execute(['name' => $data->name, 'category_id' => $data->category_id, 'sub_name' => $data->sub_name, 'expire_on' => $data->expire_on]);
             http_response_code(201);
             echo json_encode($data);
             // $this->dbConnection->commit();

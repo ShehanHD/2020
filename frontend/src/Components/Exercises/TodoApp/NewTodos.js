@@ -85,8 +85,9 @@ function NewTodos() {
     }
 
     const handleDateChange = (e) => {
+        console.log(e);
         setSelectedDate(e);
-        setDate(e.getFullYear() + "-" + e.getMonth() + "-" + e.getDate() + " " + e.getHours() + ":" + e.getMinutes() + ":00");
+        setDate(e.getFullYear() + "-" + (e.getMonth() + 1) + "-" + e.getDate() + " " + e.getHours() + ":" + e.getMinutes() + ":00");
     }
 
     return (
