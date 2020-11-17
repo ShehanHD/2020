@@ -89,6 +89,7 @@ function NavBar(props) {
                     <NavItem path={'/'} icon={"far fa-compass"} text={'Dashboard'} />
                     <NavItem path={'/covid'} icon={"fas fa-hands-wash"} text={'Covid'} />
                     <NavItem path={'/exercises'} icon={"far fa-hdd"} text={'Exercises'} />
+                    <NavItem path={'/info'} icon={"fas fa-info-circle"} text={'Info'} />
                 </MenuList>
 
                 <Divider />

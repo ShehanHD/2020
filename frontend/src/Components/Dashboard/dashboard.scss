@@ -1,0 +1,35 @@
+.dashboard-expand {
+    flex: 1 !important;
+    border-radius: 0 !important;
+}
+
+.dashboard-expand:hover {
+    background-color: transparent !important;
+}
+
+.dashboard-shadow {
+    box-shadow: 4px 4px 12px #0000001f,
+        -4px -4px 12px #05050504 !important;
+}
+
+.dashboard-load-in {
+    animation: loadCard 700ms ease-in-out;
+}
+
+@keyframes loadCard {
+    0% {
+        transform: scale(.6);
+    }
+
+    60% {
+        transform: scale(1.05);
+    }
+
+    80% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

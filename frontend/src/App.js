@@ -14,6 +14,7 @@ import Covid from './Components/Covid/Covid';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { ConfirmProvider } from "material-ui-confirm";
+import Info from './Components/Info/Info';
 
 function App() {
   const theme = useTheme();
@@ -61,6 +62,8 @@ function App() {
 
                 <Route exact path={'/exercises'}> <Exercises /> </Route>
                 <Route exact path={'/exercises/todo'}> <Todos /> </Route>
+
+                <Route exact path={'/info'}> <Info /> </Route>
               </Switch>
             </div>
             <Notification />
