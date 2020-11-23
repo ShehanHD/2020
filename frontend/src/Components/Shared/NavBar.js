@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import useStyles from '../../Hooks/useStyles';
 import clsx from "clsx";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 function NavBar(props) {
     const theme = useTheme();
     const classes = useStyles(theme);
     const [open, setOpen] = useState(false);
+    const isLogged = useSelector(state => state.authenticationReducer.logged)
 
     const toggleDrawer = (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -101,7 +103,11 @@ function NavBar(props) {
                         </ListItemIcon>
                         <ListItemText primary={"Switch Theme"} />
                     </ListItem>
+
+                    <NavItem path={'/login'} icon={!isLogged ? "fas fa-lock" : "fas fa-lock-open"} text={!isLogged ? 'Login' : 'logout'} />
+                    <NavItem path={'/register'} icon={"fas fa-feather-alt"} text={'Register'} />
                 </MenuList>
+
             </Drawer>
         </div>
     )

@@ -6,7 +6,7 @@ const initialState = {
     msg: ''
 };
 
-export default function (state = initialState, action) {
+export default function notification(state = initialState, action) {
     switch (action.type) {
         case SET_NOTIFICATION:
             // console.log(action);

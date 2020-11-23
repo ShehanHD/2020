@@ -1,26 +1,17 @@
 .dx-datagrid {
-    background-color: inherit !important;
+    background-color: transparent !important;
     color: rgb(105, 105, 105) !important;
     font-weight: 500 !important;
     padding: 2vh 1vh;
 }
 
-#root>div.makeStyles-content-11>div.dx-widget.dx-visibility-change-handler>div>div.dx-datagrid-header-panel>div>div>div.dx-toolbar-after>div>div>div {
+#root>div.makeStyles-content-16>div.covid-table.dx-widget.dx-visibility-change-handler>div>div.dx-datagrid-header-panel>div {
     background-color: transparent !important;
-    border-width: 2px;
-
-    input {
-        color: rgb(116, 116, 116) !important;
-    }
 }
 
 .red {
     background-color: rgb(255, 45, 45) !important;
     color: aliceblue !important;
-}
-
-#root>div.makeStyles-content-11>div.dx-widget.dx-visibility-change-handler>div>div.dx-datagrid-header-panel>div {
-    background-color: transparent !important;
 }
 
 .info {
@@ -37,8 +28,8 @@
 }
 
 .covid-table {
-    margin-top: 2vh;
-    border-radius: 20px;
+    margin-top: 3vh;
+    border-radius: 10px;
     height: 65vh;
     box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.103) !important;
 }

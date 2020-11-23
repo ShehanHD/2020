@@ -73,7 +73,7 @@ function Covid() {
                 className={'covid-table'}
             >
 
-                <SearchPanel component={Paper} visible={true} width={240} placeholder="Search..." />
+                <SearchPanel visible={true} width={220} placeholder="Search..." />
 
                 <Scrolling mode="infinite" />
 
