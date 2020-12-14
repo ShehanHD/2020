@@ -121,4 +121,19 @@ class Esercizio1Repository
             echo json_encode($e);
         }
     }
+
+    public function participentNumberOfOnCountry($num, $country)
+    {
+        try {
+            $query = $this->dbConnection->prepare('SELECT ciclista.* FROM gara INNER JOIN gareggia ON gara.IdGara = gareggia.IdGara AND gareggia.Piazzamento >= :num INNER JOIN ciclista ON gareggia.IdCiclista = ciclista.IdCiclista AND gara.Nazione = :country GROUP BY ciclista.IdCiclista HAVING COUNT(ciclista.IdCiclista) >= 2');
+            $query->execute([':num' => $num, ':country' => $country]);
+            $x = $query->fetchAll();
+
+            http_response_code(200);
+            echo json_encode($x);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e);
+        }
+    }
 }

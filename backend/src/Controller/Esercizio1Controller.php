@@ -46,6 +46,9 @@ class Esercizio1Controller
             case 'gareVintiDeiPaese':
                 $this->Esercizio->GetRaceByWinnersCountry($params[1]);
                 break;
+            case 'ciclistiPiuDiGare':
+                $this->Esercizio->participentNumberOfOnCountry($params[1], $params[2]);
+                break;
             default:
                 echo http_response_code(404);
                 break;
