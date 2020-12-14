@@ -40,6 +40,9 @@ class Esercizio1Controller
             case 'ciclistiVincitoriSuPaese':
                 $this->Esercizio->GetWinningCyclistByCountry($params[1]);
                 break;
+            case 'mediaDeiGareSuPaesi':
+                $this->Esercizio->GetRaceAVGByCountry();
+                break;
             case 'gareVintiDeiPaese':
                 $this->Esercizio->GetRaceByWinnersCountry($params[1]);
                 break;

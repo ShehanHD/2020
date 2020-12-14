@@ -80,8 +80,23 @@ class Esercizio1Repository
     public function GetWinningCyclistByCountry($country)
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT ciclista.* FROM gara INNER JOIN gareggia ON gara.IdGara = gareggia.IdGara AND gareggia.Piazzamento = 1 INNER JOIN ciclista ON gareggia.IdCiclista = ciclista.IdCiclista AND ciclista.Nazione = :country');
+            $query = $this->dbConnection->prepare('SELECT ciclista.* FROM gara INNER JOIN gareggia ON gara.IdGara = gareggia.IdGara AND gareggia.Piazzamento >= 1 INNER JOIN ciclista ON gareggia.IdCiclista = ciclista.IdCiclista AND ciclista.Nazione = :country');
             $query->execute(['country' => $country]);
+            $x = $query->fetchAll();
+
+            http_response_code(200);
+            echo json_encode($x);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e);
+        }
+    }
+
+    public function GetRaceAVGByCountry()
+    {
+        try {
+            $query = $this->dbConnection->prepare('SELECT gara.Nazione, AVG(gara.Lunghezza) MediaDeiGare FROM gara GROUP BY gara.Nazione');
+            $query->execute();
             $x = $query->fetchAll();
 
             http_response_code(200);
@@ -95,7 +110,7 @@ class Esercizio1Repository
     public function GetRaceByWinnersCountry($country)
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT gara.* FROM gara INNER JOIN gareggia ON gara.IdGara = gareggia.IdGara AND gareggia.Piazzamento = 1 INNER JOIN ciclista ON gareggia.IdCiclista = ciclista.IdCiclista AND ciclista.Nazione = :country');
+            $query = $this->dbConnection->prepare('SELECT gara.* FROM gara INNER JOIN gareggia ON gara.IdGara = gareggia.IdGara AND gareggia.Piazzamento >= 1 INNER JOIN ciclista ON gareggia.IdCiclista = ciclista.IdCiclista AND ciclista.Nazione = :country');
             $query->execute(['country' => $country]);
             $x = $query->fetchAll();
 
