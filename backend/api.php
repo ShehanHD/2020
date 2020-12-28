@@ -19,7 +19,14 @@ if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
             include('./src/Controller/TodoController.php');
             new TodoController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
             break;
-
+        case 'verifica1':
+            include('./src/Controller/Verifica1Controller.php');
+            new Verifica1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'esercizio1':
+            include('./src/Controller/Esercizio1Controller.php');
+            new Esercizio1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
         default:
             echo http_response_code(404);
             break;
