@@ -9,7 +9,7 @@ function Exercises() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(callNotification("You have to login before you access to some applications"));
+        // dispatch(callNotification("You have to login before you access to some applications"));
         // !isLogged && dispatch(callNotification("You have to login before you access to some applications"));
     }, [dispatch])
 

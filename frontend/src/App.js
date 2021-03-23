@@ -16,6 +16,7 @@ import { ConfirmProvider } from "material-ui-confirm";
 import Info from './Components/Info/Info';
 import { Login } from './Components/Authentication/Login';
 import { Register } from './Components/Authentication/Register';
+import BP from './Components/Exercises/BussinesPlan/BP';
 
 function App() {
   const theme = useTheme();
@@ -39,8 +40,8 @@ function App() {
       primary: { main: '#282C2F' },
       secondary: { main: '#ff2200' },
       background: {
-        default: "#FAFAFA",
-        paper: "#f0f0f0",
+        default: "#ffffff",
+        paper: "#a0a0a0",
       },
     },
   });
@@ -63,6 +64,8 @@ function App() {
 
                 <Route exact path={'/exercises'}> <Exercises /> </Route>
                 <Route exact path={'/exercises/todo'}> <Todos /> </Route>
+
+                <Route exact path={'/exercises/business-plan'}> <BP /> </Route>
 
                 <Route exact path={'/info'}> <Info /> </Route>
 
