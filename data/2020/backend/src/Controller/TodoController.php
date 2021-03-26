@@ -12,6 +12,7 @@ class TodoController
         $this->firstParams = isset($params[0]) ? $params[0] : NULL;
         $this->secParams = isset($params[1]) ? $params[1] : NULL;
 
+
         switch ($method) {
             case 'GET':
                 $this->Get($this->firstParams, $this->secParams);

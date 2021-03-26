@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 $URL = preg_split('@/@', $_SERVER['REQUEST_URI'], NULL, PREG_SPLIT_NO_EMPTY);
 $REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
-//var_dump($_SERVER['REQUEST_URI']);
+// var_dump($_SERVER['REQUEST_URI']);
 
 $controller = isset($URL[3]) ? $URL[3] : "";
 
@@ -26,6 +26,10 @@ if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
         case 'esercizio1':
             include('./src/Controller/Esercizio1Controller.php');
             new Esercizio1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'student':
+            include('./src/Controller/StudentController.php');
+            new StudentController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
             break;
         default:
             echo http_response_code(404);
