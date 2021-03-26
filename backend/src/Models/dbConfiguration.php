@@ -5,13 +5,12 @@ class PDOConnection
     private $host = 'mariadb'; //mariadb
     private $user = "wecode";
     private $password = "wecode2020";
-    private $dbname = "wecode2020";
     private $port = 3307;
     private $dsn;
 
-    public function __construct()
+    public function __construct($dbname = "wecode2020")
     {
-        $this->dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname . ';port=' . $this->port;
+        $this->dsn = 'mysql:host=' . $this->host . ';dbname=' . $dbname . ';port=' . $this->port;
     }
 
     public function connection()

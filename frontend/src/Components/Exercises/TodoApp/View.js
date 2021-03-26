@@ -26,6 +26,9 @@ function View() {
             })
             .then((data) => {
                 if (data.errorInfo !== null) {
+                    console.log('====================================');
+                    console.log(data);
+                    console.log('====================================');
                     setRows(data)
                 }
             });
