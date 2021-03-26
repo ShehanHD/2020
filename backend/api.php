@@ -27,6 +27,10 @@ if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
             include('./src/Controller/Esercizio1Controller.php');
             new Esercizio1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
             break;
+        case 'student':
+            include('./src/Controller/StudentController.php');
+            new StudentController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
         default:
             echo http_response_code(404);
             break;
