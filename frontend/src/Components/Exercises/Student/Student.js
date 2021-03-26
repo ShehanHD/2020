@@ -49,9 +49,7 @@ function Student() {
                         console.log("Successfully removed a user", "success")
                     }
                     else {
-                        console.log('====================================');
                         console.log(response);
-                        console.log('====================================');
                     }
                 })
             })
@@ -116,8 +114,8 @@ export const StudentCard = ({ element, handleDelete, handleUpdate }) => {
                             {element.Nominativo[0]}
                         </Avatar>
                     }
-                    title={element.Nominativo}
-                    subheader={element.eta}
+                    title={element.Nominativo + " (Classe " + element.Classe + ")"}
+                    subheader={"Voto Media: " + element.MediaVoti}
                 />
                 <CardMedia
                     style={{ height: '15vh' }}
@@ -125,8 +123,9 @@ export const StudentCard = ({ element, handleDelete, handleUpdate }) => {
                     title="Office"
                 />
                 <CardContent style={{ textAlign: 'center' }}>
-                    <Typography variant="body2" color="textSecondary" component="h5">{element.NatoIl}</Typography>
-                    <Typography variant="body2" color="textSecondary" component="h5">{element.Ripetente}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="h5">Nato Il: {element.NatoIl.split(" ")[0]}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="h5">{"Età: " + element.Eta}</Typography>
+                    <Typography variant="body2" color="textSecondary" component="h5">{element.Ripetente !== "1" && "Non "} Ripetente</Typography>
                     <Typography variant="body2" color="textSecondary" component="h5">{element.Sesso}</Typography>
                     {/* <Typography variant="body2" color="textSecondary" component="p">Team: {element.team}</Typography> */}
                 </CardContent>
@@ -171,9 +170,12 @@ export const StudentModal = ({ element, setModalIsOpen, submitUpdate }) => {
                             <Grid item xs={1} />
                             <Grid item xs={10}>
                                 <TextField style={{ marginTop: '1vh' }} fullWidth label="Nome" name="Nominativo" value={data.Nominativo} onChange={handleInput} />
-                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Eta" name="eta" value={data.eta} onChange={handleInput} disabled />
-                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Nato Il" name="NatoIl" value={data.NatoIl} onChange={handleInput} disabled />
-                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Ripetente" name="Ripetente" value={data.Ripetente} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Eta" name="eta" value={data.Eta} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Nato Il" name="NatoIl" value={data.NatoIl.split(" ")[0]} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Classe" name="Classe" value={data.Classe} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Ripetente" name="Ripetente" value={data.Ripetente !== "1" ? "Non Ripetente" : "Ripetente"} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Sesso" name="Sesso" value={data.Sesso} onChange={handleInput} disabled />
+                                <TextField style={{ marginTop: '1vh' }} fullWidth label="Voto Media" name="MediaVoti" value={data.MediaVoti} onChange={handleInput} disabled />
                             </Grid>
                             <Grid item xs={1} />
                         </Grid>
@@ -188,15 +190,16 @@ export const StudentModal = ({ element, setModalIsOpen, submitUpdate }) => {
     )
 }
 
+
 export const Table = ({ data }) => {
     return (
         <table id="studentTable">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Data</th>
-                    <th>Vechchio</th>
-                    <th>Nuovo</th>
+                    <th>ID Studente</th>
+                    <th>Data e Ora</th>
+                    <th>Vechchio Nome</th>
+                    <th>Nuovo Nome</th>
                     <th>Azione</th>
                 </tr>
             </thead>
@@ -208,7 +211,7 @@ export const Table = ({ data }) => {
                         <td>{row.CambiatoIl}</td>
                         <td>{row.OldNominativo}</td>
                         <td>{row.NewNominativo}</td>
-                        <td>{row.Azione}</td>
+                        <td style={{ color: (row.Azione === "DELETE" && "red") }}>{row.Azione}</td>
                     </tr>
                 )}
             </tbody>
