@@ -1,0 +1,8 @@
+version: "2.1"
+services:
+    frontend:
+        container_name: frontend
+        build: .
+        ports:
+            - 50000:3000
+        restart: always

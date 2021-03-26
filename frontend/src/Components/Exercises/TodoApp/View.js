@@ -124,7 +124,7 @@ export const TRow = ({ row, closeTodo }) => {
             <TableCell align="center">{row.expire_on}</TableCell>
             <TableCell align="center">{row.is_done === 1 ? "Closed" : "Open"}</TableCell>
             <TableCell align="center" value={row.todos_id}>
-                {row.is_done === 0 ?
+                {row.is_done === "0" ?
                     <IconButton className="far fa-times-circle" style={{ color: 'red' }} onClick={(e) => closeTodo(e, row.todos_id)} />
                     // <Button fullWidth variant={'outlined'} color={'secondary'} onClick={(e) => closeTodo(e, row.todos_id)} >Close Todo</Button>
                     :

@@ -6,7 +6,7 @@ class PDOConnection
     private $user = "wecode";
     private $password = "wecode2020";
     private $dbname = "wecode2020";
-    private $port = 3307;
+    private $port = 3306;
     private $dsn;
 
     public function __construct()

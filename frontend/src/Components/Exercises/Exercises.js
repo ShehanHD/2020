@@ -5,18 +5,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { callNotification } from '../../Redux/reducers/notification';
 
 function Exercises() {
-    const isLogged = useSelector(state => state.authenticationReducer.logged);
+    // const isLogged = useSelector(state => state.authenticationReducer.logged);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        !isLogged && dispatch(callNotification("You have to login before you access to some applications"));
-    }, [isLogged, dispatch])
+        // dispatch(callNotification("You have to login before you access to some applications"));
+        // !isLogged && dispatch(callNotification("You have to login before you access to some applications"));
+    }, [dispatch])
 
     return (
         <div>
             <Typography variant={'h3'}>Exercises</Typography>
             <MenuList>
-                <ListItem disabled={!isLogged} button component={Link} to={'exercises/todo'} style={{ textDecoration: "none", color: "inherit" }}>
+                <ListItem button component={Link} to={'exercises/todo'} style={{ textDecoration: "none", color: "inherit" }}>
                     <ListItemIcon>
                         <i className={"fas fa-list-ul"}></i>
                     </ListItemIcon>
