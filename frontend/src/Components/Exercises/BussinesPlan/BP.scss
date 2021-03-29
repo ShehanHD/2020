@@ -61,7 +61,7 @@
             z-index: 100000;
 
             &:hover {
-                transform: translateX(20%) scale(1.25);
+                transform: translateX(20%) scale(1.75);
 
                 @media (max-width: 768px) {
                     transform: scale(2);
