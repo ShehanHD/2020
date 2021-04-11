@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header("Access-Control-Allow-Headers: Authorization, Content-Type,Accept, Origin");
     exit(0);
 }
-echo "ciao";
+
 $URL = preg_split('@/@', $_SERVER['REQUEST_URI'], NULL, PREG_SPLIT_NO_EMPTY);
 $REQUEST_METHOD = $_SERVER['REQUEST_METHOD'];
 // var_dump($_SERVER['REQUEST_URI']);
