@@ -51,6 +51,9 @@ class StudentController
             case 'delete':
                 $this->Student->DeleteStudent($params[1]);
                 break;
+            case 'delete_student_audit':
+                $this->Student->deleteDataStudentAudit();
+                break;
             default:
                 echo http_response_code(404);
                 break;
@@ -71,7 +74,17 @@ class StudentController
         }
     }
 
-    public function Post($params, $data)
+    public function post($params, $data)
     {
+        $data = json_decode($data);
+
+        switch ($params[0]) {
+            case 'new':
+                $this->Student->newStudent($data);
+                break;
+            default:
+                echo http_response_code(404);
+                break;
+        }
     }
 }

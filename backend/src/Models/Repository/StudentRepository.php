@@ -46,13 +46,46 @@ class StudentRepository
         }
     }
 
+    public function deleteDataStudentAudit()
+    {
+        try {
+            $query = $this->dbConnection->prepare('DELETE FROM Studenti_Audit;');
+            $query->execute();
+
+            http_response_code(200);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e);
+        }
+    }
+
+    public function newStudent($data)
+    {
+        try {
+            $bool = $data->Ripetente == "1" ? "b'1'" : "b'0'";
+            $query = $this->dbConnection->prepare('INSERT INTO Studenti (Nominativo, NatoIl, Ripetente, Sesso, Eta, MediaVoti, Classe) VALUES (:Nominativo, :NatoIl, ' . $bool . ', :Sesso, :Eta, :MediaVoti, :Classe);');
+            $query->execute(['Nominativo' => $data->Nominativo, 'NatoIl' => $data->NatoIl, 'Sesso' => $data->Sesso, 'Eta' => $data->Eta, 'MediaVoti' => $data->MediaVoti, 'Classe' => $data->Classe]);
+            $x = $this->dbConnection->lastInsertId();
+
+            http_response_code(201);
+            echo json_encode(array("IdStudente" => $x));
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode($e);
+        }
+    }
+
     public function SetName($data)
     {
         try {
             $query = $this->dbConnection->prepare('UPDATE Studenti SET Nominativo = :name WHERE IdStudente = :id;');
             $query->execute(['name' => $data->Nominativo, 'id' => $data->IdStudente]);
 
-            http_response_code(201);
+            if ($query->rowCount() == "1") {
+                http_response_code(201);
+            } else {
+                http_response_code(203);
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);

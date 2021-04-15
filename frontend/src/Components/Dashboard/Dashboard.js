@@ -11,7 +11,7 @@ function Dashboard() {
             title: "2018 Web Site",
             description: "This is my first proper web site",
             link: 'http://wecode.best:50100',
-            img: 'https://lh3.googleusercontent.com/proxy/9nhAFKVWCjhumjgOcHepJPL9SIEBEfsMtcPqevoBss3jwUXXDKUZrGxdUNkpFenUbhvWSTw9gHcz_MntTak',
+            img: 'https://lolstatic-a.akamaihd.net/frontpage/apps/prod/event-site-announcement-2018/it_IT/e6f3b858b0af0b97c54d21e9eef7a3e8950e51ee/assets/img/header-mobile.jpg',
             list: [
                 "I've used basic HTML, CSS, JS for frontend",
                 "For backend I've used php"

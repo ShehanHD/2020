@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30639d5f-3e53-4979-93e6-313fe9f02004" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Exercises/Exercises.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Exercises/Exercises.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Dashboard/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Dashboard/Dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +37,22 @@
       <updated>1609448914615</updated>
       <workItem from="1609448916782" duration="28000" />
       <workItem from="1611742510721" duration="67000" />
+      <workItem from="1618425854481" duration="711000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/api.php</url>
+          <line>10</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
