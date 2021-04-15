@@ -1,36 +1,59 @@
-#studentTable {
-    margin-top: 2vh;
-    width: 100%;
-    text-align: center;
-    border: solid gray 1px;
-
-    tr {
-        height: 50px;
+#student {
+    &>div {
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
     }
 
-    thead>tr {
-        background-color: #bda984;
+    .new-student {
+        position: fixed;
+        right: 2vw;
+        bottom: 2vh;
+        background: #5599ff;
+        border-radius: 2em;
+        padding: 1em;
+
+        i {
+            font-size: 1rem;
+        }
     }
 
-    tbody {
-        tr>td:nth-child(3) {
-            background-color: #601b14;
+    #studentTable {
+        margin-top: 2vh;
+        width: 100%;
+        text-align: center;
+        border: solid gray 1px;
+
+        tr {
+            height: 50px;
         }
 
-        tr>td:nth-child(4) {
-            background-color: #1d402a;
+        thead>tr {
+            background-color: #bda984;
         }
 
-        &>tr:nth-child(even) {
-            background-color: rgb(105, 105, 105);
-
-            &>td:nth-child(4) {
-                background-color: #1d402aa8 !important;
+        tbody {
+            tr>td:nth-child(3) {
+                background-color: #601b14;
             }
 
-            &>td:nth-child(3) {
-                background-color: #601c14af !important;
+            tr>td:nth-child(4) {
+                background-color: #1d402a;
+            }
+
+            &>tr:nth-child(even) {
+                background-color: rgb(105, 105, 105);
+
+                &>td:nth-child(4) {
+                    background-color: #1d402aa8 !important;
+                }
+
+                &>td:nth-child(3) {
+                    background-color: #601c14af !important;
+                }
             }
         }
     }
+
 }
