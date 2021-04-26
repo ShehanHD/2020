@@ -34,7 +34,7 @@ class TracerRepository
     {
         $api_key = "7c99ceecda2271d22003b1905e233fb1&format=1";
 
-        $response = file_get_contents("http://api.ipstack.com/151.64.207.164?access_key=$api_key");
+        $response = file_get_contents("http://api.ipstack.com/$remoteAddress?access_key=$api_key");
         $response = json_decode($response);
 
         try {
@@ -59,7 +59,6 @@ class TracerRepository
 
 
             http_response_code(201);
-            echo json_encode($data);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);
