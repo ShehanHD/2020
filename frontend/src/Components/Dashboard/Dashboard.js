@@ -1,59 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardActions, CardContent, CardMedia, Collapse, Divider, Grid, IconButton, Typography } from '@material-ui/core';
 import './dashboard.scss';
+import { SITE_ID, URL } from '../Shared/api_url';
 
-function Dashboard() {
+function Dashboard(props) {
     const [toCollapse, setToCollapse] = useState(0);
+    const [data, setData] = useState([])
 
-    const data = [
-        {
-            id: 1,
-            title: "2018 Web Site",
-            description: "This is my first proper web site",
-            link: 'http://wecode.best:50100',
-            img: 'https://lolstatic-a.akamaihd.net/frontpage/apps/prod/event-site-announcement-2018/it_IT/e6f3b858b0af0b97c54d21e9eef7a3e8950e51ee/assets/img/header-mobile.jpg',
-            list: [
-                "I've used basic HTML, CSS, JS for frontend",
-                "For backend I've used php"
-            ]
-        },
-        {
-            id: 2,
-            title: "2019 Web Site",
-            description: "This is my second web site",
-            link: 'http://wecode.best:50200',
-            img: 'https://www.simantel.com/wp-content/uploads/2018/09/2019_trends_900x500-FINAL.jpg',
-            list: [
-                "I've used basic HTML, CSS, JS for frontend",
-                "I've used Materialize also for frontend",
-                "For backend I've used php"
-            ]
-        },
-        {
-            id: 3,
-            title: "Github",
-            description: "Github repository",
-            link: 'https://github.com/ShehanHD',
-            img: 'https://portswigger.net/cms/images/54/14/6efb9bc5d143-article-190612-github-body-text.jpg',
-            list: [
-                "Frontend scripts",
-                "Backend scripts",
-                "Database",
-                "Frameworks",
-            ]
-        },
-        {
-            id: 4,
-            title: "Gitlab",
-            description: "Gitlab repository",
-            link: 'https://gitlab.com/shehanhd',
-            img: 'https://www.philipp-doblhofer.at/wp-content/uploads/2019/11/gitlab_hero-1568x692.png',
-            list: [
-                "Frontend scripts",
-                "Backend scripts"
-            ]
-        }
-    ]
+    useEffect(() => {
+        fetch(`${URL}/api/site_management/details/${SITE_ID}/dashboard`,
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(JSON.parse(data[0].page_data))
+                setData(JSON.parse(data[0].page_data));
+            })
+    }, [])
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname === "/" ? "/dashboard" : window.location.pathname);
+    }, [])
 
     const handleExpand = (e, id) => {
         toCollapse === id ? setToCollapse(0) : setToCollapse(id);

@@ -7,7 +7,7 @@ import './Student.scss'
 import { callNotification } from '../../../Redux/reducers/notification';
 import { useDispatch } from 'react-redux';
 
-function Student() {
+function Student(props) {
     const confirm = useConfirm();
     const [dataSource, setDataSource] = useState([]);
     const [auditSource, setAuditSource] = useState([]);
@@ -15,6 +15,10 @@ function Student() {
     const [selectedUser, setSelectedUser] = useState([]);
     const [isUpdate, setIsUpdate] = useState(true);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
 
     useEffect(() => {
         fetch(URL + '/api/student/students')

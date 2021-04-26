@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-function Info() {
+function Info(props) {
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
+
     return (
         <>
             Info

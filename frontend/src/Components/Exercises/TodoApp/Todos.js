@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import NewTodos from './NewTodos';
 import Admin from './Admin';
 import View from './View';
 import './todoApp.scss'
 
-function Todos() {
+function Todos(props) {
     const [selectedTab, setSelectedTab] = useState(0);
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
 
     const handleChange = (event, newValue) => {
         setSelectedTab(newValue);

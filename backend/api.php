@@ -15,6 +15,10 @@ $controller = isset($URL[3]) ? $URL[3] : "";
 
 if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
     switch ($controller) {
+        case 'site_management':
+            include('./src/Controller/siteManagementController.php');
+            new siteManagementController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
         case 'todo':
             include('./src/Controller/TodoController.php');
             new TodoController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
@@ -30,6 +34,10 @@ if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
         case 'student':
             include('./src/Controller/StudentController.php');
             new StudentController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'trace':
+            include('./src/Controller/TracerController.php');
+            new TracerController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'), $_SERVER['REMOTE_ADDR']);
             break;
         default:
             echo http_response_code(404);

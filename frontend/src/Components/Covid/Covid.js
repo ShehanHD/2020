@@ -4,10 +4,14 @@ import { Grid, Paper, Typography } from '@material-ui/core';
 import DataGrid, { Column, LoadPanel, Scrolling, SearchPanel } from 'devextreme-react/data-grid';
 
 
-function Covid() {
+function Covid(props) {
     const [data, setData] = useState([]);
     const [global, setGlobal] = useState([]);
     const [date, setDate] = useState("");
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
 
     useEffect(() => {
         fetch('https://api.covid19api.com/summary',

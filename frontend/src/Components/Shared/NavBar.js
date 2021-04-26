@@ -42,7 +42,7 @@ function NavBar(props) {
                     </IconButton>
                     <Typography variant="h6" noWrap>
                         weCode 2020
-                </Typography>
+                    </Typography>
                 </Toolbar>
             </AppBar>
 
