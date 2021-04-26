@@ -16,8 +16,8 @@ $controller = isset($URL[3]) ? $URL[3] : "";
 if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
     switch ($controller) {
         case 'site_management':
-            include('./src/Controller/siteManagementController.php');
-            new siteManagementController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            include('./src/Controller/SiteManagementController.php');
+            new SiteManagementController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
             break;
         case 'todo':
             include('./src/Controller/TodoController.php');

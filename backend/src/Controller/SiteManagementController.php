@@ -30,6 +30,9 @@ class SiteManagementController
     {
         try {
             switch ($params[0]) {
+                case 'all_pages':
+                    $this->siteManagement->getAllPageData($params);
+                    break;
                 case 'details':
                     $this->siteManagement->getPageData($params);
                     break;
