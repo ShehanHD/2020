@@ -3,8 +3,8 @@
 class PDOConnection
 {
     private $host = '192.168.1.100'; //mariadb
-    private $user = "wecode";
-    private $password = "wecode2020";
+    private $user = "client";
+    private $password = "user123";
     private $port = 3307;
     private $dsn;
 
