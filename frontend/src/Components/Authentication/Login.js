@@ -15,10 +15,14 @@ import Copyright from '../Shared/Copyright';
 import useStyles from '../../Hooks/useStyles';
 import { Link } from 'react-router-dom';
 
-export const Login = () => {
+export const Login = (props) => {
     const dispatch = useDispatch();
     const isLogged = useSelector(state => state.authenticationReducer.logged);
     const classes = useStyles();
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
 
     useEffect(() => {
         isLogged && dispatch(callAuthentication(false));
@@ -38,7 +42,7 @@ export const Login = () => {
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Sign in
-        </Typography>
+                </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"
@@ -74,7 +78,7 @@ export const Login = () => {
                         className={classes.submit}
                     >
                         Sign In
-          </Button>
+                    </Button>
                     <Grid container>
                         <Grid item xs>
                             <Link to="#" style={{ textDecoration: 'none', color: "inherit" }}> Forgot password? </Link>

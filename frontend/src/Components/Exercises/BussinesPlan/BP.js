@@ -1,12 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@material-ui/core';
-import { data } from './data'
 import './BP.scss';
+import { SITE_ID, URL } from '../../Shared/api_url';
 
-function BP() {
+function BP(props) {
+    const [data, setData] = useState([])
+
+
+    useEffect(() => {
+        fetch(`${URL}/api/site_management/details/${SITE_ID}/business-plan`,
+        )
+            .then(res => res.json())
+            .then(data => {
+                console.log(JSON.parse(data[0].page_data))
+                setData(JSON.parse(data[0].page_data));
+            })
+    }, [])
+
+
+    useEffect(() => {
+        props.traceUser(window.location.pathname);
+    }, [])
+
     const handleClick = (e) => {
         console.log(e.currentTarget.id);
     }
+
     return (
         <div id="bp">
             <Typography variant={"h3"}>Hotel Business Plan</Typography>
@@ -17,12 +36,11 @@ function BP() {
                     <p>{item.description}</p>
 
                     {item.subHeaders.length !== 0 && item.subHeaders.map(sub =>
-                        <Accordion>
+                        <Accordion key={sub.id}>
                             <AccordionSummary
                                 expandIcon={<i className="fas fa-sort-down"></i>}
                                 aria-controls="panel1a-content"
                                 id={sub.id}
-                                key={sub.id}
                             >
                                 <Typography>{sub.tittle}</Typography>
                             </AccordionSummary>

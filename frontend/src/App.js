@@ -18,6 +18,7 @@ import { Login } from './Components/Authentication/Login';
 import { Register } from './Components/Authentication/Register';
 import BP from './Components/Exercises/BussinesPlan/BP';
 import Student from './Components/Exercises/Student/Student';
+import { SITE_ID, URL } from './Components/Shared/api_url';
 
 function App() {
   const theme = useTheme();
@@ -47,6 +48,27 @@ function App() {
     },
   });
 
+  const traceUser = (app) => {
+    let pageName = app.split("/").slice(-1).toString();
+
+    fetch(`${URL}/api/trace`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        siteId: SITE_ID,
+        pageName
+      }),
+    })
+      .then(response => {
+        //console.log(response);
+      })
+      .then(data => {
+        //console.log(data)
+      })
+  }
+
   const toggleDarkTheme = () => {
     setDarkMode(!darkMode);
   };
@@ -60,19 +82,18 @@ function App() {
 
             <div className={classes.content}>
               <Switch>
-                <Route exact path={'/'}> <Dashboard /> </Route>
-                <Route exact path={'/covid'}> <Covid /> </Route>
+                <Route exact path={'/'}> <Dashboard traceUser={traceUser} /> </Route>
+                <Route exact path={'/covid'}> <Covid traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/exercises'}> <Exercises /> </Route>
-                <Route exact path={'/exercises/todo'}> <Todos /> </Route>
+                <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>
+                <Route exact path={'/exercises/business-plan'}> <BP traceUser={traceUser} /> </Route>
+                <Route exact path={'/exercises/student'}> <Student traceUser={traceUser} /> </Route>
 
-                <Route exact path={'/exercises/business-plan'}> <BP /> </Route>
-                <Route exact path={'/exercises/student'}> <Student /> </Route>
+                <Route exact path={'/info'}> <Info traceUser={traceUser} /> </Route>
 
-                <Route exact path={'/info'}> <Info /> </Route>
-
-                <Route exact path={'/login'}> <Login /> </Route>
-                <Route exact path={'/register'}> <Register /> </Route>
+                <Route exact path={'/login'}> <Login traceUser={traceUser} /> </Route>
+                <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>
               </Switch>
             </div>
             <Notification />
