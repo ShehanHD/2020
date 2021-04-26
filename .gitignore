@@ -11,6 +11,7 @@ logs
 node_modules
 build
 bower_components
+/data/*
 
 *.sublime*
 
