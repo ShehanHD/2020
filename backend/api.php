@@ -22,6 +22,7 @@ if (
 
     $controller = isset($URL[3]) ? $URL[3] : "";
 
+<<<<<<< HEAD
     if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
         switch ($controller) {
             case 'site_management':
@@ -54,6 +55,37 @@ if (
         }
     } else {
         echo http_response_code(404);
+=======
+if ($URL[0] === "2020" && $URL[1] === "backend" && $URL[2] === "api") {
+    switch ($controller) {
+        case 'site_management':
+            include('./src/Controller/SiteManagementController.php');
+            new SiteManagementController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'todo':
+            include('./src/Controller/TodoController.php');
+            new TodoController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'verifica1':
+            include('./src/Controller/Verifica1Controller.php');
+            new Verifica1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'esercizio1':
+            include('./src/Controller/Esercizio1Controller.php');
+            new Esercizio1Controller(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'student':
+            include('./src/Controller/StudentController.php');
+            new StudentController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'));
+            break;
+        case 'trace':
+            include('./src/Controller/TracerController.php');
+            new TracerController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'), $_SERVER['REMOTE_ADDR']);
+            break;
+        default:
+            echo http_response_code(404);
+            break;
+>>>>>>> c15752a3f82344985e41d5b1df0a206b4fd787d7
     }
 } else {
     echo "Access Denied";
