@@ -19,6 +19,7 @@ import { Register } from './Components/Authentication/Register';
 import BP from './Components/Exercises/BussinesPlan/BP';
 import Student from './Components/Exercises/Student/Student';
 import { SITE_ID, URL } from './Components/Shared/api_url';
+import Admin from './Components/Admin/Admin';
 
 function App() {
   const theme = useTheme();
@@ -91,6 +92,7 @@ function App() {
                 <Route exact path={'/exercises/student'}> <Student traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/info'}> <Info traceUser={traceUser} /> </Route>
+                <Route exact path={'/admin'}> <Admin traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/login'}> <Login traceUser={traceUser} /> </Route>
                 <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>

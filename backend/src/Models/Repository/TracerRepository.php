@@ -38,27 +38,45 @@ class TracerRepository
         $response = json_decode($response);
 
         try {
-            $query = $this->dbConnection->prepare(
-                'INSERT INTO trace 
-                (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
-                VALUES 
-                (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);'
+            $verify = $this->dbConnection->prepare(
+                'SELECT * FROM pages 
+                WHERE
+                visited_site = :visited_site AND visited_page = :visited_page'
             );
 
-            $query->execute([
-                'ip' => $response->ip,
-                'country_name' => $response->country_name,
-                'city' => $response->city,
-                'zip' => $response->zip,
-                'country_flag' => $response->location->country_flag,
-                'latitude' => $response->latitude,
-                'longitude' => $response->longitude,
+            $verify->execute([
                 'visited_site' => $data->siteId,
                 'visited_page' => $data->pageName
             ]);
 
+            $isVerified = $verify->fetchAll();
 
-            http_response_code(201);
+            echo $isVerified;
+
+            // if (sizeof($isVerified) !== 0) {
+            //     $insert = $this->dbConnection->prepare(
+            //         'INSERT INTO trace 
+            //     (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
+            //     VALUES 
+            //     (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);'
+            //     );
+
+            //     $insert->execute([
+            //         'ip' => $response->ip,
+            //         'country_name' => $response->country_name,
+            //         'city' => $response->city,
+            //         'zip' => $response->zip,
+            //         'country_flag' => $response->location->country_flag,
+            //         'latitude' => $response->latitude,
+            //         'longitude' => $response->longitude,
+            //         'visited_site' => $data->siteId,
+            //         'visited_page' => $data->pageName
+            //     ]);
+
+            //     http_response_code(201);
+            // } else {
+            //     http_response_code(401);
+            // }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);
