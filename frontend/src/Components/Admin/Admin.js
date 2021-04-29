@@ -1,10 +1,27 @@
-import React from 'react';
-import { Paper, TextField, Button, Typography } from '@material-ui/core';
+import React, { useState } from 'react';
+import { TextField, Button, Typography } from '@material-ui/core';
 import './admin.scss';
 import useStyles from '../../Hooks/useStyles';
+import { URL } from '../Shared/api_url';
+
 
 const Admin = () => {
-    const classes = useStyles()
+    const classes = useStyles();
+    const [input, setInput] = useState({
+        username: "",
+        password: ""
+    })
+    const handleInput = (e) => {
+        setInput({
+            ...input,
+            [e.target.id]: e.target.value
+        })
+    }
+
+    const handleSubmit = () => {
+        fetch(`${URL}/api/auth`)
+            .then(res => console.log(res))
+    }
 
     return (
         <div id="admin">
@@ -16,23 +33,30 @@ const Admin = () => {
                         fullWidth
                         variant="outlined"
                         margin="normal"
-                        name="username"
+                        id="username"
                         label="Username"
-                        value={""}
-                        onChange={(e) => console.log("a")}
+                        value={input.username}
+                        onChange={handleInput}
                     />
 
                     <TextField
                         fullWidth
                         variant="outlined"
                         margin="normal"
-                        name="password"
+                        id="password"
                         label="Password"
-                        value={""}
-                    //   onChange={}
+                        value={input.password}
+                        onChange={handleInput}
                     />
 
-                    <Button fullWidth margin="normal" className={classes.submit} variant="contained" color="default">
+                    <Button
+                        fullWidth
+                        margin="normal"
+                        className={classes.submit}
+                        variant="contained"
+                        color="default"
+                        onClick={handleSubmit}
+                    >
                         Login
                     </Button>
                 </form>

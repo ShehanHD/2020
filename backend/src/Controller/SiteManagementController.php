@@ -1,7 +1,5 @@
 <?php
 require("src/Models/Repository/SiteManagementRepository.php");
-
-
 class SiteManagementController
 {
     private $siteManagement;

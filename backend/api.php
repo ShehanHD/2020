@@ -5,7 +5,8 @@ $HTTP_ORIGIN = $_SERVER['HTTP_ORIGIN'];
 if (
     $HTTP_ORIGIN == "https://www.wecode.best" ||
     $HTTP_ORIGIN == "https://wecode.best" ||
-    $HTTP_ORIGIN == "http://localhost:3000"
+    $HTTP_ORIGIN == "http://localhost:3000" ||
+    $HTTP_ORIGIN == null
 ) {
 
     header("Access-Control-Allow-Origin: $HTTP_ORIGIN");
@@ -46,7 +47,11 @@ if (
                 break;
             case 'trace':
                 include('./src/Controller/TracerController.php');
-                new TracerController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'), $_SERVER['HTTP_X_REAL_IP']);
+                new TracerController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
+                break;
+            case 'auth':
+                include('./src/Controller/UserController.php');
+                new UserController(array_slice($URL, 4), $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
                 break;
             default:
                 echo http_response_code(404);

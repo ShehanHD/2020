@@ -10,10 +10,16 @@ function Dashboard(props) {
     useEffect(() => {
         fetch(`${URL}/api/site_management/details/${SITE_ID}/dashboard`,
         )
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 200) { return res.json() }
+                else { throw res };
+            })
             .then(data => {
                 console.log(JSON.parse(data[0].page_data))
                 setData(JSON.parse(data[0].page_data));
+            })
+            .catch(err => {
+                console.error(err);
             })
     }, [])
 

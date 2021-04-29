@@ -40,10 +40,15 @@ class SiteManagementRepository
                 'site_id' => $params[1],
                 'page_name' => $params[2]
             ]);
+
             $x = $query->fetchAll();
 
-            http_response_code(200);
-            echo json_encode($x);
+            if (sizeof($x) !== 0) {
+                http_response_code(200);
+                echo json_encode($x);
+            } else {
+                http_response_code(401);
+            }
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);
