@@ -1,6 +1,13 @@
 #admin {
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+
     .login {
-        background-color: red;
         width: 60vw !important;
     }
 }
