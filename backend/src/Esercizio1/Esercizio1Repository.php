@@ -1,7 +1,5 @@
 <?php
 
-require('./src/Models/dbConfiguration.php');
-
 class Esercizio1Repository
 {
     private $dbConnection;

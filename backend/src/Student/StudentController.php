@@ -1,5 +1,5 @@
 <?php
-require("src/Models/Repository/StudentRepository.php");
+
 
 class StudentController
 {

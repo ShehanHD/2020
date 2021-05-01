@@ -1,7 +1,5 @@
 <?php
 
-require("src/Models/Repository/Verifica1Repository.php");
-
 class Verifica1Controller
 {
     private $Verifica;

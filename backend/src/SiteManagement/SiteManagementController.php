@@ -1,25 +1,22 @@
 <?php
-require("src/Models/Repository/TracerRepository.php");
 
-class TracerController
+class SiteManagementController
 {
-    private $remoteAddress;
+    private $siteManagement;
     private $tracer;
-    private $params;
 
-    public function __construct($params, $method, $data, $ip)
+    public function __construct($params, $method, $body)
     {
-        $this->tracer = new TracerRepository();
-        $this->params = isset($params[0]) ? $params[0] : NULL;
-        $this->remoteAddress = $ip;
+        $this->siteManagement = new SiteManagementRepository();
+        $params = isset($params) ? $params : NULL;
 
 
         switch ($method) {
             case 'GET':
-                $this->get($this->params);
+                $this->get($params);
                 break;
             case 'POST':
-                $this->post($this->params, $data);
+                $this->post($params, $body);
                 break;
             default:
                 echo http_response_code(404);
@@ -30,9 +27,12 @@ class TracerController
     public function get($params)
     {
         try {
-            switch ($params) {
-                case '':
-                    $this->tracer->getTrace();
+            switch ($params[0]) {
+                case 'all_pages':
+                    $this->siteManagement->getAllPageData($params);
+                    break;
+                case 'details':
+                    $this->siteManagement->getPageData($params);
                     break;
                 default:
                     echo http_response_code(404);
@@ -44,14 +44,14 @@ class TracerController
         }
     }
 
-    public function post($params, $data)
+    public function post($params, $body)
     {
         try {
-            $data = json_decode($data);
+            $data = json_decode($body);
 
-            switch ($params) {
+            switch ($params[0]) {
                 case '':
-                    $this->tracer->addTrace($data, $this->remoteAddress);
+                    //$this->siteManagement->addPageData($data);
                     break;
                 default:
                     echo http_response_code(404);

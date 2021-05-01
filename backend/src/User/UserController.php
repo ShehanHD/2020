@@ -1,8 +1,9 @@
 <?php
-require("src/Models/Repository/UserRepository.php");
+
 
 class UserController
 {
+    private $siteManagement;
     public function __construct($params, $method, $body)
     {
         $this->siteManagement = new UserRepository();

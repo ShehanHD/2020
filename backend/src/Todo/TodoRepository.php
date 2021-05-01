@@ -1,10 +1,7 @@
 <?php
-require('./src/Models/dbConfiguration.php');
-require('./src/Models/Interface/ITodoRepository.php');
 
-use TD\ITodoRepository;
 
-class TodoRepository implements ITodoRepository
+class TodoRepository
 {
     private $dbConnection;
 

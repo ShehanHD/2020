@@ -1,22 +1,25 @@
 <?php
-require("src/Models/Repository/SiteManagementRepository.php");
-class SiteManagementController
-{
-    private $siteManagement;
-    private $tracer;
 
-    public function __construct($params, $method, $body)
+
+class TracerController
+{
+    private $remoteAddress;
+    private $tracer;
+    private $params;
+
+    public function __construct($params, $method, $data, $ip)
     {
-        $this->siteManagement = new SiteManagementRepository();
-        $params = isset($params) ? $params : NULL;
+        $this->tracer = new TracerRepository();
+        $this->params = isset($params[0]) ? $params[0] : NULL;
+        $this->remoteAddress = $ip;
 
 
         switch ($method) {
             case 'GET':
-                $this->get($params);
+                $this->get($this->params);
                 break;
             case 'POST':
-                $this->post($params, $body);
+                $this->post($this->params, $data);
                 break;
             default:
                 echo http_response_code(404);
@@ -27,12 +30,9 @@ class SiteManagementController
     public function get($params)
     {
         try {
-            switch ($params[0]) {
-                case 'all_pages':
-                    $this->siteManagement->getAllPageData($params);
-                    break;
-                case 'details':
-                    $this->siteManagement->getPageData($params);
+            switch ($params) {
+                case '':
+                    $this->tracer->getTrace();
                     break;
                 default:
                     echo http_response_code(404);
@@ -44,14 +44,14 @@ class SiteManagementController
         }
     }
 
-    public function post($params, $body)
+    public function post($params, $data)
     {
         try {
-            $data = json_decode($body);
+            $data = json_decode($data);
 
-            switch ($params[0]) {
+            switch ($params) {
                 case '':
-                    //$this->siteManagement->addPageData($data);
+                    $this->tracer->addTrace($data, $this->remoteAddress);
                     break;
                 default:
                     echo http_response_code(404);

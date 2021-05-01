@@ -1,5 +1,4 @@
 <?php
-require("src/Models/Repository/Esercizio1Repository.php");
 
 class Esercizio1Controller
 {

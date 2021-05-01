@@ -1,5 +1,5 @@
 <?php
-require('./src/Models/dbConfiguration.php');
+
 
 class TracerRepository
 {
