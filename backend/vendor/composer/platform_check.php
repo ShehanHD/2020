@@ -4,8 +4,15 @@
 
 $issues = array();
 
-if (!(PHP_VERSION_ID >= 50300)) {
-    $issues[] = 'Your Composer dependencies require a PHP version ">= 5.3.0". You are running ' . PHP_VERSION  .  '.';
+if (!(PHP_VERSION_ID >= 70103)) {
+    $issues[] = 'Your Composer dependencies require a PHP version ">= 7.1.3". You are running ' . PHP_VERSION  .  '.';
+}
+
+$missingExtensions = array();
+extension_loaded('pcre') || $missingExtensions[] = 'pcre';
+
+if ($missingExtensions) {
+    $issues[] = 'Your Composer dependencies require the following PHP extensions to be installed: ' . implode(', ', $missingExtensions);
 }
 
 if ($issues) {

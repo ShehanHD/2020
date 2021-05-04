@@ -1,5 +1,7 @@
 <?php
-require_once("./src/Shared/AutoReloader.php");
+require_once("./src/Shared/autoLoader.php");
+
+new Env;
 
 $HTTP_ORIGIN = $_SERVER['HTTP_ORIGIN'];
 

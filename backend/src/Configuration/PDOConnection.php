@@ -2,15 +2,19 @@
 
 class PDOConnection
 {
-    private $host = '192.168.1.100'; //mariadb
-    private $user = "client";
-    private $password = "user123";
-    private $port = 3307;
+    private $user;
+    private $password;
     private $dsn;
 
     public function __construct($dbname = "wecode2020")
     {
-        $this->dsn = 'mysql:host=' . $this->host . ';dbname=' . $dbname . ';port=' . $this->port;
+        $host = getenv('DB_HOST'); //mariadb
+        $port = getenv('DB_PORT');
+        $this->user = getenv('DB_USER');
+        $this->password = getenv('DB_PASSWORD');
+        $this->dsn = getenv('DB_HOST');
+
+        $this->dsn = 'mysql:host=' . $host . ';dbname=' . $dbname . ';port=' . $port;
     }
 
     public function connection()
