@@ -8,8 +8,7 @@ $HTTP_ORIGIN = $_SERVER['HTTP_ORIGIN'];
 if (
     $HTTP_ORIGIN == "https://www.wecode.best" ||
     $HTTP_ORIGIN == "https://wecode.best" ||
-    $HTTP_ORIGIN == "http://localhost:3000" ||
-    $HTTP_ORIGIN == null
+    $HTTP_ORIGIN == "http://localhost:3000"
 ) {
 
     header("Access-Control-Allow-Origin: $HTTP_ORIGIN");
