@@ -52,7 +52,7 @@ function App() {
   const traceUser = (app) => {
     let pageName = app.split("/").slice(-1).toString();
 
-    fetch(`${URL}/api/trace`, {
+    fetch(`${URL}/trace`, {
       method: "POST",
       headers: {
         "content-type": "application/json"

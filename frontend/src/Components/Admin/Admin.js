@@ -19,7 +19,7 @@ const Admin = () => {
     }
 
     const handleSubmit = () => {
-        fetch(`${URL}/api/auth`)
+        fetch(`${URL}/auth`)
             .then(res => console.log(res))
     }
 

@@ -15,7 +15,7 @@ function View() {
     const [openTodos, setOpenTodos] = useState(true);
 
     useEffect(() => {
-        fetch(`${URL}/api/todo`)
+        fetch(`${URL}/todo`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -39,7 +39,7 @@ function View() {
         confirm({ description: `Is this todo ready to be closed?` })
             .then(() => {
 
-                fetch(`${URL}/api/todo/${id}`, {
+                fetch(`${URL}/todo/${id}`, {
                     method: "PATCH",
                 })
                     .then(response => {

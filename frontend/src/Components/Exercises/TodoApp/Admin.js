@@ -17,7 +17,7 @@ function Admin() {
     const confirm = useConfirm();
 
     useEffect(() => {
-        fetch(`${URL}/api/todo/category`)
+        fetch(`${URL}/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -51,7 +51,7 @@ function Admin() {
                 user_id: null
             }
 
-            fetch(`${URL}/api/todo/category`, {
+            fetch(`${URL}/todo/category`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -92,7 +92,7 @@ function Admin() {
     const handleDeleteCategory = () => {
         confirm({ description: `This will permanently delete category '${selectedDeleteCategory.name}'` })
             .then(() => {
-                fetch(`${URL}/api/todo/category/${selectedDeleteCategory.category_id}`, {
+                fetch(`${URL}/todo/category/${selectedDeleteCategory.category_id}`, {
                     method: "DELETE",
                 })
                     .then(response => {
@@ -123,7 +123,7 @@ function Admin() {
                 category_id: selectedCategory.category_id
             }
 
-            fetch(`${URL}/api/todo/subcategory`, {
+            fetch(`${URL}/todo/subcategory`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

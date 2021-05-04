@@ -8,7 +8,7 @@ function Dashboard(props) {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        fetch(`${URL}/api/site_management/details/${SITE_ID}/dashboard`,
+        fetch(`${URL}/site_management/details/${SITE_ID}/dashboard`,
         )
             .then(res => {
                 if (res.status === 200) { return res.json() }

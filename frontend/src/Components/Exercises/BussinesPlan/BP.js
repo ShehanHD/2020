@@ -8,7 +8,7 @@ function BP(props) {
 
 
     useEffect(() => {
-        fetch(`${URL}/api/site_management/details/${SITE_ID}/business-plan`,
+        fetch(`${URL}/site_management/details/${SITE_ID}/business-plan`,
         )
             .then(res => {
                 if (res.status === 200) { return res.json() }

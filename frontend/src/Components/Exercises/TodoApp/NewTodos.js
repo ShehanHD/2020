@@ -18,7 +18,7 @@ function NewTodos() {
 
     useEffect(() => {
 
-        fetch(`${URL}/api/todo/category`)
+        fetch(`${URL}/todo/category`)
             .then((response) => {
                 if (response.status === 200) {
                     return response.json();
@@ -42,7 +42,7 @@ function NewTodos() {
                 expire_on: date
             }
 
-            fetch(`${URL}/api/todo`, {
+            fetch(`${URL}/todo`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"
@@ -79,7 +79,7 @@ function NewTodos() {
     }
 
     const fetchSubCategory = (id) => {
-        fetch(`${URL}/api/todo/subcategory/${id}`)
+        fetch(`${URL}/todo/subcategory/${id}`)
             .then((response) => response.json())
             .then((data) => setSubCategories(data));
     }

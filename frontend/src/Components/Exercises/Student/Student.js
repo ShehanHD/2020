@@ -21,7 +21,7 @@ function Student(props) {
     }, [])
 
     useEffect(() => {
-        fetch(URL + '/api/student/students')
+        fetch(URL + '/student/students')
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -38,7 +38,7 @@ function Student(props) {
     }, [dataSource])
 
     const getStudentAudit = () => {
-        fetch(URL + '/api/student/students_audit')
+        fetch(URL + '/student/students_audit')
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
@@ -59,7 +59,7 @@ function Student(props) {
     const submitDelete = (e, id) => {
         confirm({ description: `This User will permanently delete` })
             .then(() => {
-                fetch(URL + '/api/student/delete/' + encodeURIComponent(id), {
+                fetch(URL + '/student/delete/' + encodeURIComponent(id), {
                     method: 'DELETE',
                 }).then((response) => {
                     if (response.status === 200) {
@@ -96,7 +96,7 @@ function Student(props) {
         let items = [...filtered, data];
         items.sort((a, b) => a.IdStudente - b.IdStudente);
 
-        fetch(`${URL}/api/student/setName`, {
+        fetch(`${URL}/student/setName`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json"
@@ -118,7 +118,7 @@ function Student(props) {
     }
 
     const submitInsert = (data) => {
-        fetch(`${URL}/api/student/new`, {
+        fetch(`${URL}/student/new`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -147,7 +147,7 @@ function Student(props) {
     const clearTable = () => {
         confirm({ description: `This User will permanently clear the table?` })
             .then(() => {
-                fetch(URL + '/api/student/delete_student_audit/', {
+                fetch(URL + '/student/delete_student_audit/', {
                     method: 'DELETE',
                 }).then((response) => {
                     if (response.status === 200) {
