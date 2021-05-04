@@ -4,11 +4,11 @@
 class UserController
 {
     private $siteManagement;
+
     public function __construct($params, $method, $body)
     {
         $this->siteManagement = new UserRepository();
-        $params = isset($params) ? $params : NULL;
-
+        $params = (isset($params) ? $params : NULL);
 
         switch ($method) {
             case 'GET':
@@ -28,7 +28,7 @@ class UserController
         try {
             $data = json_decode($body);
 
-            switch ($params[0]) {
+            switch (isset($params[0]) ? $params[0] : "") {
                 case '':
                     $this->siteManagement->login($data);
                     break;

@@ -1,22 +1,27 @@
 <?php
-require "vendor/autoload.php";
+require 'vendor/autoload.php';
 
 use \Firebase\JWT\JWT;
 
 class UserRepository
 {
+
+    private $jwt_key;
+
     public function __construct()
     {
+        $jwt_key = getenv("JWT_KEY");
     }
 
     public function login($data)
     {
         echo json_encode($this->generateJWT($data));
+        // $decoded = JWT::decode($jwt, $key, array('HS256'));
     }
 
     private function generateJWT($data)
     {
-        $key = "example_key";
+        $key = $this->jwt_key;
         $payload = array(
             "iss" => "https://wecode.best",
             "aud" => "https://www.wecode.best",
@@ -26,7 +31,6 @@ class UserRepository
             "data" => $data
         );
 
-        $jwt = JWT::encode($payload, $key);
-        return $jwt;
+        return JWT::encode($payload, $key);
     }
 }

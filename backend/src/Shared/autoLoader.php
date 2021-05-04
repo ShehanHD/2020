@@ -9,7 +9,7 @@ function __autoload($class_name)
         "Todo",
         "Tracer",
         "User",
-        "Database"
+        "Configuration",
     );
 
     $filename = $class_name . '.php';
