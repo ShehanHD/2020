@@ -25,29 +25,30 @@ if (
     // var_dump($_SERVER['REQUEST_URI']);
 
     $controller = isset($URL[2]) ? $URL[2] : "";
+    $params = array_slice($URL, 3);
 
     if ($URL[0] === "api" && $URL[1] === "v1") {
         switch ($controller) {
             case 'site_management':
-                new SiteManagementController(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'));
+                new SiteManagementController($params, $REQUEST_METHOD, file_get_contents('php://input'));
                 break;
             case 'todo':
-                new TodoController(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'));
+                new TodoController($params, $REQUEST_METHOD, file_get_contents('php://input'));
                 break;
             case 'verifica1':
-                new Verifica1Controller(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'));
+                new Verifica1Controller($params, $REQUEST_METHOD, file_get_contents('php://input'));
                 break;
             case 'esercizio1':
-                new Esercizio1Controller(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'));
+                new Esercizio1Controller($params, $REQUEST_METHOD, file_get_contents('php://input'));
                 break;
             case 'student':
-                new StudentController(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'));
+                new StudentController($params, $REQUEST_METHOD, file_get_contents('php://input'));
                 break;
             case 'trace':
-                new TracerController(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
+                new TracerController($params, $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
                 break;
             case 'auth':
-                new UserController(array_slice($URL, 3), $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
+                new UserController($params, $REQUEST_METHOD, file_get_contents('php://input'), $HTTP_ORIGIN); //$_SERVER['HTTP_X_REAL_IP']
                 break;
             default:
                 echo http_response_code(404);
