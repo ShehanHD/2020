@@ -27,7 +27,7 @@ class UserController
     {
         switch (isset($params[0]) ? $params[0] : "") {
             case '':
-                $this->siteManagement->get();
+                //$this->siteManagement->get();
                 break;
 
             default:
@@ -42,8 +42,11 @@ class UserController
             $data = json_decode($body);
 
             switch (isset($params[0]) ? $params[0] : "") {
-                case '':
+                case 'login':
                     $this->siteManagement->login($data);
+                    break;
+                case 'admin_login':
+                    $this->siteManagement->adminLogin($data);
                     break;
                 case 'registration':
                     $this->siteManagement->registration($data);

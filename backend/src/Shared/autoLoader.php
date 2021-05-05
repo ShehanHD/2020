@@ -9,6 +9,7 @@ function __autoload($class_name)
         "Todo",
         "Tracer",
         "User",
+        "Shared",
         "Configuration",
     );
 
