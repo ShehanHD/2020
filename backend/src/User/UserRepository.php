@@ -13,10 +13,21 @@ class UserRepository
         $jwt_key = getenv("JWT_KEY");
     }
 
+    public function get()
+    {
+        echo  openssl_encrypt("aaaaaa", "aes256", getenv("ENCRYPT_KEY"), 0, getenv("IV"));
+
+        //openssl_decrypt($x, "aes256", getenv("ENCRYPT_KEY"), 0, getenv("IV"));
+    }
+
     public function login($data)
     {
         echo json_encode($this->generateJWT($data));
         // $decoded = JWT::decode($jwt, $key, array('HS256'));
+    }
+
+    public function registration($data)
+    {
     }
 
     private function generateJWT($data)

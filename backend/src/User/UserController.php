@@ -12,11 +12,24 @@ class UserController
 
         switch ($method) {
             case 'GET':
-                //$this->get($params);
+                $this->get($params);
                 break;
             case 'POST':
                 $this->post($params, $body);
                 break;
+            default:
+                echo http_response_code(404);
+                break;
+        }
+    }
+
+    public function get($params)
+    {
+        switch (isset($params[0]) ? $params[0] : "") {
+            case '':
+                $this->siteManagement->get();
+                break;
+
             default:
                 echo http_response_code(404);
                 break;
@@ -31,6 +44,9 @@ class UserController
             switch (isset($params[0]) ? $params[0] : "") {
                 case '':
                     $this->siteManagement->login($data);
+                    break;
+                case 'registration':
+                    $this->siteManagement->registration($data);
                     break;
                 default:
                     echo http_response_code(404);

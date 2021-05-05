@@ -8,6 +8,8 @@ class Env
         putenv("DB_USER=client");
         putenv("DB_PASSWORD=user123");
         putenv("DB_PORT=3307");
+        putenv("ENCRYPT_KEY=encrypt_key");
+        putenv("IV=@wecode19931214@");
         putenv("JWT_KEY=mysecretkeyinsecretkey");
     }
 }
