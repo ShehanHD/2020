@@ -1,5 +1,4 @@
 <?php
-require_once("./src/Api/HttpMapping.php");
 
 class UserController extends Rest implements HttpMapping
 {
@@ -30,9 +29,6 @@ class UserController extends Rest implements HttpMapping
         switch ($params[0] ?? "") {
             case 'login':
                 $this->siteManagement->login($data);
-                break;
-            case 'admin_login':
-                $this->siteManagement->adminLogin($data);
                 break;
             case 'registration':
                 $this->siteManagement->registration($data);

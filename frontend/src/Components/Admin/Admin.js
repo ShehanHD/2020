@@ -29,7 +29,7 @@ const Admin = () => {
     }
 
     const handleSubmit = () => {
-        fetch(`${URL}/auth/admin_login`, {
+        fetch(`${URL}/auth/login`, {
             method: "POST",
             headers: {
                 "content-type": "application/json"
@@ -46,9 +46,14 @@ const Admin = () => {
                 throw "Login Failed";
             })
             .then(data => {
-                dispatch(callNotification(data.message, "success"));
-                localStorage.setItem("admin-jwt", data.jwt_token);
-                setAuthenticated(data.jwt_token);
+                if (data.is_admin) {
+                    dispatch(callNotification(data.message, "success"));
+                    localStorage.setItem("admin-jwt", data.jwt_token);
+                    setAuthenticated(data.jwt_token);
+                }
+                else {
+                    dispatch(callNotification(data.message, "warning"));
+                }
             })
             .catch(err => {
                 console.log(err);

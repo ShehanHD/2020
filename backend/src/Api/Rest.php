@@ -3,9 +3,9 @@
 
 class Rest
 {
-    public function __construct($params, $REQUEST_METHOD, $body)
+    public function __construct($params, $method, $body)
     {
-        switch ($REQUEST_METHOD){
+        switch ($method){
             case "GET":
                 $this->getMapping($params, $body);
                 break;

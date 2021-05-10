@@ -1,5 +1,6 @@
 <?php
 require_once("./src/Shared/autoLoader.php");
+require_once("./src/Api/HttpMapping.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     header("Access-Control-Allow-Methods: GET, POST, PATCH, DELETE, OPTIONS");

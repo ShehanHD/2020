@@ -26,41 +26,17 @@ class UserRepository
                 'email' => $data->email,
                 'password' => $this->auth->encrypt($data->password)
             ]);
+
             $x = $query->fetchAll();
+            $is_admin = (bool)$x[0]['is_admin'];
 
             if ($query->rowCount()) {
                 HTTP_Response::SendWithBody(
                     HTTP_Response::MSG_OK,
                     array(
                         "jwt_token" => $this->auth->generateJWT($x[0]),
-                        "message" => "Login is successful"
-                    ),
-                    HTTP_Response::OK
-                );
-            } else {
-                HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
-            }
-        } catch (Exception $e) {
-            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    public function adminLogin($data)
-    {
-        try {
-            $query = $this->dbConnection->prepare('SELECT email, password from user WHERE email = :email AND password = :password AND is_admin = ' . b'1' . ';');
-            $query->execute([
-                'email' => $data->email,
-                'password' => $this->auth->encrypt($data->password)
-            ]);
-            $x = $query->fetchAll();
-
-            if ($query->rowCount()) {
-                HTTP_Response::SendWithBody(
-                    HTTP_Response::MSG_OK,
-                    array(
-                        "jwt_token" => $this->auth->generateJWT($x[0]),
-                        "message" => "Login is successful"
+                        "message" => $is_admin ? "Login is successful" : "You don't have admin permission!",
+                        "is_admin" => $is_admin
                     ),
                     HTTP_Response::OK
                 );
