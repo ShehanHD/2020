@@ -5,21 +5,20 @@ class TracerController
 {
     private $remoteAddress;
     private $tracer;
-    private $params;
 
     public function __construct($params, $method, $data, $ip)
     {
         $this->tracer = new TracerRepository();
-        $this->params = isset($params[0]) ? $params[0] : NULL;
+        $params = $params ?? NULL;
         $this->remoteAddress = $ip;
 
 
         switch ($method) {
             case 'GET':
-                $this->get($this->params);
+                $this->get($params);
                 break;
             case 'POST':
-                $this->post($this->params, $data);
+                $this->post($params, $data);
                 break;
             default:
                 echo http_response_code(404);
@@ -30,9 +29,9 @@ class TracerController
     public function get($params)
     {
         try {
-            switch ($params) {
-                case '':
-                    $this->tracer->getTrace();
+            switch ($params[0]) {
+                case 'get_by':
+                    isset($params[1]) ? $this->tracer->getTrace($params[1]) : http_response_code(404);
                     break;
                 default:
                     echo http_response_code(404);

@@ -2,13 +2,12 @@
 
 class SiteManagementController
 {
-    private $siteManagement;
-    private $tracer;
+    private SiteManagementRepository $siteManagement;
 
     public function __construct($params, $method, $body)
     {
         $this->siteManagement = new SiteManagementRepository();
-        $params = isset($params) ? $params : NULL;
+        $params = $params ?? NULL;
 
 
         switch ($method) {

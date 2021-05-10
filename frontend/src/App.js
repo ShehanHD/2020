@@ -43,8 +43,8 @@ function App() {
       primary: { main: '#282C2F' },
       secondary: { main: '#ff2200' },
       background: {
-        default: "#ffffff",
-        paper: "#a0a0a0",
+        default: "#dadada",
+        paper: "#a7a7a7",
       },
     },
   });

@@ -20,14 +20,17 @@ class Authentication
             "aud" => "https://www.wecode.best",
             "iat" => time(),
             "nbf" => time() + 10,
-            "exp" => time() + 60,
-            "data" => $data
+            "exp" => time() + 3600,
+            "data" => array(
+                'email' => $data['email'],
+                'password' => $this->decrypt($data['password'])
+            )
         );
 
         return JWT::encode($payload, $key);
     }
 
-    public function crypt($payload)
+    public function encrypt($payload)
     {
         return openssl_encrypt($payload, "aes256", getenv("ENCRYPT_KEY"), 0, getenv("IV"));
     }

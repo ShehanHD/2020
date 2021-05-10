@@ -15,11 +15,11 @@ class TracerRepository
         }
     }
 
-    public function getTrace()
+    public function getTrace($id)
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT * from pages;');
-            $query->execute();
+            $query = $this->dbConnection->prepare('SELECT * from trace WHERE visited_site = :visited_site;');
+            $query->execute(['visited_site' => $id]);
             $x = $query->fetchAll();
 
             http_response_code(200);

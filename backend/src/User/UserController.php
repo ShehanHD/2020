@@ -1,63 +1,55 @@
 <?php
+require_once("./src/Api/HttpMapping.php");
 
-
-class UserController
+class UserController extends Rest implements HttpMapping
 {
-    private $siteManagement;
+    private UserRepository $siteManagement;
 
     public function __construct($params, $method, $body)
     {
         $this->siteManagement = new UserRepository();
-        $params = (isset($params) ? $params : NULL);
-
-        switch ($method) {
-            case 'GET':
-                $this->get($params);
-                break;
-            case 'POST':
-                $this->post($params, $body);
-                break;
-            default:
-                echo http_response_code(404);
-                break;
-        }
+        parent::__construct($params, $method, $body);
     }
 
-    public function get($params)
+    function getMapping($params, $body)
     {
-        switch (isset($params[0]) ? $params[0] : "") {
+        switch ($params[0] ?? "") {
             case '':
                 //$this->siteManagement->get();
                 break;
-
             default:
-                echo http_response_code(404);
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::MSG_NOT_FOUND);
                 break;
         }
     }
 
-    public function post($params, $body)
+    function postMapping($params, $body)
     {
-        try {
-            $data = json_decode($body);
+        $data = json_decode($body);
 
-            switch (isset($params[0]) ? $params[0] : "") {
-                case 'login':
-                    $this->siteManagement->login($data);
-                    break;
-                case 'admin_login':
-                    $this->siteManagement->adminLogin($data);
-                    break;
-                case 'registration':
-                    $this->siteManagement->registration($data);
-                    break;
-                default:
-                    echo http_response_code(404);
-                    break;
-            }
-        } catch (Exception $e) {
-            echo json_encode($e);
-            die();
+        switch ($params[0] ?? "") {
+            case 'login':
+                $this->siteManagement->login($data);
+                break;
+            case 'admin_login':
+                $this->siteManagement->adminLogin($data);
+                break;
+            case 'registration':
+                $this->siteManagement->registration($data);
+                break;
+            default:
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::MSG_NOT_FOUND);
+                break;
         }
+    }
+
+    function deleteMapping($params, $body)
+    {
+        // TODO: Implement deleteMapping() method.
+    }
+
+    function patchMapping($params, $body)
+    {
+        // TODO: Implement patchMapping() method.
     }
 }

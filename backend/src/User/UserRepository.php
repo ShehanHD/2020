@@ -3,8 +3,8 @@
 class UserRepository
 {
 
-    private $dbConnection;
-    private $auth;
+    private PDO $dbConnection;
+    private Authentication $auth;
 
     public function __construct()
     {
@@ -21,30 +21,27 @@ class UserRepository
     public function login($data)
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT email, password from user WHERE email = :email AND password = :password;');
+            $query = $this->dbConnection->prepare('SELECT email, password, is_admin from user WHERE email = :email AND password = :password;');
             $query->execute([
                 'email' => $data->email,
-                'password' => $this->auth->crypt($data->password)
+                'password' => $this->auth->encrypt($data->password)
             ]);
             $x = $query->fetchAll();
 
             if ($query->rowCount()) {
-                http_response_code(202);
-                echo json_encode(array(
-                    "jwt_token" => $this->auth->generateJWT($x),
-                    "message" => "Login is successful"
-                ));
+                HTTP_Response::SendWithBody(
+                    HTTP_Response::MSG_OK,
+                    array(
+                        "jwt_token" => $this->auth->generateJWT($x[0]),
+                        "message" => "Login is successful"
+                    ),
+                    HTTP_Response::OK
+                );
             } else {
-                http_response_code(401);
-                echo json_encode(array(
-                    "message" => "Authentication failed"
-                ));
+                HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
             }
         } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode(array(
-                "message" => $e->errorInfo[2]
-            ));
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -54,34 +51,30 @@ class UserRepository
             $query = $this->dbConnection->prepare('SELECT email, password from user WHERE email = :email AND password = :password AND is_admin = ' . b'1' . ';');
             $query->execute([
                 'email' => $data->email,
-                'password' => $this->auth->crypt($data->password)
+                'password' => $this->auth->encrypt($data->password)
             ]);
             $x = $query->fetchAll();
 
             if ($query->rowCount()) {
-                http_response_code(202);
-                echo json_encode(array(
-                    "jwt_token" => $this->auth->generateJWT($x),
-                    "message" => "Login is successful"
-                ));
+                HTTP_Response::SendWithBody(
+                    HTTP_Response::MSG_OK,
+                    array(
+                        "jwt_token" => $this->auth->generateJWT($x[0]),
+                        "message" => "Login is successful"
+                    ),
+                    HTTP_Response::OK
+                );
             } else {
-                http_response_code(401);
-                echo json_encode(array(
-                    "message" => "Authentication failed",
-                    "dati" => $x
-                ));
+                HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
             }
         } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode(array(
-                "message" => $e->errorInfo[2]
-            ));
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
     public function registration($data)
     {
-        if ($data->password === $data->re_password) {
+        if (strcmp($data->password, $data->re_password)) {
             try {
                 $is_admin = $data->is_admin == 1 ? "b'1'" : "b'0'";
                 $query = $this->dbConnection->prepare('INSERT INTO user (name, surname, email, password, is_admin) VALUES (:name, :surname, :email, :password, ' . $is_admin . ');');
@@ -89,35 +82,33 @@ class UserRepository
                     'name' => $data->name,
                     'surname' => $data->surname,
                     'email' => $data->email,
-                    'password' => $this->auth->crypt($data->password)
+                    'password' => $this->auth->encrypt($data->password)
                 ]);
 
                 if ($query->rowCount()) {
-                    http_response_code(201);
-                    echo json_encode(array(
-                        "jwt_token" => $this->auth->generateJWT([
-                            'email' => $data->email,
-                            'password' => $data->password
-                        ]),
-                        "message" => "new user successfully created"
-                    ));
+                    HTTP_Response::SendWithBody(
+                        HTTP_Response::MSG_CREATED,
+                        array(
+                            "jwt_token" => $this->auth->generateJWT([
+                                'email' => $data->email,
+                                'password' => $this->auth->encrypt($data->password)
+                            ]),
+                            "message" => "new user successfully created"
+                        ),
+                        HTTP_Response::CREATED
+                    );
                 } else {
-                    http_response_code(401);
-                    echo json_encode(array(
-                        "message" => "Authentication failed"
-                    ));
+                    HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
                 }
             } catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode(array(
-                    "message" => $e->errorInfo[2]
-                ));
+                HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
             }
         } else {
-            http_response_code(400);
-            echo json_encode(array(
-                "message" => "Passwords are not matching!"
-            ));
+            HTTP_Response::SendWithBody(
+                HTTP_Response::MSG_BAD_REQUEST,
+                array( "message" => "Passwords are not matching!" ),
+                HTTP_Response::BAD_REQUEST
+            );
         }
     }
 }

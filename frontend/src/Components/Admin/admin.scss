@@ -11,4 +11,16 @@
     .login {
         width: 60vw !important;
     }
+
+    .auth {
+        display: block;
+        height: inherit;
+        width: 100%;
+
+        &>.menu {
+            display: flex;
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
 }

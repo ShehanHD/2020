@@ -11,6 +11,7 @@ function __autoload($class_name)
         "User",
         "Shared",
         "Configuration",
+        "Api"
     );
 
     $filename = $class_name . '.php';
