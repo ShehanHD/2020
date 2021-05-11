@@ -1,6 +1,6 @@
 <?php
 
-function __autoload($class_name)
+function __autoload($class_name): bool
 {
     $folders = array(
         "Esercizio1",
@@ -25,4 +25,18 @@ function __autoload($class_name)
         }
     }
     return FALSE;
+}
+
+function controlOrigin($ORIGIN): bool
+{
+    $whiteList = array("https://www.wecode.best", "https://wecode.best", "http://localhost:3000", null);
+    $verified = false;
+
+    foreach ($whiteList as $value) {
+        if($value === $ORIGIN){
+            $verified = true;
+        }
+    }
+
+    return $verified;
 }

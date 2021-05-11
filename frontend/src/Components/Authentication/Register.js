@@ -3,23 +3,72 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import sha256 from 'sha256'
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import Copyright from '../Shared/Copyright';
 import useStyles from '../../Hooks/useStyles';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { callNotification } from '../../Redux/reducers/notification';
+import { URL } from '../Shared/api_url';
 
 export const Register = (props) => {
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const [authenticated, setAuthenticated] = useState("");
+    const [form, setForm] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        re_password: ""
+    })
 
     useEffect(() => {
         props.traceUser(window.location.pathname);
     }, [])
+
+    const handleInput = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const submit = () => {
+
+        fetch(`${URL}/auth/registration`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                name: form.name,
+                surname: form.surname,
+                email: form.email,
+                password: sha256(form.password),
+                re_password: sha256(form.re_password)
+            }),
+        })
+            .then(response => {
+                if (response.status === 201) {
+                    return response.json()
+                };
+                throw "Registration Failed";
+            })
+            .then(data => {
+                dispatch(callNotification(data.message, "success"));
+                localStorage.setItem("admin-jwt", data.jwt_token);
+                setAuthenticated(data.jwt_token);
+            })
+            .catch(err => {
+                dispatch(callNotification(err, "error"));
+            })
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -34,13 +83,14 @@ export const Register = (props) => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="fname"
-                                name="firstName"
+                                name="name"
                                 variant="outlined"
                                 required
                                 fullWidth
                                 id="firstName"
                                 label="First Name"
                                 autoFocus
+                                onInput={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -48,10 +98,10 @@ export const Register = (props) => {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="lastName"
-                                label="Last Name"
-                                name="lastName"
-                                autoComplete="lname"
+                                id="surname"
+                                label="Surname"
+                                name="surname"
+                                onInput={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -62,7 +112,7 @@ export const Register = (props) => {
                                 id="email"
                                 label="Email Address"
                                 name="email"
-                                autoComplete="email"
+                                onInput={handleInput}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -74,16 +124,29 @@ export const Register = (props) => {
                                 label="Password"
                                 type="password"
                                 id="password"
-                                autoComplete="current-password"
+                                onInput={handleInput}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                name="re_password"
+                                label="Repeat Password"
+                                type="password"
+                                id="re_password"
+                                onInput={handleInput}
                             />
                         </Grid>
                     </Grid>
                     <Button
-                        type="submit"
+                        type="button"
                         fullWidth
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={submit}
                     >
                         Sign Up
                     </Button>

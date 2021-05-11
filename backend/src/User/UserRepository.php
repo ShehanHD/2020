@@ -50,7 +50,7 @@ class UserRepository
 
     public function registration($data)
     {
-        if (strcmp($data->password, $data->re_password)) {
+        if (!strcmp($data->password, $data->re_password) && filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
             try {
                 $is_admin = $data->is_admin == 1 ? "b'1'" : "b'0'";
                 $query = $this->dbConnection->prepare('INSERT INTO user (name, surname, email, password, is_admin) VALUES (:name, :surname, :email, :password, ' . $is_admin . ');');

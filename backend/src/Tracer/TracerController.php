@@ -3,8 +3,8 @@
 
 class TracerController
 {
-    private $remoteAddress;
-    private $tracer;
+    private string $remoteAddress;
+    private TracerRepository $tracer;
 
     public function __construct($params, $method, $data, $ip)
     {
@@ -48,12 +48,12 @@ class TracerController
         try {
             $data = json_decode($data);
 
-            switch ($params) {
-                case '':
+            switch ($params[0]) {
+                case 'new_trace':
                     $this->tracer->addTrace($data, $this->remoteAddress);
                     break;
                 default:
-                    echo http_response_code(404);
+                    HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
                     break;
             }
         } catch (Exception $e) {

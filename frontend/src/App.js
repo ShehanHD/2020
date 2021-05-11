@@ -20,6 +20,8 @@ import BP from './Components/Exercises/BussinesPlan/BP';
 import Student from './Components/Exercises/Student/Student';
 import { SITE_ID, URL } from './Components/Shared/api_url';
 import Admin from './Components/Admin/Admin';
+import Api from './Components/API/Api';
+import TracerApi from './Components/API/TracerApi/TracerApi';
 
 function App() {
   const theme = useTheme();
@@ -52,7 +54,7 @@ function App() {
   const traceUser = (app) => {
     let pageName = app.split("/").slice(-1).toString();
 
-    fetch(`${URL}/trace`, {
+    fetch(`${URL}/trace/new_trace`, {
       method: "POST",
       headers: {
         "content-type": "application/json"
@@ -90,6 +92,9 @@ function App() {
                 <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>
                 <Route exact path={'/exercises/business-plan'}> <BP traceUser={traceUser} /> </Route>
                 <Route exact path={'/exercises/student'}> <Student traceUser={traceUser} /> </Route>
+
+                <Route exact path={'/api_management'}> <Api traceUser={traceUser} /> </Route>
+                <Route exact path={'/api_management/tracer_api'}> <TracerApi traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/info'}> <Info traceUser={traceUser} /> </Route>
                 <Route exact path={'/admin'}> <Admin traceUser={traceUser} /> </Route>

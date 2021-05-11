@@ -3,7 +3,7 @@
 
 class TracerRepository
 {
-    private $dbConnection;
+    private PDO $dbConnection;
 
     public function __construct()
     {

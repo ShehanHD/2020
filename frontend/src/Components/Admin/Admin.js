@@ -40,16 +40,17 @@ const Admin = () => {
             }),
         })
             .then(response => {
-                if (response.status === 202) {
+                if (response.status === 200) {
                     return response.json()
                 };
                 throw "Login Failed";
             })
             .then(data => {
-                if (data.is_admin) {
+                console.log(data)
+                if (data.body.is_admin) {
                     dispatch(callNotification(data.message, "success"));
-                    localStorage.setItem("admin-jwt", data.jwt_token);
-                    setAuthenticated(data.jwt_token);
+                    localStorage.setItem("admin-jwt", data.body.jwt_token);
+                    setAuthenticated(data.body.jwt_token);
                 }
                 else {
                     dispatch(callNotification(data.message, "warning"));
