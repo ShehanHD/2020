@@ -16,7 +16,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -57,7 +57,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="php.override.implement.member.chooser.php.doc" value="DEFAULT" />
     <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -80,7 +80,12 @@
       <workItem from="1619188850014" duration="343000" />
       <workItem from="1620592908978" duration="3493000" />
       <workItem from="1620652917468" duration="3110000" />
+<<<<<<< Updated upstream
       <workItem from="1620682537319" duration="4674000" />
+=======
+      <workItem from="1620745247530" duration="632000" />
+      <workItem from="1620745885091" duration="581000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
