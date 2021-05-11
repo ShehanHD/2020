@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30639d5f-3e53-4979-93e6-313fe9f02004" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Api/Rest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/Rest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/User/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/User/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/User/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Admin/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Admin/Admin.js" afterDir="false" />
-    </list>
+    <list default="true" id="30639d5f-3e53-4979-93e6-313fe9f02004" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +12,7 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="ADD_SUFFIX_TO_CHERRY_PICKS_OF_PUBLISHED_COMMITS" value="false" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -53,8 +47,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -76,6 +71,7 @@
       <workItem from="1619188850014" duration="343000" />
       <workItem from="1620592908978" duration="3493000" />
       <workItem from="1620652917468" duration="3110000" />
+      <workItem from="1620745247530" duration="406000" />
     </task>
     <servers />
   </component>
