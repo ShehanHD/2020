@@ -2,7 +2,7 @@
 
 class SiteManagementRepository
 {
-    private $dbConnection;
+    private PDO $dbConnection;
 
     public function __construct()
     {
@@ -10,7 +10,7 @@ class SiteManagementRepository
             $db = new PDOConnection();
             $this->dbConnection = $db->connection();
         } catch (PDOException $e) {
-            throw $e;
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -23,11 +23,9 @@ class SiteManagementRepository
             ]);
             $x = $query->fetchAll();
 
-            http_response_code(200);
-            echo json_encode($x);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode($e);
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_OK, $x, HTTP_Response::OK);
+        } catch (PDOException $e) {
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -43,18 +41,22 @@ class SiteManagementRepository
             $x = $query->fetchAll();
 
             if (sizeof($x) !== 0) {
-                http_response_code(200);
-                echo json_encode($x);
+                HTTP_Response::SendWithBody(HTTP_Response::MSG_OK, $x, HTTP_Response::OK);
             } else {
-                http_response_code(401);
+                HTTP_Response::Send(HTTP_Response::MSG_BAD_REQUEST, HTTP_Response::BAD_REQUEST);
             }
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode($e);
+        } catch (PDOException $e) {
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
     public function addPageData($data, $remoteAddress)
     {
+        try {
+            $query = $this->dbConnection->prepare("INSERT INTO () VALUES ();");
+        }
+        catch (PDOException $e){
+
+        }
     }
 }

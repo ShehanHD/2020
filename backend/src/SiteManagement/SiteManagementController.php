@@ -17,21 +17,16 @@ class SiteManagementController extends Rest implements HttpMapping
      */
     function getMapping($params, $body): mixed
     {
-        try {
-            switch ($params[0]) {
-                case 'all_pages':
-                    $this->siteManagement->getAllPageData($params);
-                    break;
-                case 'details':
-                    $this->siteManagement->getPageData($params);
-                    break;
-                default:
-                    echo http_response_code(404);
-                    break;
-            }
-        } catch (Exception $e) {
-            echo json_encode($e);
-            die();
+        switch ($params[0]) {
+            case 'all_pages':
+                $this->siteManagement->getAllPageData($params);
+                break;
+            case 'details':
+                $this->siteManagement->getPageData($params);
+                break;
+            default:
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                break;
         }
     }
 
@@ -42,20 +37,15 @@ class SiteManagementController extends Rest implements HttpMapping
      */
     function postMapping($params, $body): mixed
     {
-        try {
-            $data = json_decode($body);
+        $data = json_decode($body);
 
-            switch ($params[0]) {
-                case '':
-                    //$this->siteManagement->addPageData($data);
-                    break;
-                default:
-                    echo http_response_code(404);
-                    break;
-            }
-        } catch (Exception $e) {
-            echo json_encode($e);
-            die();
+        switch ($params[0]) {
+            case '':
+                //$this->siteManagement->addPageData($data);
+                break;
+            default:
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                break;
         }
     }
 
