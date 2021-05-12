@@ -1,36 +1,81 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import { URL } from '../Shared/api_url';
+import sha256 from 'sha256'
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { connect, useDispatch, useSelector } from 'react-redux';
-import { callAuthentication } from '../../Redux/reducers/authentication'
 import Copyright from '../Shared/Copyright';
 import useStyles from '../../Hooks/useStyles';
 import { Link } from 'react-router-dom';
+import { setAuth } from '../../Redux/action/authentication';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { callNotification } from '../../Redux/reducers/notification';
 
 export const Login = (props) => {
     const dispatch = useDispatch();
+    let history = useHistory();
     const isLogged = useSelector(state => state.authenticationReducer.logged);
     const classes = useStyles();
+    const [authenticated, setAuthenticated] = useState("");
+    const [input, setInput] = useState({
+        email: "",
+        password: ""
+    })
 
     useEffect(() => {
         props.traceUser(window.location.pathname);
     }, [])
 
     useEffect(() => {
-        isLogged && dispatch(callAuthentication(false));
-    }, [isLogged, dispatch])
+        setAuthenticated(localStorage.getItem("client-jwt"));
+    }, [])
 
     const login = () => {
-        dispatch(callAuthentication(true))
-        window.history.back();
+        fetch(`${URL}/auth/login`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({
+                email: input.email,
+                password: sha256(input.password)
+            }),
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json()
+                };
+                throw "Login Failed";
+            })
+            .then(data => {
+                console.log(data)
+                if (data.body) {
+                    dispatch(callNotification(data.message, "success"));
+                    props.SetClientLogin(data.body.jwt_token);
+                    setAuthenticated(data.body.jwt_token);
+                    history.push("/api_management")
+                }
+                else {
+                    dispatch(callNotification(data.message, "warning"));
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        dispatch(setAuth("true"));
+    }
+
+    const handleInput = (e) => {
+        setInput({
+            ...input,
+            [e.target.id]: e.target.value
+        })
     }
 
     return (
@@ -45,44 +90,45 @@ export const Login = (props) => {
                 </Typography>
                 <form className={classes.form} noValidate>
                     <TextField
+                        fullWidth
                         variant="outlined"
                         margin="normal"
-                        required
-                        fullWidth
+                        type="email"
                         id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
+                        label="e-mail"
+                        value={input.username}
+                        onChange={handleInput}
                     />
+
                     <TextField
+                        fullWidth
                         variant="outlined"
                         margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        label="Password"
+                        value={input.password}
+                        onChange={handleInput}
                     />
-                    <FormControlLabel
+
+                    <Button
+                        fullWidth
+                        margin="normal"
+                        className={classes.submit}
+                        variant="contained"
+                        color="default"
+                        onClick={login}
+                    >
+                        Login
+                    </Button>
+                    {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
-                        Sign In
-                    </Button>
+                    /> */}
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link to="#" style={{ textDecoration: 'none', color: "inherit" }}> Forgot password? </Link>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
                             <Link to={"/register"} style={{ textDecoration: 'none', color: "inherit" }}> {"Don't have an account? Sign Up"}</Link>
                         </Grid>

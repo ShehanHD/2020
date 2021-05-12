@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30639d5f-3e53-4979-93e6-313fe9f02004" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Api/Api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6883bafe-a733-40f7-bd07-74070129508d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6883bafe-a733-40f7-bd07-74070129508d.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Shared/autoLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shared/common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Tracer/TracerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracer/TracerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Migrations/Trace.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Trace.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tracer/TracerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tracer/TracerRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/User/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/User/UserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Admin/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Admin/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Authentication/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Authentication/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Exercises/Exercises.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Exercises/Exercises.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Components/Shared/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Components/Shared/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Redux/reducers/authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Redux/reducers/authentication.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/Redux/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/Redux/types.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,9 +86,13 @@
       <workItem from="1620652917468" duration="3110000" />
 <<<<<<< Updated upstream
       <workItem from="1620682537319" duration="4674000" />
+<<<<<<< Updated upstream
 =======
       <workItem from="1620745247530" duration="632000" />
       <workItem from="1620745885091" duration="581000" />
+>>>>>>> Stashed changes
+=======
+      <workItem from="1620808568264" duration="3546000" />
 >>>>>>> Stashed changes
     </task>
     <servers />

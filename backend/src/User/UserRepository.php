@@ -52,13 +52,13 @@ class UserRepository
     {
         if (!strcmp($data->password, $data->re_password) && filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
             try {
-                $is_admin = $data->is_admin == 1 ? "b'1'" : "b'0'";
-                $query = $this->dbConnection->prepare('INSERT INTO user (name, surname, email, password, is_admin) VALUES (:name, :surname, :email, :password, ' . $is_admin . ');');
+                $query = $this->dbConnection->prepare('INSERT INTO user (name, surname, email, password, is_admin) VALUES (:name, :surname, :email, :password, :is_admin);');
                 $query->execute([
                     'name' => $data->name,
                     'surname' => $data->surname,
                     'email' => $data->email,
-                    'password' => $this->auth->encrypt($data->password)
+                    'password' => $this->auth->encrypt($data->password),
+                    'is_admin' => $data->is_admin
                 ]);
 
                 if ($query->rowCount()) {

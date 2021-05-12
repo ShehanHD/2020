@@ -3,12 +3,14 @@ import { Link } from 'react-router-dom'
 import { ListItem, ListItemIcon, ListItemText, MenuList, Typography } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { callNotification } from '../../Redux/reducers/notification';
+import { setAuth } from '../../Redux/action/authentication';
 
 function Exercises() {
-    // const isLogged = useSelector(state => state.authenticationReducer.logged);
+    const JWT = useSelector(state => state.authenticationReducer.token);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        dispatch(setAuth("ssss"));
         // dispatch(callNotification("You have to login before you access to some applications"));
         // !isLogged && dispatch(callNotification("You have to login before you access to some applications"));
     }, [dispatch])

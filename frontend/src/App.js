@@ -1,6 +1,6 @@
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Notification from './Components/Shared/Notification'
 import NavBar from './Components/Shared/NavBar';
@@ -22,11 +22,18 @@ import { SITE_ID, URL } from './Components/Shared/api_url';
 import Admin from './Components/Admin/Admin';
 import Api from './Components/API/Api';
 import TracerApi from './Components/API/TracerApi/TracerApi';
+import Logout from './Components/Authentication/Logout';
+import { LoginValidator } from './Components/Shared/validator';
 
 function App() {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [darkMode, setDarkMode] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
+
+  useEffect(() => {
+    setIsLogged(localStorage.getItem("client-jwt") !== "");
+  }, [])
 
   const darkTheme = createMuiTheme({
     palette: {
@@ -76,12 +83,17 @@ function App() {
     setDarkMode(!darkMode);
   };
 
+  const SetClientLogin = (jwt) => {
+    localStorage.setItem("client-jwt", jwt);
+    setIsLogged(true);
+  }
+
   return (
     <BrowserRouter>
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
         <MuiThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <ConfirmProvider>
-            <NavBar toggleDarkTheme={toggleDarkTheme} />
+            <NavBar toggleDarkTheme={toggleDarkTheme} isLogged={isLogged} />
 
             <div className={classes.content}>
               <Switch>
@@ -89,18 +101,23 @@ function App() {
                 <Route exact path={'/covid'}> <Covid traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/exercises'}> <Exercises /> </Route>
-                <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>
                 <Route exact path={'/exercises/business-plan'}> <BP traceUser={traceUser} /> </Route>
                 <Route exact path={'/exercises/student'}> <Student traceUser={traceUser} /> </Route>
-
-                <Route exact path={'/api_management'}> <Api traceUser={traceUser} /> </Route>
-                <Route exact path={'/api_management/tracer_api'}> <TracerApi traceUser={traceUser} /> </Route>
 
                 <Route exact path={'/info'}> <Info traceUser={traceUser} /> </Route>
                 <Route exact path={'/admin'}> <Admin traceUser={traceUser} /> </Route>
 
-                <Route exact path={'/login'}> <Login traceUser={traceUser} /> </Route>
+                <Route exact path={'/login'}> <Login traceUser={traceUser} SetClientLogin={SetClientLogin} /> </Route>
+                <Route exact path={'/logout'}> <Logout setIsLogged={setIsLogged} /> </Route>
                 <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>
+
+
+                <LoginValidator>
+                  <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>
+                  <Route exact path={'/api_management'}> <Api traceUser={traceUser} /> </Route>
+                  <Route exact path={'/api_management/tracer_api'}> <TracerApi traceUser={traceUser} /> </Route>
+                </LoginValidator>
+
               </Switch>
             </div>
             <Notification />

@@ -40,7 +40,7 @@ class TracerRepository
         if (!property_exists($response, 'success')) {
             try {
                 $verify = $this->dbConnection->prepare(
-                    'SELECT * FROM pages 
+                    'SELECT id FROM page 
                     WHERE
                     site_id = :site_id AND page_name = :page_name'
                 );
@@ -51,13 +51,14 @@ class TracerRepository
                 ]);
 
                 $isVerified = $verify->rowCount();
+                $page = $verify->fetchAll();
 
                 if ($isVerified) {
                     $insert = $this->dbConnection->prepare(
                         'INSERT INTO trace 
-                (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
-                VALUES 
-                (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);'
+                                (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
+                                VALUES 
+                                (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);'
                     );
 
                     $insert->execute([
@@ -69,7 +70,7 @@ class TracerRepository
                         'latitude' => $response->latitude,
                         'longitude' => $response->longitude,
                         'visited_site' => $data->siteId,
-                        'visited_page' => $data->pageName
+                        'visited_page' => $page->id
                     ]);
 
                     http_response_code(201);

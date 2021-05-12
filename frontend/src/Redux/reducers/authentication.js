@@ -1,8 +1,8 @@
-import { SET_LOGIN } from "../types";
 import { SET_AUTHENTICATION } from "../types";
+import { GET_AUTHENTICATION } from "../types";
 
 const initialState = {
-    logged: false
+    token: ""
 }
 
 export default function authentication(state = initialState, action) {
@@ -14,9 +14,9 @@ export default function authentication(state = initialState, action) {
     }
 }
 
-export const callAuthentication = (logged = true) => ({
-    type: SET_AUTHENTICATION,
+export const callAuthentication = (type, token) => ({
+    type,
     payload: {
-        logged,
+        token: token
     }
 })

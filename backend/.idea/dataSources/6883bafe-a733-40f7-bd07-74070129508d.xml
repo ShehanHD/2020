@@ -1197,299 +1197,373 @@ wecode2020|schema||wecode||grant option|G</Grants>
     <table id="344" parent="12" name="ciclista"/>
     <table id="345" parent="12" name="gara"/>
     <table id="346" parent="12" name="gareggia"/>
-    <table id="347" parent="12" name="pages"/>
-    <table id="348" parent="12" name="sub_categories"/>
-    <table id="349" parent="12" name="todos"/>
-    <table id="350" parent="12" name="trace"/>
-    <table id="351" parent="12" name="user"/>
-    <column id="352" parent="339" name="CodDip">
+    <table id="347" parent="12" name="page"/>
+    <table id="348" parent="12" name="pages"/>
+    <table id="349" parent="12" name="site"/>
+    <table id="350" parent="12" name="sub_categories"/>
+    <table id="351" parent="12" name="todos"/>
+    <table id="352" parent="12" name="trace"/>
+    <table id="353" parent="12" name="user"/>
+    <column id="354" parent="339" name="CodDip">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="353" parent="339" name="Denominazione">
+    <column id="355" parent="339" name="Denominazione">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="354" parent="339" name="Città">
+    <column id="356" parent="339" name="Città">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="355" parent="339" name="PRIMARY">
+    <key id="357" parent="339" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>CodDip</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="356" parent="340" name="CodImp">
+    <column id="358" parent="340" name="CodImp">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="357" parent="340" name="Cognome">
+    <column id="359" parent="340" name="Cognome">
       <Position>2</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="358" parent="340" name="Nome">
+    <column id="360" parent="340" name="Nome">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="359" parent="340" name="CodDip">
+    <column id="361" parent="340" name="CodDip">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="360" parent="340" name="Stipendio">
+    <column id="362" parent="340" name="Stipendio">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="361" parent="340" name="CodDip">
+    <index id="363" parent="340" name="CodDip">
       <ColNames>CodDip</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="362" parent="340" name="PRIMARY">
+    <key id="364" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>CodImp</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="363" parent="340" name="IMPIEGATO_ibfk_1">
+    <foreign-key id="365" parent="340" name="IMPIEGATO_ibfk_1">
       <ColNames>CodDip</ColNames>
       <RefTableName>DIPARTIMENTO</RefTableName>
       <RefColNames>CodDip</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="364" parent="341" name="CodImp">
+    <column id="366" parent="341" name="CodImp">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="365" parent="341" name="Data">
+    <column id="367" parent="341" name="Data">
       <Position>2</Position>
       <DataType>date|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="366" parent="341" name="OraI">
+    <column id="368" parent="341" name="OraI">
       <Position>3</Position>
       <DataType>time|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="367" parent="341" name="OraF">
+    <column id="369" parent="341" name="OraF">
       <Position>4</Position>
       <DataType>time|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="368" parent="341" name="PRIMARY">
+    <key id="370" parent="341" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>CodImp
 Data</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="369" parent="341" name="TURNO_ibfk_1">
+    <foreign-key id="371" parent="341" name="TURNO_ibfk_1">
       <ColNames>CodImp</ColNames>
       <RefTableName>IMPIEGATO</RefTableName>
       <RefColNames>CodImp</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="370" parent="342" name="aa">
+    <column id="372" parent="342" name="aa">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="371" parent="342" name="aas">
+    <column id="373" parent="342" name="aas">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <column id="372" parent="343" name="category_id">
+    <column id="374" parent="343" name="category_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="373" parent="343" name="name">
+    <column id="375" parent="343" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="374" parent="343" name="user_id">
+    <column id="376" parent="343" name="user_id">
       <Position>3</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <key id="375" parent="343" name="PRIMARY">
+    <key id="377" parent="343" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>category_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="376" parent="344" name="IdCiclista">
+    <column id="378" parent="344" name="IdCiclista">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="377" parent="344" name="Nome">
+    <column id="379" parent="344" name="Nome">
       <Position>2</Position>
       <DataType>char(20)|0s</DataType>
     </column>
-    <column id="378" parent="344" name="Nazione">
+    <column id="380" parent="344" name="Nazione">
       <Position>3</Position>
       <DataType>char(30)|0s</DataType>
     </column>
-    <column id="379" parent="344" name="Età">
+    <column id="381" parent="344" name="Età">
       <Position>4</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <key id="380" parent="344" name="PRIMARY">
+    <key id="382" parent="344" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdCiclista</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="381" parent="345" name="IdGara">
+    <column id="383" parent="345" name="IdGara">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="382" parent="345" name="Nazione">
+    <column id="384" parent="345" name="Nazione">
       <Position>2</Position>
       <DataType>char(20)|0s</DataType>
     </column>
-    <column id="383" parent="345" name="Lunghezza">
+    <column id="385" parent="345" name="Lunghezza">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <key id="384" parent="345" name="PRIMARY">
+    <key id="386" parent="345" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdGara</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="385" parent="346" name="IdCiclista">
+    <column id="387" parent="346" name="IdCiclista">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="386" parent="346" name="IdGara">
+    <column id="388" parent="346" name="IdGara">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="387" parent="346" name="Piazzamento">
+    <column id="389" parent="346" name="Piazzamento">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
     </column>
-    <key id="388" parent="346" name="PRIMARY">
+    <key id="390" parent="346" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>IdCiclista
 IdGara</ColNames>
       <Primary>1</Primary>
     </key>
-    <check id="389" parent="347" name="page_data">
-      <Predicate>json_valid(`page_data`)</Predicate>
-    </check>
-    <column id="390" parent="347" name="site_id">
-      <Position>1</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="391" parent="347" name="page_name">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="392" parent="347" name="page_data">
-      <Position>3</Position>
-      <DataType>longtext|0s</DataType>
-      <Collation>utf8mb4_bin</Collation>
-    </column>
-    <key id="393" parent="347" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>site_id
-page_name</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="394" parent="348" name="name">
-      <Position>1</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="395" parent="348" name="category_id">
-      <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <index id="396" parent="348" name="category_id">
-      <ColNames>category_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="397" parent="348" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>name
-category_id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="398" parent="348" name="sub_categories_ibfk_1">
-      <ColNames>category_id</ColNames>
-      <RefTableName>categories</RefTableName>
-      <RefColNames>category_id</RefColNames>
-      <OnDelete>cascade</OnDelete>
-    </foreign-key>
-    <column id="399" parent="349" name="todos_id">
+    <column id="391" parent="347" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="400" parent="349" name="name">
+    <column id="392" parent="347" name="page_name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="393" parent="347" name="page_data">
+      <Position>3</Position>
+      <DataType>longtext|0s</DataType>
+    </column>
+    <column id="394" parent="347" name="site_id">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="395" parent="347" name="site_id">
+      <ColNames>site_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="396" parent="347" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="397" parent="347" name="page_ibfk_1">
+      <ColNames>site_id</ColNames>
+      <RefTableName>site</RefTableName>
+      <RefColNames>site_id</RefColNames>
+    </foreign-key>
+    <check id="398" parent="348" name="page_data">
+      <Predicate>json_valid(`page_data`)</Predicate>
+    </check>
+    <column id="399" parent="348" name="site_id">
+      <Position>1</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="400" parent="348" name="page_name">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="401" parent="349" name="category_id">
+    <column id="401" parent="348" name="page_data">
+      <Position>3</Position>
+      <DataType>longtext|0s</DataType>
+      <Collation>utf8mb4_bin</Collation>
+    </column>
+    <key id="402" parent="348" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>site_id
+page_name</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="403" parent="349" name="site_id">
+      <Position>1</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="404" parent="349" name="url">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="405" parent="349" name="user_id">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="402" parent="349" name="sub_name">
+    <index id="406" parent="349" name="url">
+      <ColNames>url</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="407" parent="349" name="user_id">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="408" parent="349" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>site_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="409" parent="349" name="url">
+      <ColNames>url</ColNames>
+      <UnderlyingIndexName>url</UnderlyingIndexName>
+    </key>
+    <foreign-key id="410" parent="349" name="site_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefTableName>user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="411" parent="350" name="name">
+      <Position>1</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="412" parent="350" name="category_id">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="413" parent="350" name="category_id">
+      <ColNames>category_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="414" parent="350" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>name
+category_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="415" parent="350" name="sub_categories_ibfk_1">
+      <ColNames>category_id</ColNames>
+      <RefTableName>categories</RefTableName>
+      <RefColNames>category_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="416" parent="351" name="todos_id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="417" parent="351" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="418" parent="351" name="category_id">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="419" parent="351" name="sub_name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="403" parent="349" name="is_done">
+    <column id="420" parent="351" name="is_done">
       <Position>5</Position>
       <DataType>bit(1)|0s</DataType>
       <DefaultExpression>b&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="404" parent="349" name="user_id">
+    <column id="421" parent="351" name="user_id">
       <Position>6</Position>
       <DataType>varchar(10)|0s</DataType>
     </column>
-    <column id="405" parent="349" name="created_on">
+    <column id="422" parent="351" name="created_on">
       <Position>7</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="406" parent="349" name="expire_on">
+    <column id="423" parent="351" name="expire_on">
       <Position>8</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <column id="407" parent="349" name="finished_on">
+    <column id="424" parent="351" name="finished_on">
       <Position>9</Position>
       <DataType>datetime|0s</DataType>
     </column>
-    <index id="408" parent="349" name="sub_name">
+    <index id="425" parent="351" name="sub_name">
       <ColNames>sub_name
 category_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="409" parent="349" name="PRIMARY">
+    <key id="426" parent="351" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>todos_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="410" parent="349" name="todos_ibfk_1">
+    <foreign-key id="427" parent="351" name="todos_ibfk_1">
       <ColNames>sub_name
 category_id</ColNames>
       <RefTableName>sub_categories</RefTableName>
@@ -1497,106 +1571,113 @@ category_id</ColNames>
 category_id</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="411" parent="350" name="ip">
-      <Position>1</Position>
-      <DataType>varchar(255)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="412" parent="350" name="visited_at">
-      <Position>2</Position>
-      <DataType>datetime|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="413" parent="350" name="country_name">
-      <Position>3</Position>
-      <DataType>varchar(20)|0s</DataType>
-    </column>
-    <column id="414" parent="350" name="city">
-      <Position>4</Position>
-      <DataType>varchar(20)|0s</DataType>
-    </column>
-    <column id="415" parent="350" name="zip">
-      <Position>5</Position>
-      <DataType>varchar(10)|0s</DataType>
-    </column>
-    <column id="416" parent="350" name="country_flag">
-      <Position>6</Position>
-      <DataType>varchar(255)|0s</DataType>
-    </column>
-    <column id="417" parent="350" name="latitude">
-      <Position>7</Position>
-      <DataType>double|0s</DataType>
-    </column>
-    <column id="418" parent="350" name="longitude">
-      <Position>8</Position>
-      <DataType>double|0s</DataType>
-    </column>
-    <column id="419" parent="350" name="visited_site">
-      <Position>9</Position>
-      <DataType>varchar(50)|0s</DataType>
-    </column>
-    <column id="420" parent="350" name="visited_page">
-      <Position>10</Position>
-      <DataType>varchar(50)|0s</DataType>
-    </column>
-    <index id="421" parent="350" name="visited_site">
-      <ColNames>visited_site
-visited_page</ColNames>
-      <Type>btree</Type>
-    </index>
-    <foreign-key id="422" parent="350" name="trace_ibfk_1">
-      <ColNames>visited_site
-visited_page</ColNames>
-      <RefTableName>pages</RefTableName>
-      <RefColNames>site_id
-page_name</RefColNames>
-    </foreign-key>
-    <column id="423" parent="351" name="id">
+    <column id="428" parent="352" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="424" parent="351" name="name">
+    <column id="429" parent="352" name="ip">
       <Position>2</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="425" parent="351" name="surname">
-      <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="426" parent="351" name="email">
+    <column id="430" parent="352" name="visited_at">
+      <Position>3</Position>
+      <DataType>datetime|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>current_timestamp()</DefaultExpression>
+    </column>
+    <column id="431" parent="352" name="country_name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="427" parent="351" name="password">
+    <column id="432" parent="352" name="country_flag">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>&apos;&apos;</DefaultExpression>
     </column>
-    <column id="428" parent="351" name="is_admin">
+    <column id="433" parent="352" name="city">
       <Position>6</Position>
-      <DataType>bit(1)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <DefaultExpression>b&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="429" parent="351" name="email">
-      <ColNames>email</ColNames>
-      <Unique>1</Unique>
+    <column id="434" parent="352" name="zip">
+      <Position>7</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="435" parent="352" name="latitude">
+      <Position>8</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="436" parent="352" name="longitude">
+      <Position>9</Position>
+      <DataType>double|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="437" parent="352" name="visited_site">
+      <Position>10</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="438" parent="352" name="visited_page">
+      <Position>11</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="439" parent="352" name="visited_page">
+      <ColNames>visited_page</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="430" parent="351" name="PRIMARY">
+    <key id="440" parent="352" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="431" parent="351" name="email">
-      <ColNames>email</ColNames>
-      <UnderlyingIndexName>email</UnderlyingIndexName>
+    <foreign-key id="441" parent="352" name="trace_ibfk_1">
+      <ColNames>visited_page</ColNames>
+      <RefTableName>page</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="442" parent="353" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
+    </column>
+    <column id="443" parent="353" name="name">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="444" parent="353" name="surname">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="445" parent="353" name="email">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="446" parent="353" name="password">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="447" parent="353" name="is_admin">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="448" parent="353" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
     </key>
   </database-model>
 </dataSource>

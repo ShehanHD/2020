@@ -9,7 +9,6 @@ function NavBar(props) {
     const theme = useTheme();
     const classes = useStyles(theme);
     const [open, setOpen] = useState(false);
-    const isLogged = useSelector(state => state.authenticationReducer.logged)
 
     const toggleDrawer = (event) => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -92,7 +91,7 @@ function NavBar(props) {
                     <NavItem path={'/covid'} icon={"fas fa-hands-wash"} text={'Covid'} />
                     <NavItem path={'/exercises'} icon={"far fa-hdd"} text={'Exercises'} />
                     <NavItem path={'/info'} icon={"fas fa-info-circle"} text={'Info'} />
-                    {isLogged ? <NavItem path={'/api_management'} icon={"fas fa-road"} text={'API'} /> : <NavItem path={'/login'} icon={"fas fa-road"} text={'API'} />}
+                    <NavItem path={'/api_management'} icon={"fas fa-road"} text={'API'} />
                 </MenuList>
 
                 <Divider />
@@ -105,8 +104,15 @@ function NavBar(props) {
                         <ListItemText primary={"Switch Theme"} />
                     </ListItem>
 
-                    <NavItem path={'/login'} icon={!isLogged ? "fas fa-lock" : "fas fa-lock-open"} text={!isLogged ? 'Login' : 'logout'} />
-                    <NavItem path={'/register'} icon={"fas fa-feather-alt"} text={'Register'} />
+
+                    {props.isLogged ?
+                        <NavItem path={"/logout"} icon={"fas fa-lock-open"} text={'logout'} />
+                        :
+                        <span>
+                            <NavItem path={'/login'} icon={"fas fa-lock"} text={'Login'} />
+                            <NavItem path={'/register'} icon={"fas fa-feather-alt"} text={'Register'} />
+                        </span>
+                    }
                 </MenuList>
 
             </Drawer>
