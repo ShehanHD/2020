@@ -1,6 +1,6 @@
 <?php
 
-class SiteManagementController extends Rest implements HttpMapping
+class SiteManagementController extends Rest
 {
     private SiteManagementRepository $siteManagement;
 
@@ -13,7 +13,6 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return void
      */
     function getMapping($params, $body)
     {
@@ -30,10 +29,10 @@ class SiteManagementController extends Rest implements HttpMapping
         }
     }
 
+
     /**
      * @param $params
      * @param $body
-     * @return void
      */
     function postMapping($params, $body)
     {
@@ -49,23 +48,4 @@ class SiteManagementController extends Rest implements HttpMapping
         }
     }
 
-    /**
-     * @param $params
-     * @param $body
-     * @return void
-     */
-    function deleteMapping($params, $body)
-    {
-        // TODO: Implement deleteMapping() method.
-    }
-
-    /**
-     * @param $params
-     * @param $body
-     * @return void
-     */
-    function patchMapping($params, $body)
-    {
-        // TODO: Implement patchMapping() method.
-    }
 }

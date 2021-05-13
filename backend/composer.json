@@ -3,5 +3,7 @@
         "firebase/php-jwt": "^5.2",
       "ext-pdo": "*",
       "ext-openssl": "*"
-    }
+    },
+  "name": "wecode",
+  "description": "personal site backend"
 }

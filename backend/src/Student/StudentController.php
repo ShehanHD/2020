@@ -3,7 +3,7 @@
 
 class StudentController
 {
-    private $Student;
+    private StudentRepository $Student;
 
     public function __construct($params, $method, $data)
     {

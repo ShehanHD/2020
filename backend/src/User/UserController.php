@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Rest implements HttpMapping
+class UserController extends Rest
 {
     private UserRepository $siteManagement;
 
@@ -10,6 +10,10 @@ class UserController extends Rest implements HttpMapping
         parent::__construct($params, $method, $body);
     }
 
+    /**
+     * @param $params
+     * @param $body
+     */
     function getMapping($params, $body)
     {
         switch ($params[0] ?? "") {
@@ -22,6 +26,10 @@ class UserController extends Rest implements HttpMapping
         }
     }
 
+    /**
+     * @param $params
+     * @param $body
+     */
     function postMapping($params, $body)
     {
         $data = json_decode($body);
@@ -36,13 +44,4 @@ class UserController extends Rest implements HttpMapping
         }
     }
 
-    function deleteMapping($params, $body)
-    {
-        // TODO: Implement deleteMapping() method.
-    }
-
-    function patchMapping($params, $body)
-    {
-        // TODO: Implement patchMapping() method.
-    }
 }

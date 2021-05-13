@@ -12,6 +12,7 @@ class SiteManagementRepository extends Authentication
             parent::__construct();
         } catch (PDOException $e) {
             HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
+            die();
         }
     }
 

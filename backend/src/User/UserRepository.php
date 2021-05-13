@@ -4,17 +4,15 @@ class UserRepository extends Authentication
 {
 
     private PDO $dbConnection;
-    //private Authentication $auth;
 
     public function __construct()
     {
-        //$this->auth = new Authentication();
         try {
             $db = new PDOConnection();
             $this->dbConnection = $db->connection();
             parent::__construct();
         } catch (PDOException $e) {
-            echo json_encode($e);
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
             die();
         }
     }
