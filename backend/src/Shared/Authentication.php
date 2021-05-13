@@ -5,37 +5,45 @@ use \Firebase\JWT\JWT;
 
 class Authentication
 {
-    private $jwt_key;
+    private string $jwt_key;
 
     public function __construct()
     {
         $this->jwt_key = getenv("JWT_KEY");
     }
 
-    public function generateJWT($data)
+    public function generateJWT($data): string
     {
         $key = $this->jwt_key;
+        $issuedAt   = new DateTimeImmutable();
+        $expire     = $issuedAt->modify('+6 minutes')->getTimestamp();      // Add 60 seconds
+        $serverName = "https://wecode.best";
+
+
         $payload = array(
-            "iss" => "https://wecode.best",
-            "aud" => "https://www.wecode.best",
-            "iat" => time(),
-            "nbf" => time() + 10,
-            "exp" => time() + 3600,
+            "iss" => $serverName,
+            "iat" => $issuedAt->getTimestamp(),
+            "nbf" => $issuedAt->getTimestamp(),
+            "exp" => $expire,
             "data" => array(
                 'email' => $data['email'],
                 'password' => $this->decrypt($data['password'])
             )
         );
 
-        return JWT::encode($payload, $key);
+        return JWT::encode($payload, $key, 'HS512');
     }
 
-    public function encrypt($payload)
+    public function verifyJWT($data){
+
+    }
+
+    public function encrypt($payload): string
     {
         return openssl_encrypt($payload, "aes256", getenv("ENCRYPT_KEY"), 0, getenv("IV"));
     }
 
-    public function decrypt($payload)
+    public function decrypt($payload): string
     {
         return openssl_decrypt($payload, "aes256", getenv("ENCRYPT_KEY"), 0, getenv("IV"));
     }

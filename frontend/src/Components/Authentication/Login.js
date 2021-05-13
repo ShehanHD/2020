@@ -38,7 +38,7 @@ export const Login = (props) => {
 
     const login = () => {
         fetch(`${URL}/auth/login`, {
-            method: "POST",
+            method: "GET",
             headers: {
                 "content-type": "application/json"
             },

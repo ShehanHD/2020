@@ -1,17 +1,18 @@
 <?php
 
-class UserRepository
+class UserRepository extends Authentication
 {
 
     private PDO $dbConnection;
-    private Authentication $auth;
+    //private Authentication $auth;
 
     public function __construct()
     {
-        $this->auth = new Authentication();
+        //$this->auth = new Authentication();
         try {
             $db = new PDOConnection();
             $this->dbConnection = $db->connection();
+            parent::__construct();
         } catch (PDOException $e) {
             echo json_encode($e);
             die();
@@ -24,7 +25,7 @@ class UserRepository
             $query = $this->dbConnection->prepare('SELECT email, password, is_admin from user WHERE email = :email AND password = :password;');
             $query->execute([
                 'email' => $data->email,
-                'password' => $this->auth->encrypt($data->password)
+                'password' => Authentication::encrypt($data->password)
             ]);
 
             $x = $query->fetchAll();
@@ -34,7 +35,7 @@ class UserRepository
                 HTTP_Response::SendWithBody(
                     HTTP_Response::MSG_OK,
                     array(
-                        "jwt_token" => $this->auth->generateJWT($x[0]),
+                        "jwt_token" => Authentication::generateJWT($x[0]),
                         "message" => $is_admin ? "Login is successful" : "You don't have admin permission!",
                         "is_admin" => $is_admin
                     ),
@@ -57,7 +58,7 @@ class UserRepository
                     'name' => $data->name,
                     'surname' => $data->surname,
                     'email' => $data->email,
-                    'password' => $this->auth->encrypt($data->password),
+                    'password' => Authentication::encrypt($data->password),
                     'is_admin' => $data->is_admin
                 ]);
 
@@ -65,9 +66,9 @@ class UserRepository
                     HTTP_Response::SendWithBody(
                         HTTP_Response::MSG_CREATED,
                         array(
-                            "jwt_token" => $this->auth->generateJWT([
+                            "jwt_token" => Authentication::generateJWT([
                                 'email' => $data->email,
-                                'password' => $this->auth->encrypt($data->password)
+                                'password' => Authentication::encrypt($data->password)
                             ]),
                             "message" => "new user successfully created"
                         ),

@@ -15,8 +15,7 @@ function BP(props) {
                 else { throw res };
             })
             .then(data => {
-                console.log(JSON.parse(data[0].page_data))
-                setData(JSON.parse(data[0].page_data));
+                setData(JSON.parse(data.body[0].page_data));
             })
             .catch(err => {
                 console.error(err);

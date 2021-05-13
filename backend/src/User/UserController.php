@@ -13,8 +13,8 @@ class UserController extends Rest implements HttpMapping
     function getMapping($params, $body)
     {
         switch ($params[0] ?? "") {
-            case '':
-                //$this->siteManagement->get();
+            case 'login':
+                $this->siteManagement->login(json_decode($body));
                 break;
             default:
                 HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::MSG_NOT_FOUND);
@@ -27,9 +27,6 @@ class UserController extends Rest implements HttpMapping
         $data = json_decode($body);
 
         switch ($params[0] ?? "") {
-            case 'login':
-                $this->siteManagement->login($data);
-                break;
             case 'registration':
                 $this->siteManagement->registration($data);
                 break;

@@ -17,6 +17,14 @@ class TracerRepository
 
     public function getTrace($id)
     {
+        if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
+            header('HTTP/1.0 400 Bad Request');
+            echo json_encode($_SERVER);
+            exit;
+        }
+
+        echo json_encode($matches);
+        /*
         try {
             $query = $this->dbConnection->prepare('SELECT * from trace WHERE visited_site = :visited_site;');
             $query->execute(['visited_site' => $id]);
@@ -27,7 +35,7 @@ class TracerRepository
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode($e);
-        }
+        }*/
     }
 
     public function addTrace($data, $remoteAddress)
