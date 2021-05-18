@@ -109,10 +109,8 @@ function App() {
 
                 <Route exact path={'/logout'}> <Logout setIsLogged={setIsLogged} /> </Route>
 
-                <LoginValidator loggedUser={false}>
-                  <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>
-                  <Route exact path={'/login'}> <Login traceUser={traceUser} SetClientLogin={SetClientLogin} /> </Route>
-                </LoginValidator>
+                <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>
+                <Route exact path={'/login'}> <Login traceUser={traceUser} SetClientLogin={SetClientLogin} /> </Route>
 
                 <LoginValidator loggedUser={true}>
                   <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>

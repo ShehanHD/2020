@@ -18,7 +18,7 @@ class UserController extends Rest
     {
         switch ($params[0] ?? "") {
             case 'login':
-                $this->siteManagement->login(json_decode($body));
+                $this->siteManagement->login($params);
                 break;
             default:
                 HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::MSG_NOT_FOUND);

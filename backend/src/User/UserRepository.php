@@ -17,13 +17,13 @@ class UserRepository extends Authentication
         }
     }
 
-    public function login($data)
+    public function login($params)
     {
         try {
-            $query = $this->dbConnection->prepare('SELECT email, password, is_admin from user WHERE email = :email AND password = :password;');
+            $query = $this->dbConnection->prepare('SELECT id, email, password, is_admin from user WHERE email = :email AND password = :password;');
             $query->execute([
-                'email' => $data->email,
-                'password' => Authentication::encrypt($data->password)
+                'email' => $params[1],
+                'password' => Authentication::encrypt($params[2])
             ]);
 
             $x = $query->fetchAll();
@@ -57,14 +57,17 @@ class UserRepository extends Authentication
                     'surname' => $data->surname,
                     'email' => $data->email,
                     'password' => Authentication::encrypt($data->password),
-                    'is_admin' => $data->is_admin
+                    'is_admin' => $data->is_admin ?? b'0'
                 ]);
+
+                $id = $this->dbConnection->lastInsertId();
 
                 if ($query->rowCount()) {
                     HTTP_Response::SendWithBody(
                         HTTP_Response::MSG_CREATED,
                         array(
                             "jwt_token" => Authentication::generateJWT([
+                                'id' => $id,
                                 'email' => $data->email,
                                 'password' => Authentication::encrypt($data->password)
                             ]),

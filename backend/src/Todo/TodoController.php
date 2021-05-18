@@ -4,14 +4,14 @@
 class TodoController
 {
     private TodoRepository $Todo;
-    private mixed $firstParams;
-    private mixed $secParams;
+    private string $firstParams;
+    private string $secParams;
 
     public function __construct($params, $method, $data)
     {
         $this->Todo = new TodoRepository();
-        $this->firstParams = isset($params[0]) ? $params[0] : NULL;
-        $this->secParams = $params[1] ?? NULL;
+        $this->firstParams = $params[0] ?? "";
+        $this->secParams = $params[1] ?? "";
 
 
         switch ($method) {
