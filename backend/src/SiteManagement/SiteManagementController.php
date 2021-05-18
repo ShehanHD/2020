@@ -13,9 +13,9 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return mixed
+     * @return void
      */
-    function getMapping($params, $body): mixed
+    function getMapping($params, $body)
     {
         switch ($params[0]) {
             case 'all_pages':
@@ -33,9 +33,9 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return mixed
+     * @return void
      */
-    function postMapping($params, $body): mixed
+    function postMapping($params, $body)
     {
         $data = json_decode($body);
 
@@ -52,9 +52,9 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return mixed
+     * @return void
      */
-    function deleteMapping($params, $body): mixed
+    function deleteMapping($params, $body)
     {
         // TODO: Implement deleteMapping() method.
     }
@@ -62,9 +62,9 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return mixed
+     * @return void
      */
-    function patchMapping($params, $body): mixed
+    function patchMapping($params, $body)
     {
         // TODO: Implement patchMapping() method.
     }

@@ -70,7 +70,7 @@ class TracerRepository
                         'latitude' => $response->latitude,
                         'longitude' => $response->longitude,
                         'visited_site' => $data->siteId,
-                        'visited_page' => $page->id
+                        'visited_page' => $page[0]['id']
                     ]);
 
                     http_response_code(201);
