@@ -37,16 +37,7 @@ export const Login = (props) => {
     }, [])
 
     const login = () => {
-        fetch(`${URL}/auth/login`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                email: input.email,
-                password: sha256(input.password)
-            }),
-        })
+        fetch(`${URL}/auth/login/${input.email}/${sha256(input.password)}`)
             .then(response => {
                 if (response.status === 200) {
                     return response.json()

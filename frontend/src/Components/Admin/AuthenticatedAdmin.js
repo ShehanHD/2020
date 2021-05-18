@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography'
 import { SITE_ID, URL } from '../Shared/api_url'
 import { useState } from 'react'
 
-const AuthenticatedAdmin = ({ setAuthenticated }) => {
+const AuthenticatedAdmin = ({ authenticated, setAuthenticated }) => {
     const [roots, setRoots] = useState([]);
     const [leafs, setLeafs] = useState([]);
 
@@ -14,7 +14,12 @@ const AuthenticatedAdmin = ({ setAuthenticated }) => {
     }
 
     const getTrace = () => {
-        fetch(`${URL}/trace/get_by/${SITE_ID}`)
+        fetch(`${URL}/trace/get_by/${SITE_ID}`, {
+            contentType: 'application/json',
+            headers: {
+                'Authorization': `Bearer ${authenticated}`
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 console.log([...new Set(data.map(a => a.ip))])

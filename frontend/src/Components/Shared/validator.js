@@ -8,12 +8,12 @@ export const LoginValidator = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        localStorage.getItem("client-jwt") === "" && dispatch(callNotification("You have to login before you access to this applications"));
+        (localStorage.getItem("client-jwt") === "" && props.loggedUser) && dispatch(callNotification("You have to login before you access to this applications"));
     }, [])
 
     return (
         <>
-            {localStorage.getItem("client-jwt") === "" ? <Redirect to='/login' /> : props.children}
+            {(localStorage.getItem("client-jwt") === "" && props.loggedUser) ? <Redirect to='/login' /> : props.children}
         </>
     )
 }

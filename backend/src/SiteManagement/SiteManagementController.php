@@ -1,6 +1,6 @@
 <?php
 
-class SiteManagementController extends Rest implements HttpMapping
+class SiteManagementController extends Rest
 {
     private SiteManagementRepository $siteManagement;
 
@@ -13,7 +13,6 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return void
      */
     function getMapping($params, $body)
     {
@@ -33,39 +32,20 @@ class SiteManagementController extends Rest implements HttpMapping
     /**
      * @param $params
      * @param $body
-     * @return void
      */
     function postMapping($params, $body)
     {
         $data = json_decode($body);
 
-        switch ($params[0]) {
-            case '':
-                //$this->siteManagement->addPageData($data);
-                break;
-            default:
-                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
-                break;
-        }
-    }
-
-    /**
-     * @param $params
-     * @param $body
-     * @return void
-     */
-    function deleteMapping($params, $body)
-    {
-        // TODO: Implement deleteMapping() method.
-    }
-
-    /**
-     * @param $params
-     * @param $body
-     * @return void
-     */
-    function patchMapping($params, $body)
-    {
-        // TODO: Implement patchMapping() method.
+        if (Authentication::verifyJWT()) {
+            switch ($params[0]) {
+                case 'new_site':
+                    $this->siteManagement->addNewSite($data);
+                    break;
+                default:
+                    HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                    break;
+            }
+        } else HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED,  HTTP_Response::UNAUTHORIZED);
     }
 }

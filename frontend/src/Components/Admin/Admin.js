@@ -64,7 +64,7 @@ const Admin = () => {
     return (
         <div id="admin">
             {
-                authenticated === "" ? <AdminLogin handleSubmit={handleSubmit} handleInput={handleInput} input={input} /> : <AuthenticatedAdmin setAuthenticated={setAuthenticated} />
+                authenticated === "" ? <AdminLogin handleSubmit={handleSubmit} handleInput={handleInput} input={input} /> : <AuthenticatedAdmin authenticated={authenticated} setAuthenticated={setAuthenticated} />
             }
         </div>
     )

@@ -107,12 +107,12 @@ function App() {
                 <Route exact path={'/info'}> <Info traceUser={traceUser} /> </Route>
                 <Route exact path={'/admin'}> <Admin traceUser={traceUser} /> </Route>
 
-                <Route exact path={'/login'}> <Login traceUser={traceUser} SetClientLogin={SetClientLogin} /> </Route>
                 <Route exact path={'/logout'}> <Logout setIsLogged={setIsLogged} /> </Route>
+
                 <Route exact path={'/register'}> <Register traceUser={traceUser} /> </Route>
+                <Route exact path={'/login'}> <Login traceUser={traceUser} SetClientLogin={SetClientLogin} /> </Route>
 
-
-                <LoginValidator>
+                <LoginValidator loggedUser={true}>
                   <Route exact path={'/exercises/todo'}> <Todos traceUser={traceUser} /> </Route>
                   <Route exact path={'/api_management'}> <Api traceUser={traceUser} /> </Route>
                   <Route exact path={'/api_management/tracer_api'}> <TracerApi traceUser={traceUser} /> </Route>

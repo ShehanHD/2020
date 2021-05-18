@@ -11,7 +11,8 @@ class TracerRepository
             $db = new PDOConnection();
             $this->dbConnection = $db->connection();
         } catch (PDOException $e) {
-            throw $e;
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
+            die();
         }
     }
 
@@ -22,11 +23,10 @@ class TracerRepository
             $query->execute(['visited_site' => $id]);
             $x = $query->fetchAll();
 
-            http_response_code(200);
-            echo json_encode($x);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode($e);
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_OK, $x, HTTP_Response::OK);
+
+        } catch (PDOException $e) {
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -39,11 +39,9 @@ class TracerRepository
 
         if (!property_exists($response, 'success')) {
             try {
-                $verify = $this->dbConnection->prepare(
-                    'SELECT id FROM page 
-                    WHERE
-                    site_id = :site_id AND page_name = :page_name'
-                );
+                $this->dbConnection->beginTransaction();
+
+                $verify = $this->dbConnection->prepare('SELECT id FROM page WHERE site_id = :site_id AND page_name = :page_name');
 
                 $verify->execute([
                     'site_id' => $data->siteId,
@@ -55,11 +53,8 @@ class TracerRepository
 
                 if ($isVerified) {
                     $insert = $this->dbConnection->prepare(
-                        'INSERT INTO trace 
-                                (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
-                                VALUES 
-                                (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);'
-                    );
+                        'INSERT INTO trace  (ip, visited_at, country_name, city, zip, country_flag, latitude, longitude, visited_site, visited_page) 
+                                VALUES (:ip, CURRENT_TIMESTAMP, :country_name, :city, :zip, :country_flag, :latitude, :longitude, :visited_site, :visited_page);');
 
                     $insert->execute([
                         'ip' => $response->ip,
@@ -73,17 +68,18 @@ class TracerRepository
                         'visited_page' => $page[0]['id']
                     ]);
 
-                    http_response_code(201);
+                    $this->dbConnection->commit();
+
+                    HTTP_Response::Send(HTTP_Response::MSG_CREATED, HTTP_Response::CREATED);
                 } else {
-                    http_response_code(401);
+                    HTTP_Response::Send(HTTP_Response::UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
                 }
             } catch (Exception $e) {
-                http_response_code(500);
-                echo json_encode($e);
+                $this->dbConnection->rollBack();
+                HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
             }
         } else {
-            http_response_code(500);
-            echo json_encode($response->error);
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $response->error, HTTP_Response::INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends Rest implements HttpMapping
+class UserController extends Rest
 {
     private UserRepository $siteManagement;
 
@@ -10,11 +10,15 @@ class UserController extends Rest implements HttpMapping
         parent::__construct($params, $method, $body);
     }
 
+    /**
+     * @param $params
+     * @param $body
+     */
     function getMapping($params, $body)
     {
         switch ($params[0] ?? "") {
-            case '':
-                //$this->siteManagement->get();
+            case 'login':
+                $this->siteManagement->login($params);
                 break;
             default:
                 HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::MSG_NOT_FOUND);
@@ -22,14 +26,15 @@ class UserController extends Rest implements HttpMapping
         }
     }
 
+    /**
+     * @param $params
+     * @param $body
+     */
     function postMapping($params, $body)
     {
         $data = json_decode($body);
 
         switch ($params[0] ?? "") {
-            case 'login':
-                $this->siteManagement->login($data);
-                break;
             case 'registration':
                 $this->siteManagement->registration($data);
                 break;
@@ -39,13 +44,4 @@ class UserController extends Rest implements HttpMapping
         }
     }
 
-    function deleteMapping($params, $body)
-    {
-        // TODO: Implement deleteMapping() method.
-    }
-
-    function patchMapping($params, $body)
-    {
-        // TODO: Implement patchMapping() method.
-    }
 }

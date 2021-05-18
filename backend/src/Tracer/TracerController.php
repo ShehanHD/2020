@@ -1,64 +1,53 @@
 <?php
 
 
-class TracerController
+class TracerController extends Rest implements HttpMapping
 {
     private string $remoteAddress;
     private TracerRepository $tracer;
 
-    public function __construct($params, $method, $data, $ip)
+    public function __construct($params, $method, $body, $ip)
     {
         $this->tracer = new TracerRepository();
-        $params = $params ?? NULL;
         $this->remoteAddress = $ip;
 
+        parent::__construct($params, $method, $body);
+    }
 
-        switch ($method) {
-            case 'GET':
-                $this->get($params);
-                break;
-            case 'POST':
-                $this->post($params, $data);
+    /**
+     * @param $params
+     * @param $body
+     */
+    function getMapping($params, $body)
+    {
+        switch ($params[0]) {
+            case 'get_by':
+                (Authentication::verifyJWT() === true) ?
+                    isset($params[1]) ? $this->tracer->getTrace($params[1]) : HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND)
+                : HTTP_Response::Send(HTTP_Response::MSG_BAD_REQUEST,  HTTP_Response::BAD_REQUEST);
                 break;
             default:
-                echo http_response_code(404);
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                 break;
+        }
+    }
+
+    /**
+     * @param $params
+     * @param $body
+     */
+    function postMapping($params, $body)
+    {
+        $body = json_decode($body);
+
+        switch ($params[0]) {
+            case 'new_trace':
+                $this->tracer->addTrace($body, $this->remoteAddress);
+                break;
+            default:
+                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
                 break;
         }
     }
 
-    public function get($params)
-    {
-        try {
-            switch ($params[0]) {
-                case 'get_by':
-                    isset($params[1]) ? $this->tracer->getTrace($params[1]) : http_response_code(404);
-                    break;
-                default:
-                    echo http_response_code(404);
-                    break;
-            }
-        } catch (Exception $e) {
-            echo json_encode($e);
-            die();
-        }
-    }
-
-    public function post($params, $data)
-    {
-        try {
-            $data = json_decode($data);
-
-            switch ($params[0]) {
-                case 'new_trace':
-                    $this->tracer->addTrace($data, $this->remoteAddress);
-                    break;
-                default:
-                    HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
-                    break;
-            }
-        } catch (Exception $e) {
-            echo json_encode($e);
-            die();
-        }
-    }
 }

@@ -12,9 +12,6 @@ class Verifica1Controller
             case 'GET':
                 $this->Get($params, $data);
                 break;
-            case 'POST':
-                $this->post($params, $data);
-                break;
             default:
                 echo http_response_code(404);
                 break;
@@ -61,9 +58,5 @@ class Verifica1Controller
                 echo http_response_code(404);
                 break;
         }
-    }
-
-    public function Post($params, $data)
-    {
     }
 }

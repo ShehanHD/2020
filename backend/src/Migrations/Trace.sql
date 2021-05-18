@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS page (
         page_name VARCHAR(20) NOT NULL,
         page_data LONGTEXT NOT NULL,
         site_id VARCHAR(255) NOT NULL,
+        UNIQUE (page_name, site_id),
         FOREIGN KEY (site_id) REFERENCES site(site_id)
 );
 
