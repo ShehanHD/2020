@@ -22,7 +22,7 @@ class Api
                 new StudentController($params, $request_method, $body);
                 break;
             case 'trace':
-                new TracerController($params, $request_method, $body, $_SERVER['HTTP_X_REAL_IP'] ?? $_SERVER['HTTP_ORIGIN']); //$_SERVER['HTTP_X_REAL_IP']
+                new TracerController($params, $request_method, $body, $_SERVER['HTTP_X_REAL_IP'] ?? ($_SERVER['HTTP_ORIGIN'] ?? "")); //$_SERVER['HTTP_X_REAL_IP']
                 break;
             case 'auth':
                 new UserController($params, $request_method, $body);

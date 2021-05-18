@@ -22,7 +22,9 @@ class TracerController extends Rest implements HttpMapping
     {
         switch ($params[0]) {
             case 'get_by':
-                isset($params[1]) ? $this->tracer->getTrace($params[1]) : HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                (Authentication::verifyJWT() === true) ?
+                    isset($params[1]) ? $this->tracer->getTrace($params[1]) : HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND)
+                : HTTP_Response::Send(HTTP_Response::MSG_BAD_REQUEST,  HTTP_Response::BAD_REQUEST);
                 break;
             default:
                 HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);

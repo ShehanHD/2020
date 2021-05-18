@@ -29,7 +29,6 @@ class SiteManagementController extends Rest
         }
     }
 
-
     /**
      * @param $params
      * @param $body
@@ -38,14 +37,17 @@ class SiteManagementController extends Rest
     {
         $data = json_decode($body);
 
-        switch ($params[0]) {
-            case 'new_site':
-                $this->siteManagement->addNewSite($data);
-                break;
-            default:
-                HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
-                break;
+        if(Authentication::verifyJWT()){
+            switch ($params[0]) {
+                case 'new_site':
+                    $this->siteManagement->addNewSite($data);
+                    break;
+                default:
+                    HTTP_Response::Send(HTTP_Response::MSG_NOT_FOUND, HTTP_Response::NOT_FOUND);
+                    break;
+            }
         }
+        else HTTP_Response::Send(HTTP_Response::MSG_UNAUTHORIZED,  HTTP_Response::UNAUTHORIZED);
     }
 
 }

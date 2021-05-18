@@ -18,25 +18,16 @@ class TracerRepository
 
     public function getTrace($id)
     {
-        if (! preg_match('/Bearer\s(\S+)/', $_SERVER['HTTP_AUTHORIZATION'], $matches)) {
-            header('HTTP/1.0 400 Bad Request');
-            echo json_encode($_SERVER);
-            exit;
-        }
-
-        echo json_encode($matches);
-        /*
         try {
             $query = $this->dbConnection->prepare('SELECT * from trace WHERE visited_site = :visited_site;');
             $query->execute(['visited_site' => $id]);
             $x = $query->fetchAll();
 
-            http_response_code(200);
-            echo json_encode($x);
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode($e);
-        }*/
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_OK, $x, HTTP_Response::OK);
+
+        } catch (PDOException $e) {
+            HTTP_Response::SendWithBody(HTTP_Response::MSG_INTERNAL_SERVER_ERROR, $e, HTTP_Response::INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function addTrace($data, $remoteAddress)
@@ -76,7 +67,9 @@ class TracerRepository
                         'visited_site' => $data->siteId,
                         'visited_page' => $page->id
                     ]);
+
                     $this->dbConnection->commit();
+
                     HTTP_Response::Send(HTTP_Response::MSG_CREATED, HTTP_Response::CREATED);
                 } else {
                     HTTP_Response::Send(HTTP_Response::UNAUTHORIZED, HTTP_Response::UNAUTHORIZED);
